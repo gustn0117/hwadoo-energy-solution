@@ -1,4 +1,4 @@
-/** 사진·이미지가 들어갈 자리를 빗금으로 표시하는 플레이스홀더 */
+/** 사진을 표시하고, 아직 없으면 빗금으로 자리를 표시한다 */
 export function Hatch({
   label,
   className = "",
@@ -16,7 +16,7 @@ export function Hatch({
     <div
       className={`hatch ${src ? "hatch--image" : ""} ${onDark ? "hatch--onDark" : ""} ${className}`}
       role="img"
-      aria-label={`이미지 자리: ${label}`}
+      aria-label={src ? label : `이미지 자리: ${label}`}
     >
       {src ? (
         <img className="hatch__image" src={src} alt="" loading="lazy" style={{ objectFit: fit }} />
