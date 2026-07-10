@@ -298,6 +298,11 @@ img {
   border-bottom: 1px solid var(--hair);
 }
 
+/* 패널이 열리면 헤더 바도 완전 불투명으로 — 반투명 바 + 불투명 패널은 어긋나 보인다 */
+.hd[data-open="true"] {
+  background: var(--paper);
+}
+
 .hd__bar {
   height: var(--header-h);
   display: flex;
@@ -404,15 +409,26 @@ img {
 
 /* 어떤 메뉴에 올려도 전체 서브메뉴가 보인다 — 기획서 화면설명 1 */
 .mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.28s var(--ease);
+  background: var(--paper);
   border-top: 1px solid transparent;
 }
 
 .hd[data-open="true"] .mega {
   grid-template-rows: 1fr;
-  border-top-color: var(--mist);
+  border-top-color: var(--hair);
+  box-shadow: 0 30px 44px -34px rgba(12, 26, 21, 0.5);
+}
+
+/* 닫혀 있을 때 0높이 영역이 클릭을 가로채지 않도록 */
+.mega[aria-hidden="true"] {
+  pointer-events: none;
 }
 
 .mega__clip {
