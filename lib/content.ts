@@ -9,6 +9,18 @@ export const COMPANY = {
   tel: "1660-4589",
 } as const;
 
+/**
+ * 메인 비주얼 배경 사진.
+ * public/ 에 파일을 넣고 경로를 적으면 빗금 플레이스홀더가 사진으로 바뀐다.
+ * 예: "/hero.jpg"
+ */
+export const HERO_PHOTO: string | null = null;
+
+export const HERO_PHOTO_SPEC = {
+  subject: "아파트 지하주차장 완속충전 구역",
+  size: "2400 × 1400 px 이상 · 가로형",
+} as const;
+
 /** 헤더 메가메뉴 — 어떤 메뉴에 올려도 전체가 보인다 */
 export const MENU = [
   {

@@ -4,9 +4,10 @@ import {
   BUILDING_OPTIONS,
   COMPANY,
   CPO_OPTIONS,
+  HERO_PHOTO,
+  HERO_PHOTO_SPEC,
   HERO_STATS,
 } from "@/lib/content";
-import { Hatch } from "./Hatch";
 
 function Chevron() {
   return (
@@ -19,6 +20,27 @@ function Chevron() {
 export function Hero() {
   return (
     <section className="hero" id="상담신청">
+      {/* 배경 사진 슬롯 — HERO_PHOTO가 없으면 빗금으로 자리를 표시한다 */}
+      <div
+        className="hero__photo"
+        data-has-photo={HERO_PHOTO ? "true" : "false"}
+        style={
+          HERO_PHOTO
+            ? ({ "--hero-photo": `url(${HERO_PHOTO})` } as React.CSSProperties)
+            : undefined
+        }
+        role={HERO_PHOTO ? "img" : undefined}
+        aria-label={HERO_PHOTO ? HERO_PHOTO_SPEC.subject : undefined}
+      />
+      <div className="hero__scrim" />
+
+      {!HERO_PHOTO && (
+        <p className="hero__slotTag" aria-hidden="true">
+          <b>메인 비주얼 — {HERO_PHOTO_SPEC.subject}</b>
+          <span>{HERO_PHOTO_SPEC.size}</span>
+        </p>
+      )}
+
       <div className="shell hero__grid">
         <div>
           <p className="eyebrow eyebrow--kr eyebrow--onDark">환경부 인증 완속충전기 · 무상설치</p>
@@ -47,12 +69,6 @@ export function Hero() {
               </div>
             ))}
           </dl>
-
-          <Hatch
-            onDark
-            className="hero__visual"
-            label="메인 비주얼 — 아파트 지하주차장 완속충전 구역 (16:9)"
-          />
         </div>
 
         {/* 상담 신청 — 이 페이지의 전환 목표 */}
