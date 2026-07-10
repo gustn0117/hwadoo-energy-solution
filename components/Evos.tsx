@@ -2,7 +2,7 @@ import { Hatch } from "./Hatch";
 
 export function Evos() {
   return (
-    <section className="section" id="evos">
+    <section className="section evos" id="evos">
       <div className="shell">
         <div className="evos__inner">
           <div>
