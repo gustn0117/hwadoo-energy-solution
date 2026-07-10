@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import { COMPANY, MENU } from "@/lib/content";
-import { LogoMark } from "./Logo";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -39,11 +38,13 @@ export function Header() {
       <div className="shell hd__bar">
         {/* 로고는 링크 없이 노출 — 기획서 화면설명 2 */}
         <div className="hd__logo">
-          <LogoMark className="hd__mark" />
-          <div className="hd__wordmark">
-            <b>화두에너지솔루션</b>
-            <span>{COMPANY.nameEn}</span>
-          </div>
+          <img
+            className="hd__logoImg"
+            src="/logo-hwadoo.png"
+            alt={COMPANY.name}
+            width={403}
+            height={173}
+          />
         </div>
 
         <nav className="hd__nav" aria-label="주요 메뉴">
