@@ -97,6 +97,8 @@ function ProductPanel() {
         <Hatch
           className="panel__visual"
           label="에버온 스탠드형 완속충전기 제품컷 (누끼, 4:5)"
+          src="/images/generated/charger-1.webp"
+          fit="contain"
         />
         <ul className="checks">
           {SAFETY_FEATURES.map((f) => (
@@ -145,6 +147,7 @@ function UsagePanel() {
       <Hatch
         className="panel__visual"
         label="에버온 모바일 앱 화면 3컷 — 바로ON / 내지갑 / 토크ON"
+        src="/images/generated/app.webp"
       />
     </div>
   );
@@ -176,6 +179,7 @@ function RatePanel() {
         <Hatch
           className="rates__banner"
           label="제휴 카드 할인 · 포인트 적립 배너 (9개사 20개 상품)"
+          src="/images/generated/rate-benefits.webp"
         />
       </div>
 
@@ -246,7 +250,7 @@ function InsurancePanel() {
         </ul>
       </div>
 
-      <Hatch className="panel__visual" label="보험가입증명서 스캔본 (A4 세로)" />
+      <Hatch className="panel__visual" label="보험가입증명서 스캔본 (A4 세로)" src="/images/generated/insurance.webp" />
     </div>
   );
 }
@@ -287,7 +291,7 @@ function ServicePanel() {
         </ul>
       </div>
 
-      <Hatch className="panel__visual" label="점검 인포그래픽 — 3중 보장 체계 아이콘" />
+      <Hatch className="panel__visual" label="점검 인포그래픽 — 3중 보장 체계 아이콘" src="/images/generated/service.webp" />
     </div>
   );
 }

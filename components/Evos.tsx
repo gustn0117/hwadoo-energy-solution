@@ -28,6 +28,7 @@ export function Evos() {
             onDark
             className="evos__screen"
             label="EVOS 관제 대시보드 스크린샷 — 충전기 34기 실시간 현황"
+            src="/images/generated/dashboard.webp"
           />
         </div>
       </div>

@@ -19,7 +19,7 @@ export function Cases() {
         <ul className="cases__grid">
           {CASES.map((c) => (
             <li className="case" key={c.name}>
-              <Hatch className="case__img" label={`${c.name} 현장 사진`} />
+              <Hatch className="case__img" label={`${c.name} 현장 사진`} src={c.image} />
               <div className="case__body">
                 <p className="case__name">{c.name}</p>
                 <p className="case__qty">

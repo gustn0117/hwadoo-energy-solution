@@ -41,7 +41,7 @@ export function Compare() {
                 <th scope="row">제품 사진</th>
                 {COMPARE.cpos.map((c, i) => (
                   <td key={c} className={i === COMPARE.pick ? "compare__pick" : undefined}>
-                    <Hatch onDark className="compare__thumb" label={`${c} 충전기`} />
+                    <Hatch onDark className="compare__thumb" label={`${c} 충전기`} src={`/images/generated/charger-${i + 1}.webp`} fit="contain" />
                   </td>
                 ))}
               </tr>

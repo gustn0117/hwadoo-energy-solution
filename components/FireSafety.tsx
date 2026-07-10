@@ -19,7 +19,7 @@ export function FireSafety() {
         <ul className="fire__grid">
           {FIRE_ITEMS.map((item, i) => (
             <li className="fireCard" key={item.name}>
-              <Hatch className="fireCard__img" label="제품" />
+              <Hatch className="fireCard__img" label={`${item.name} 제품`} src={item.image} />
               <div>
                 <span className="fireCard__no">
                   ITEM {String(i + 1).padStart(2, "0")}

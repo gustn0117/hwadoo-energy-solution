@@ -3,20 +3,26 @@ export function Hatch({
   label,
   className = "",
   onDark = false,
+  src,
+  fit = "cover",
 }: {
   label: string;
   className?: string;
   onDark?: boolean;
+  src?: string;
+  fit?: "cover" | "contain";
 }) {
   return (
     <div
-      className={`hatch ${onDark ? "hatch--onDark" : ""} ${className}`}
+      className={`hatch ${src ? "hatch--image" : ""} ${onDark ? "hatch--onDark" : ""} ${className}`}
       role="img"
       aria-label={`이미지 자리: ${label}`}
     >
-      <span className="hatch__label" aria-hidden="true">
-        {label}
-      </span>
+      {src ? (
+        <img className="hatch__image" src={src} alt="" loading="lazy" style={{ objectFit: fit }} />
+      ) : (
+        <span className="hatch__label" aria-hidden="true">{label}</span>
+      )}
     </div>
   );
 }

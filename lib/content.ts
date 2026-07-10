@@ -14,7 +14,7 @@ export const COMPANY = {
  * public/ 에 파일을 넣고 경로를 적으면 빗금 플레이스홀더가 사진으로 바뀐다.
  * 예: "/hero.jpg"
  */
-export const HERO_PHOTO: string | null = null;
+export const HERO_PHOTO: string | null = "/images/generated/hero-ev-parking.webp";
 
 export const HERO_PHOTO_SPEC = {
   subject: "아파트 지하주차장 완속충전 구역",
@@ -122,23 +122,23 @@ export const RATES = [
 ] as const;
 
 export const CASES = [
-  { name: "힐스테이트자이계양", qty: 149 },
-  { name: "김포 풍무푸르지오", qty: 128 },
-  { name: "수원SK스카이뷰아파트", qty: 119 },
-  { name: "창원센트럴파크에일린의뜰", qty: 119 },
-  { name: "봉담자이프라이드시티", qty: 113 },
-  { name: "부평캐슬앤더샵퍼스트", qty: 107 },
-  { name: "힐스테이트검단웰카운티", qty: 104 },
-  { name: "다산이편한세상자이", qty: 100 },
+  { name: "힐스테이트자이계양", qty: 149, image: "/images/generated/case-1.webp" },
+  { name: "김포 풍무푸르지오", qty: 128, image: "/images/generated/case-2.webp" },
+  { name: "수원SK스카이뷰아파트", qty: 119, image: "/images/generated/case-3.webp" },
+  { name: "창원센트럴파크에일린의뜰", qty: 119, image: "/images/generated/case-4.webp" },
+  { name: "봉담자이프라이드시티", qty: 113, image: "/images/generated/case-5.webp" },
+  { name: "부평캐슬앤더샵퍼스트", qty: 107, image: "/images/generated/case-6.webp" },
+  { name: "힐스테이트검단웰카운티", qty: 104, image: "/images/generated/case-7.webp" },
+  { name: "다산이편한세상자이", qty: 100, image: "/images/generated/case-8.webp" },
 ] as const;
 
 export const FIRE_ITEMS = [
-  { name: "상방향 주수장치", desc: "차량 하부 배터리팩에 직접 주수해 열폭주를 억제합니다." },
-  { name: "질식소화포", desc: "차량 전체를 덮어 산소를 차단, 인접 차량으로의 연소 확대를 막습니다." },
-  { name: "전기차전용 소화기", desc: "리튬이온 배터리 화재에 대응하도록 설계된 전용 소화 약제." },
-  { name: "전기차 충전소 격벽", desc: "충전 구역을 물리적으로 구획해 화재 확산 경로를 차단합니다." },
-  { name: "AI BOX (Fire Box)", desc: "충전 중 이상 징후를 영상·온도로 감지해 관리사무소에 즉시 알립니다." },
-  { name: "전기차 화재예방 시스템", desc: "감지부터 초기 진압까지 연동 제어하는 통합 대응 시스템." },
+  { name: "상방향 주수장치", desc: "차량 하부 배터리팩에 직접 주수해 열폭주를 억제합니다.", image: "/images/generated/fire-1.webp" },
+  { name: "질식소화포", desc: "차량 전체를 덮어 산소를 차단, 인접 차량으로의 연소 확대를 막습니다.", image: "/images/generated/fire-2.webp" },
+  { name: "전기차전용 소화기", desc: "리튬이온 배터리 화재에 대응하도록 설계된 전용 소화 약제.", image: "/images/generated/fire-3.webp" },
+  { name: "전기차 충전소 격벽", desc: "충전 구역을 물리적으로 구획해 화재 확산 경로를 차단합니다.", image: "/images/generated/fire-4.webp" },
+  { name: "AI BOX (Fire Box)", desc: "충전 중 이상 징후를 영상·온도로 감지해 관리사무소에 즉시 알립니다.", image: "/images/generated/fire-5.webp" },
+  { name: "전기차 화재예방 시스템", desc: "감지부터 초기 진압까지 연동 제어하는 통합 대응 시스템.", image: "/images/generated/fire-6.webp" },
 ] as const;
 
 export const COMPARE = {
