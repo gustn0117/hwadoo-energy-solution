@@ -1,7 +1,14 @@
 import { COMPARE } from "@/lib/content";
-import { Hatch } from "./Hatch";
+
+const fmt = new Intl.NumberFormat("ko-KR");
 
 export function Compare() {
+  const { cpos, pick, bars, price, rows, asOf } = COMPARE;
+  const cell = (i: number, extra = "") =>
+    ["cmp__cell", i === pick ? "cmp__cell--pick" : "", extra]
+      .filter(Boolean)
+      .join(" ");
+
   return (
     <section className="section compare" id="비교">
       <div className="shell">
@@ -16,48 +23,83 @@ export function Compare() {
           </p>
         </div>
 
-        <div className="compare__scroll">
-          <table className="compare__table">
-            <caption className="sr-only">충전사업자별 제품 경쟁력 비교표</caption>
+        <p className="cmp__hint" aria-hidden="true">
+          표를 옆으로 밀어 나머지 사업자를 확인하세요
+        </p>
+
+        <div className="cmp__scroll">
+          <table className="cmp">
+            <caption className="sr-only">
+              충전사업자별 제품 경쟁력 비교표 ({asOf} 기준)
+            </caption>
+
             <thead>
               <tr>
-                <th scope="col">CPO / 2026.05</th>
-                {COMPARE.cpos.map((c, i) => (
-                  <th
-                    scope="col"
-                    key={c}
-                    className={i === COMPARE.pick ? "compare__pick" : undefined}
-                  >
-                    {c}
-                    {i === COMPARE.pick && (
-                      <span className="compare__pickTag">시안 기준</span>
-                    )}
+                <th scope="col" className="cmp__corner">
+                  <span className="cmp__asOf">AS OF {asOf}</span>
+                </th>
+                {cpos.map((c, i) => (
+                  <th scope="col" key={c.name} className={cell(i, "cmp__head")}>
+                    <span className="cmp__shot">
+                      <img src={c.image} alt="" loading="lazy" />
+                    </span>
+                    <span className="cmp__name">
+                      {c.name}
+                      {i === pick && <em className="cmp__tag">시안 기준</em>}
+                    </span>
                   </th>
                 ))}
               </tr>
             </thead>
+
             <tbody>
+              {/* 규모는 숫자보다 길이로 읽힌다 */}
+              {bars.map((row) => {
+                const max = Math.max(...row.vals);
+                return (
+                  <tr key={row.key}>
+                    <th scope="row" className="cmp__label">
+                      {row.key}
+                    </th>
+                    {row.vals.map((v, i) => (
+                      <td key={`${row.key}-${i}`} className={cell(i)}>
+                        <span className="cmp__figure">
+                          {fmt.format(v)}
+                          <small>{row.unit}</small>
+                        </span>
+                        <span className="cmp__bar">
+                          <span
+                            className="cmp__barFill"
+                            style={{ width: `${(v / max) * 100}%` }}
+                          />
+                        </span>
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+
               <tr>
-                <th scope="row">제품 사진</th>
-                {COMPARE.cpos.map((c, i) => (
-                  <td key={c} className={i === COMPARE.pick ? "compare__pick" : undefined}>
-                    <Hatch onDark className="compare__thumb" label={`${c} 충전기`} src={`/images/generated/charger-${i + 1}.webp`} fit="contain" />
+                <th scope="row" className="cmp__label">
+                  {price.key}
+                </th>
+                {price.vals.map((v, i) => (
+                  <td key={`price-${i}`} className={cell(i)}>
+                    <span className="cmp__price">
+                      {v}
+                      <small>{price.unit}</small>
+                    </span>
                   </td>
                 ))}
               </tr>
-              {COMPARE.rows.map((row) => (
+
+              {rows.map((row) => (
                 <tr key={row.key}>
-                  <th scope="row">{row.key}</th>
+                  <th scope="row" className="cmp__label">
+                    {row.key}
+                  </th>
                   {row.vals.map((v, i) => (
-                    <td
-                      key={`${row.key}-${i}`}
-                      className={[
-                        row.num ? "num" : "",
-                        i === COMPARE.pick ? "compare__pick" : "",
-                      ]
-                        .filter(Boolean)
-                        .join(" ")}
-                    >
+                    <td key={`${row.key}-${i}`} className={cell(i, "cmp__text")}>
                       {v}
                     </td>
                   ))}

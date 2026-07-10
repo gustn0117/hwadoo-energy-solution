@@ -1270,87 +1270,188 @@ img {
   color: rgba(255, 255, 255, 0.55);
 }
 
-.compare__scroll {
+.cmp__scroll {
   overflow-x: auto;
-  border-top: 1px solid rgba(255, 255, 255, 0.24);
+  scrollbar-width: thin;
 }
 
-.compare__table {
+.cmp__hint {
+  display: none;
+  margin-bottom: 16px;
+  font-size: 12px;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.cmp {
   width: 100%;
-  min-width: 980px;
-  border-collapse: collapse;
-  font-size: 14px;
+  min-width: 1060px;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-.compare__table th,
-.compare__table td {
+.cmp th,
+.cmp td {
   text-align: left;
-  padding: 18px 26px 18px 0;
-  border-bottom: 1px solid var(--hair-dark);
   vertical-align: top;
 }
 
-.compare__table thead th {
-  padding-block: 26px 20px;
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-}
-
-.compare__table thead th:first-child {
-  color: rgba(255, 255, 255, 0.4);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  font-weight: 500;
-}
-
-.compare__table tbody th {
+/* 행 라벨 레일 */
+.cmp__label {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--ink);
+  width: 200px;
+  padding: 24px 32px 24px 0;
+  border-bottom: 1px solid var(--hair-dark);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: -0.01em;
   color: rgba(255, 255, 255, 0.45);
   white-space: nowrap;
-  width: 172px;
 }
 
-.compare__table td {
-  color: rgba(255, 255, 255, 0.82);
-  letter-spacing: -0.01em;
+.cmp .cmp__corner {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--ink);
+  vertical-align: bottom;
+  padding-bottom: 26px;
 }
 
-.compare__table tr:last-child th,
-.compare__table tr:last-child td {
+.cmp__asOf {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.32);
+}
+
+/* 사업자 열 */
+.cmp__cell {
+  padding: 24px;
+  border-bottom: 1px solid var(--hair-dark);
+}
+
+/* 시안 기준 사업자는 열 전체가 하나의 면으로 선다 */
+.cmp__cell--pick {
+  background: rgba(242, 178, 9, 0.055);
+}
+
+.cmp .cmp__head {
+  vertical-align: bottom;
+  padding-bottom: 26px;
+}
+
+.cmp__head.cmp__cell--pick {
+  border-top: 2px solid var(--volt);
+  border-radius: var(--r-lg) var(--r-lg) 0 0;
+}
+
+.cmp tbody tr:last-child .cmp__cell {
   border-bottom: 0;
 }
 
-.compare__pick {
-  background: rgba(242, 178, 9, 0.05);
-  padding-left: 20px;
+.cmp tbody tr:last-child .cmp__cell--pick {
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
 }
 
-.compare__pickTag {
-  display: inline-block;
+.cmp__shot {
+  display: block;
+  position: relative;
+  height: 132px;
+  margin-bottom: 20px;
+}
+
+.cmp__shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  -webkit-mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 72%, transparent 100%);
+}
+
+.cmp__name {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #fff;
+}
+
+.cmp__tag {
+  font-style: normal;
   font-size: 10px;
   font-weight: 700;
   letter-spacing: -0.01em;
   color: var(--ink);
   background: var(--volt);
   border-radius: 999px;
-  padding: 2px 7px;
-  margin-left: 8px;
-  vertical-align: 2px;
+  padding: 3px 8px;
+  white-space: nowrap;
 }
 
-.compare__table td.num {
-  font-variant-numeric: tabular-nums;
+/* 규모는 길이로 읽는다 */
+.cmp__figure {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 22px;
   font-weight: 500;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
   color: #fff;
 }
 
-.compare__thumb {
-  height: 104px;
+.cmp__figure small,
+.cmp__price small {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.5);
+  margin-left: 4px;
+}
+
+.cmp__bar {
+  display: block;
+  margin-top: 12px;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+
+.cmp__barFill {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.cmp__cell--pick .cmp__barFill {
+  background: linear-gradient(90deg, var(--forest-soft), var(--volt));
+}
+
+.cmp__price {
+  font-family: var(--font-mono);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+}
+
+.cmp__text {
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .compare__note {
@@ -1718,6 +1819,41 @@ img {
 @media (max-width: 900px) {
   :root {
     --header-h: 66px;
+  }
+
+  .cmp__hint {
+    display: block;
+  }
+
+  .cmp {
+    min-width: 840px;
+  }
+
+  .cmp__label,
+  .cmp .cmp__corner {
+    /* 고정된 레일과 스크롤되는 값 사이의 경계 */
+    box-shadow: 1px 0 0 var(--hair-dark);
+  }
+
+  .cmp__label {
+    width: 128px;
+    padding: 20px 14px 20px 0;
+    white-space: normal;
+    line-height: 1.4;
+  }
+
+  .cmp__cell {
+    padding: 20px 16px;
+  }
+
+  .cmp__shot {
+    height: 92px;
+    margin-bottom: 14px;
+  }
+
+  .cmp__name {
+    font-size: 15px;
+    gap: 6px;
   }
 
   .hd__nav,
