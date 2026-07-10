@@ -1,7 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Docker 셀프호스팅 배포
+  output: "standalone",
 };
 
 export default nextConfig;
