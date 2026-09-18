@@ -11,7 +11,7 @@ export function FireSafety() {
           <br />
           <em>안전까지 함께 고려합니다.</em>
         </h2>
-        <a className="btn btn--white fire__btn" href="#consult">
+        <a className="btn btn--white fire__btn" href="/#consult">
           화재대응용품 보기
           <ArrowRight />
         </a>

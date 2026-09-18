@@ -484,10 +484,51 @@ img {
 }
 
 .consult__done {
-  color: var(--purple);
+  color: #d62c2c;
   font-size: 14px;
   font-weight: 600;
   text-align: center;
+}
+
+.consult__done[data-ok="true"] {
+  color: var(--purple);
+}
+
+.consult__submit:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.consult__trap {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.consult__agree {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #444;
+  font-size: 13px;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.consult__agree input {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 1px 0 0;
+  accent-color: var(--purple);
+}
+
+.consult__agree small {
+  display: block;
+  color: #888;
+  font-size: 11px;
 }
 
 /* ============================================================
@@ -1257,7 +1298,7 @@ img {
   line-height: 1.75;
 }
 
-.faq__a ul {
+.faq__a > * + * {
   margin-top: 14px;
 }
 
@@ -1551,6 +1592,129 @@ img {
 }
 
 /* ============================================================
+   서브 페이지 — 설치사례 · FAQ
+   ============================================================ */
+.subHero {
+  padding: 100px 0 90px;
+  background: linear-gradient(90deg, #0334b5 0%, #3c39d2 50%, #6c3cea 100%);
+  color: #fff;
+}
+
+.subHero__eyebrow {
+  color: var(--orange-soft);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.subHero__title {
+  margin-top: 10px;
+  font-size: clamp(32px, 2.9vw, 56px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.04em;
+}
+
+.subHero__title em {
+  color: var(--mint);
+}
+
+.subHero__desc {
+  margin-top: 16px;
+  font-size: clamp(16px, 1.15vw, 22px);
+  opacity: 0.9;
+}
+
+.cases {
+  padding: 100px 0 140px;
+}
+
+.cases__empty {
+  padding: 100px 0;
+  color: var(--gray);
+  font-size: 20px;
+  text-align: center;
+}
+
+.cases__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 34px;
+}
+
+.caseCard__img {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border-radius: 24px;
+  background: var(--bg-soft);
+  color: var(--gray);
+}
+
+.caseCard__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease);
+}
+
+.caseCard:hover .caseCard__img img {
+  transform: scale(1.04);
+}
+
+.caseCard__qty {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.caseCard__body {
+  padding: 20px 4px 0;
+}
+
+.caseCard__cpo {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #efe9fe;
+  color: var(--purple);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.caseCard h2 {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.caseCard__meta {
+  margin-top: 4px;
+  color: var(--gray);
+  font-size: 16px;
+}
+
+.caseCard__desc {
+  margin-top: 12px;
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.faqPage .faq {
+  padding-top: 90px;
+}
+
+/* ============================================================
    반응형
    ============================================================ */
 @media (max-width: 1440px) {
@@ -1645,6 +1809,10 @@ img {
 @media (max-width: 1100px) {
   :root {
     --header-h: 72px;
+  }
+
+  .cases__grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .hd__logo img {
@@ -1807,6 +1975,35 @@ img {
   :root {
     --gut: 20px;
     --header-h: 64px;
+  }
+
+  .subHero {
+    padding: 56px 0 48px;
+  }
+
+  .subHero__eyebrow {
+    font-size: 15px;
+  }
+
+  .cases {
+    padding: 56px 0 80px;
+  }
+
+  .cases__grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .caseCard__img {
+    border-radius: 18px;
+  }
+
+  .caseCard h2 {
+    font-size: 20px;
+  }
+
+  .faqPage .faq {
+    padding-top: 48px;
   }
 
   .hd__logo img {

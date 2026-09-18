@@ -8,11 +8,11 @@ export function CtaBand() {
           <em>어디서 부터 시작해야 할지 고민되시나요?</em>
         </h2>
         <div className="cta__btns">
-          <a className="cta__btn" href="#diagnosis">
+          <a className="cta__btn" href="/#diagnosis">
             <img src="/images/diagnosis-icon.png" alt="" width={190} height={190} loading="lazy" />
             설치 진단하기
           </a>
-          <a className="cta__btn cta__btn--orange" href="#consult">
+          <a className="cta__btn cta__btn--orange" href="/#consult">
             <img src="/images/consultation-icon.png" alt="" width={190} height={190} loading="lazy" />
             설치 상담하기
           </a>

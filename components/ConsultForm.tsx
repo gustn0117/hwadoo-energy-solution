@@ -1,21 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { startTransition, useActionState, useEffect, useRef } from "react";
+import { submitConsultation } from "@/app/actions/consult";
 import { Phone, Search } from "@/components/Icons";
 import { BUILDING_OPTIONS, COMPANY, CPO_OPTIONS, TEL_HREF } from "@/lib/content";
 
+/** 주소 검색 섹션에서 보내는 이벤트 — 입력한 주소를 폼에 채운다 */
+export const FINDER_EVENT = "hwadoo:finder";
+
 export function ConsultForm() {
-  const [sent, setSent] = useState(false);
+  const [state, action, pending] = useActionState(submitConsultation, null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const addressRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (state?.ok) formRef.current?.reset();
+  }, [state]);
+
+  useEffect(() => {
+    const fill = (e: Event) => {
+      const value = (e as CustomEvent<string>).detail;
+      if (addressRef.current && value) addressRef.current.value = value;
+    };
+    window.addEventListener(FINDER_EVENT, fill);
+    return () => window.removeEventListener(FINDER_EVENT, fill);
+  }, []);
 
   return (
     <form
+      ref={formRef}
       className="consult"
       id="consult"
       aria-labelledby="consult-title"
+      // action prop 대신 직접 호출 — React 19의 자동 폼 초기화로 검증 실패 시 입력값이 날아가지 않게
       onSubmit={(e) => {
         e.preventDefault();
-        // TODO: 접수 API 연동 — 지금은 화면 확인용으로 완료 문구만 띄운다
-        setSent(true);
+        const fd = new FormData(e.currentTarget);
+        startTransition(() => action(fd));
       }}
     >
       <h2 className="consult__title" id="consult-title">
@@ -49,13 +70,28 @@ export function ConsultForm() {
 
         <label className="field">
           <span className="sr-only">이름</span>
-          <input name="name" placeholder="이름" autoComplete="name" required />
+          <input name="name" placeholder="이름" autoComplete="name" required maxLength={40} />
+        </label>
+
+        <label className="field">
+          <span className="sr-only">연락처</span>
+          <input name="phone" type="tel" placeholder="연락처" autoComplete="tel" inputMode="tel" required maxLength={20} />
         </label>
 
         <label className="field field--search">
           <span className="sr-only">주소</span>
-          <input name="address" placeholder="주소를 입력해주세요." autoComplete="street-address" />
+          <input ref={addressRef} name="address" placeholder="주소를 입력해주세요." autoComplete="street-address" />
           <Search size={26} />
+        </label>
+
+        {/* 봇 차단용 숨은 칸 */}
+        <input className="consult__trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" />
+
+        <label className="consult__agree">
+          <input type="checkbox" name="agree" required />
+          <span>
+            개인정보 수집·이용에 동의합니다 <small>(이름·연락처·주소, 상담 목적, 상담 완료 후 1년 보관)</small>
+          </span>
         </label>
 
         <p className="consult__tel">
@@ -66,12 +102,12 @@ export function ConsultForm() {
           </a>
         </p>
 
-        <button className="consult__submit" type="submit">
-          무료 상담신청
+        <button className="consult__submit" type="submit" disabled={pending}>
+          {pending ? "접수 중…" : "무료 상담신청"}
         </button>
 
-        <p className="consult__done" role="status">
-          {sent ? "상담 신청이 접수되었습니다. 담당자가 곧 연락드리겠습니다." : ""}
+        <p className="consult__done" role="status" data-ok={state?.ok}>
+          {state?.message ?? ""}
         </p>
       </div>
     </form>

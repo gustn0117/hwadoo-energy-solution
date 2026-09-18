@@ -10,7 +10,7 @@ export function FloatingDock() {
   return (
     <>
       <aside className="dock" aria-label="빠른 상담">
-        <a className="dock__talk" href="#consult">
+        <a className="dock__talk" href="/#consult">
           <Chat />
           상담문의
         </a>
@@ -40,7 +40,7 @@ export function FloatingDock() {
       <div className="toast">
         <img src="/images/diagnosis-icon.png" alt="" width={190} height={190} />
         <p>전기차 충전기 고민, 전문가와 상담해보세요</p>
-        <a className="btn btn--orange" href="#consult">
+        <a className="btn btn--orange" href="/#consult">
           무료 상담 문의
         </a>
       </div>

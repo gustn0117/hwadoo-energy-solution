@@ -11,8 +11,14 @@ import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { Stats } from "@/components/Stats";
 import { WhyHwadoo } from "@/components/WhyHwadoo";
+import { getFaqs } from "@/lib/data";
 
-export default function Page() {
+// FAQ는 관리자에서 바뀌므로 요청마다 읽는다 (DB 키는 서버 런타임 환경변수)
+export const dynamic = "force-dynamic";
+
+export default async function Page() {
+  const faqs = await getFaqs(4);
+
   return (
     <>
       <Header />
@@ -25,7 +31,8 @@ export default function Page() {
         <FireSafety />
         <WhyHwadoo />
         <CtaBand />
-        <Faq />
+        {/* 시안 기준 두 번째 문항이 펼쳐진 상태로 시작 */}
+        <Faq items={faqs} defaultOpen={faqs.length > 1 ? 1 : 0} moreHref="/faq" />
         <ContactBanner />
       </main>
       <Footer />

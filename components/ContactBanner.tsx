@@ -22,7 +22,7 @@ export function ContactBanner() {
               {COMPANY.tel}
             </a>
           </p>
-          <a className="contact__btn" href="#consult">
+          <a className="contact__btn" href="/#consult">
             전기차 충전기 문의
             <ArrowRight size={30} />
           </a>

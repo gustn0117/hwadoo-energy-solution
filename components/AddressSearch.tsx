@@ -1,5 +1,6 @@
 "use client";
 
+import { FINDER_EVENT } from "@/components/ConsultForm";
 import { FINDER_BG, SEARCH_STEPS } from "@/lib/content";
 
 export function AddressSearch() {
@@ -31,7 +32,10 @@ export function AddressSearch() {
           role="search"
           onSubmit={(e) => {
             e.preventDefault();
-            // TODO: 단지 검색 API 연동
+            // 단지 조회 API 연동 전까지는 입력값을 상담 폼 주소칸에 넘겨 상담으로 잇는다
+            const q = String(new FormData(e.currentTarget).get("q") ?? "").trim();
+            window.dispatchEvent(new CustomEvent(FINDER_EVENT, { detail: q }));
+            document.getElementById("consult")?.scrollIntoView({ behavior: "smooth", block: "center" });
           }}
         >
           <img src="/images/logo-emblem.png" alt="" width={150} height={180} />

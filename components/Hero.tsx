@@ -23,7 +23,7 @@ export function Hero() {
             ))}
           </ul>
 
-          <a className="btn btn--orange hero__btn" href="#diagnosis">
+          <a className="btn btn--orange hero__btn" href="/#diagnosis">
             충전기 설치 진단
             <ArrowRight />
           </a>

@@ -43,7 +43,7 @@ export function Brands() {
             <em>우리 단지에 맞을까요?</em>
           </h2>
           <div className="brands__ctrl">
-            <a className="pill" href="#compare">
+            <a className="pill" href="/#compare">
               전체보기
             </a>
             <button className="round round--dark" onClick={() => move(-1)} disabled={edge.start} aria-label="이전 브랜드">
@@ -71,7 +71,7 @@ export function Brands() {
                     </li>
                   ))}
                 </ul>
-                <a className="brand__btn" href="#consult">
+                <a className="brand__btn" href="/#consult">
                   비교하기
                   <ArrowRight />
                 </a>
@@ -86,7 +86,7 @@ export function Brands() {
             <b>여러 업체에 일일이 문의하지 마세요!</b>
             <span>화두에서 한 번에 비교하고 상담까지</span>
           </p>
-          <a className="btn btn--orange" href="#consult">
+          <a className="btn btn--orange" href="/#consult">
             충전사업자 비교
             <ArrowRight />
           </a>

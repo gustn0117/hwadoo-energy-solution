@@ -10,7 +10,7 @@ export function Header() {
   return (
     <header className="hd" data-open={open} onKeyDown={(e) => e.key === "Escape" && close()}>
       <div className="shell hd__bar">
-        <a className="hd__logo" href="#top" onClick={close}>
+        <a className="hd__logo" href="/" onClick={close}>
           <img src="/images/logo-img.png" alt={COMPANY.name} width={500} height={181} />
         </a>
 
@@ -20,12 +20,12 @@ export function Header() {
               {m.label}
             </a>
           ))}
-          <a className="btn btn--orange hd__navCta" href="#consult" onClick={close}>
+          <a className="btn btn--orange hd__navCta" href="/#consult" onClick={close}>
             1:1 설치 상담
           </a>
         </nav>
 
-        <a className="btn btn--orange hd__cta" href="#consult">
+        <a className="btn btn--orange hd__cta" href="/#consult">
           1:1 설치 상담
         </a>
 

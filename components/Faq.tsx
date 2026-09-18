@@ -2,27 +2,68 @@
 
 import { useState } from "react";
 import { Close, Plus } from "@/components/Icons";
-import { FAQ } from "@/lib/content";
 
-export function Faq() {
-  // 시안 기준 두 번째 문항이 펼쳐진 상태로 시작
-  const [open, setOpen] = useState<number | null>(1);
+type Item = { q: string; answer: string };
+
+/** 답변 텍스트 — "- "로 시작하는 줄은 글머리표 목록, 나머지는 문단 */
+function Answer({ text }: { text: string }) {
+  const blocks: ({ type: "p"; text: string } | { type: "ul"; items: string[] })[] = [];
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    if (!line) continue;
+    if (line.startsWith("- ")) {
+      const last = blocks.at(-1);
+      if (last?.type === "ul") last.items.push(line.slice(2));
+      else blocks.push({ type: "ul", items: [line.slice(2)] });
+    } else {
+      blocks.push({ type: "p", text: line });
+    }
+  }
+  return blocks.map((b, i) =>
+    b.type === "p" ? (
+      <p key={i}>{b.text}</p>
+    ) : (
+      <ul key={i}>
+        {b.items.map((it, j) => (
+          <li key={j}>{it}</li>
+        ))}
+      </ul>
+    ),
+  );
+}
+
+export function Faq({
+  items,
+  defaultOpen = null,
+  title = true,
+  moreHref,
+}: {
+  items: Item[];
+  defaultOpen?: number | null;
+  title?: boolean;
+  moreHref?: string;
+}) {
+  const [open, setOpen] = useState<number | null>(defaultOpen);
 
   return (
     <section className="faq" id="faq">
       <div className="shell">
-        <div className="faq__head">
-          <h2 className="faq__title">
-            <small>FAQ</small>
-            자주 묻는 질문
-          </h2>
-          <a className="pill" href="#faq">
-            전체보기
-          </a>
-        </div>
+        {title ? (
+          <div className="faq__head">
+            <h2 className="faq__title">
+              <small>FAQ</small>
+              자주 묻는 질문
+            </h2>
+            {moreHref ? (
+              <a className="pill" href={moreHref}>
+                전체보기
+              </a>
+            ) : null}
+          </div>
+        ) : null}
 
         <ul className="faq__list">
-          {FAQ.map((f, i) => {
+          {items.map((f, i) => {
             const isOpen = open === i;
             return (
               <li key={f.q} className="faq__item" data-open={isOpen}>
@@ -38,12 +79,7 @@ export function Faq() {
                   </button>
                 </h3>
                 <div className="faq__a" id={`faq-a${i}`} role="region" aria-labelledby={`faq-q${i}`} hidden={!isOpen}>
-                  {f.intro ? <p>{f.intro}</p> : null}
-                  <ul>
-                    {f.items.map((it) => (
-                      <li key={it}>{it}</li>
-                    ))}
-                  </ul>
+                  <Answer text={f.answer} />
                 </div>
               </li>
             );
