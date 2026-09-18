@@ -5,14 +5,14 @@ import { STATUS_LABEL, db, type Consultation } from "@/lib/supabase";
 
 const STATUSES = Object.keys(STATUS_LABEL) as Consultation["status"][];
 
-const fmt = new Intl.DateTimeFormat("ko-KR", {
-  timeZone: "Asia/Seoul",
-  year: "2-digit",
-  month: "2-digit",
-  day: "2-digit",
-  hour: "2-digit",
-  minute: "2-digit",
-});
+// 서버(node alpine)는 한국어 로케일 데이터가 없어 Intl 대신 직접 포맷한다 — KST 고정
+const fmt = {
+  format(d: Date) {
+    const k = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+    const p = (n: number) => String(n).padStart(2, "0");
+    return `${String(k.getUTCFullYear()).slice(2)}.${p(k.getUTCMonth() + 1)}.${p(k.getUTCDate())} ${p(k.getUTCHours())}:${p(k.getUTCMinutes())}`;
+  },
+};
 
 export default async function ConsultationsPage({
   searchParams,
