@@ -9,7 +9,13 @@ export function AddressSearch() {
       className="finder"
       id="diagnosis"
       data-hatch={!FINDER_BG}
-      style={FINDER_BG ? { backgroundImage: `url(${FINDER_BG})` } : undefined}
+      style={
+        FINDER_BG
+          ? {
+              backgroundImage: `radial-gradient(60% 66% at 50% 42%, rgba(245, 246, 251, 0.94) 0%, rgba(245, 246, 251, 0.74) 62%, rgba(245, 246, 251, 0.42) 100%), url(${FINDER_BG})`,
+            }
+          : undefined
+      }
     >
       {FINDER_BG ? null : (
         <span className="hatch__label finder__hatchLabel" aria-hidden="true">
