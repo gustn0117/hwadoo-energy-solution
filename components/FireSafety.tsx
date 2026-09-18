@@ -1,39 +1,20 @@
-import { FIRE_ITEMS } from "@/lib/content";
-import { Hatch } from "./Hatch";
+import { ArrowRight } from "@/components/Icons";
 
+/** 배경 이미지(데스크톱/모바일 2종)에 일러스트가 포함돼 있다 */
 export function FireSafety() {
   return (
-    <section className="section fire" id="화재대응">
-      <div className="shell">
-        <div className="section__head">
-          <p className="eyebrow eyebrow--kr">화재 대응</p>
-          <h2 className="section__title">
-            충전기를 놓기 전에, 대응 장비부터 갖춥니다
-          </h2>
-          <p className="section__lead">
-            국토교통부·LH의 공동주택 전기자동차 화재대응 매뉴얼을 기준으로
-            단지에 필요한 품목을 제안합니다.
-          </p>
-        </div>
-
-        <ul className="fire__grid">
-          {FIRE_ITEMS.map((item, i) => (
-            <li className="fireCard" key={item.name}>
-              <Hatch className="fireCard__img" label={`${item.name} 제품`} src={item.image} />
-              <div>
-                <span className="fireCard__no">
-                  ITEM {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="fireCard__name">{item.name}</p>
-                <p className="fireCard__desc">{item.desc}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-
-        <p className="fire__note">
-          품목별 구매는 네이버 스마트스토어에서 진행됩니다. 연동 준비 중입니다.
-        </p>
+    <section className="fire" id="fire">
+      <div className="shell fire__inner">
+        <p className="fire__sub">화재대응용품 지원</p>
+        <h2 className="fire__title">
+          충전 인프라 구축에서
+          <br />
+          <em>안전까지 함께 고려합니다.</em>
+        </h2>
+        <a className="btn btn--white fire__btn" href="#consult">
+          화재대응용품 보기
+          <ArrowRight />
+        </a>
       </div>
     </section>
   );

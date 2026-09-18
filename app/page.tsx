@@ -1,33 +1,35 @@
-import { Cases } from "@/components/Cases";
-import { Compare } from "@/components/Compare";
-import { CpoTabs } from "@/components/CpoTabs";
-import { Dock } from "@/components/Dock";
-import { Evos } from "@/components/Evos";
+import { AddressSearch } from "@/components/AddressSearch";
+import { Brands } from "@/components/Brands";
+import { ContactBanner } from "@/components/ContactBanner";
+import { CtaBand } from "@/components/CtaBand";
+import { Faq } from "@/components/Faq";
 import { FireSafety } from "@/components/FireSafety";
+import { FloatingDock } from "@/components/FloatingDock";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { ProcessGauge } from "@/components/ProcessGauge";
+import { Services } from "@/components/Services";
+import { Stats } from "@/components/Stats";
+import { WhyHwadoo } from "@/components/WhyHwadoo";
 
-/**
- * 메인 페이지는 별도로 두지 않고 CPO 상담신청 페이지를 메인으로 삼는다.
- * — 기획서 화면 001 화면설명 3
- */
 export default function Page() {
   return (
     <>
       <Header />
       <main>
         <Hero />
-        <ProcessGauge />
-        <CpoTabs />
-        <Compare />
-        <Cases />
+        <Stats />
+        <Services />
+        <AddressSearch />
+        <Brands />
         <FireSafety />
-        <Evos />
+        <WhyHwadoo />
+        <CtaBand />
+        <Faq />
+        <ContactBanner />
       </main>
       <Footer />
-      <Dock />
+      <FloatingDock />
     </>
   );
 }
