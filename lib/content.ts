@@ -65,16 +65,16 @@ export const SEARCH_STEPS = [
   { icon: "/images/additional-installation.png", title: "추가설치 검토", desc: ["추가 설치 가능여부", "간편하게 확인"] },
 ] as const;
 
-/** 로고 이미지 미전달 — logo 경로를 채우면 빗금 자리가 로고로 바뀐다 */
+/** 충전사업자 공식 로고 */
 export const BRANDS: {
   name: string;
   logo: string | null;
   features: readonly string[];
 }[] = [
-  { name: "플러그링크", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "에버온", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "현대엔지니어링", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "SK일렉링크", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "플러그링크", logo: "/images/brands/pluglink.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "에버온", logo: "/images/brands/everon.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "현대엔지니어링", logo: "/images/brands/hyundai-engineering.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "SK일렉링크", logo: "/images/brands/sk-electlink.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
 ];
 
 export const WHY = [
