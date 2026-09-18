@@ -1,3 +1,4 @@
+import { Hatch } from "@/components/Hatch";
 import { WHY } from "@/lib/content";
 
 export function WhyHwadoo() {
@@ -12,7 +13,7 @@ export function WhyHwadoo() {
         <ol className="why__list">
           {WHY.map((w, i) => (
             <li key={i} className="why__row" data-flip={i % 2 === 1}>
-              <img src={w.image} alt="" width={634} height={369} loading="lazy" />
+              <Hatch className="why__img" src={w.image} label={`${w.imageLabel} (1268×738 이상)`} />
               <div className="why__text">
                 <span className="why__num num">{String(i + 1).padStart(2, "0")}</span>
                 <h3>

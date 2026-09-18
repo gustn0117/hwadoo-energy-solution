@@ -1,10 +1,20 @@
 "use client";
 
-import { SEARCH_STEPS } from "@/lib/content";
+import { FINDER_BG, SEARCH_STEPS } from "@/lib/content";
 
 export function AddressSearch() {
   return (
-    <section className="finder" id="diagnosis">
+    <section
+      className="finder"
+      id="diagnosis"
+      data-hatch={!FINDER_BG}
+      style={FINDER_BG ? { backgroundImage: `url(${FINDER_BG})` } : undefined}
+    >
+      {FINDER_BG ? null : (
+        <span className="hatch__label finder__hatchLabel" aria-hidden="true">
+          배경 사진 · 흐린 아파트 단지 (3840×2060 이상)
+        </span>
+      )}
       <div className="shell">
         <img className="finder__pin" src="/images/location-icon.png" alt="" width={160} height={192} loading="lazy" />
         <h2 className="finder__title">

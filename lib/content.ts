@@ -1,8 +1,11 @@
 /**
  * 확정 시안(2026.09.18 전달)의 문구와 이미지 경로.
  * 이미지는 public/images/ — 고객사 전달 원본(0918.zip).
- * public/images/placeholder/ 는 원본 미전달분을 시안에서 잘라 둔 임시 이미지다.
+ * 값이 null인 이미지는 원본 미전달분 — 경로를 채우면 빗금 자리가 이미지로 바뀐다.
  */
+
+/** 주소 검색 섹션 배경 — 시안의 흐린 아파트 단지 사진 */
+export const FINDER_BG: string | null = null;
 
 export const COMPANY = {
   name: "화두에너지솔루션",
@@ -62,7 +65,7 @@ export const SEARCH_STEPS = [
   { icon: "/images/additional-installation.png", title: "추가설치 검토", desc: ["추가 설치 가능여부", "간편하게 확인"] },
 ] as const;
 
-/** 로고 이미지 미전달 — logo 경로를 채우면 워드마크 대신 이미지가 나온다 */
+/** 로고 이미지 미전달 — logo 경로를 채우면 빗금 자리가 로고로 바뀐다 */
 export const BRANDS: {
   name: string;
   logo: string | null;
@@ -78,22 +81,26 @@ export const WHY = [
   {
     title: ["충전기 전문가가", "제안하는 맞춤 설치 상담"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/placeholder/why-1.jpg",
+    image: null as string | null,
+    imageLabel: "사진 · 현장 상담",
   },
   {
     title: ["현장 확인부터", "설치 전 과정 지원"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/placeholder/why-2.jpg",
+    image: null as string | null,
+    imageLabel: "사진 · 현장 점검",
   },
   {
     title: ["설치 이후", "안정적인 관리 지원"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/placeholder/why-3.jpg",
+    image: null as string | null,
+    imageLabel: "사진 · 관제 모니터링",
   },
   {
     title: ["충전기 전문가가", "제안하는 맞춤 설치 상담"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/placeholder/why-4.jpg",
+    image: null as string | null,
+    imageLabel: "사진 · 설치 상담",
   },
 ] as const;
 

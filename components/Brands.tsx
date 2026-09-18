@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Hatch } from "@/components/Hatch";
 import { ArrowRight, Check, Chevron } from "@/components/Icons";
 import { BRANDS } from "@/lib/content";
 
@@ -59,7 +60,7 @@ export function Brands() {
             {BRANDS.map((b) => (
               <li key={b.name} className="brand">
                 <div className="brand__logo">
-                  {b.logo ? <img src={b.logo} alt={b.name} /> : <span aria-hidden="true">{b.name}</span>}
+                  <Hatch src={b.logo} label={`${b.name} 로고`} />
                 </div>
                 <b className="brand__name">{b.name}</b>
                 <ul className="brand__features">
