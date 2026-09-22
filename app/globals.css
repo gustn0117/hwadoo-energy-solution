@@ -9,8 +9,10 @@
 
 @font-face {
   font-family: "Noto Sans KR";
-  src: url("/fonts/NotoSansKR-Variable.woff2") format("woff2-variations");
-  font-weight: 100 900;
+  /* 고객사 원본 가변 폰트에서 KS X 1001 한글 2,350자 + 사이트 사용 글자만 남긴 서브셋 (3.9MB → 315KB).
+     목록 밖의 드문 글자는 시스템 고딕으로 표시된다. 굵기 축은 사이트에서 쓰는 400–900만 유지 */
+  src: url("/fonts/NotoSansKR-Variable.subset.woff2") format("woff2-variations");
+  font-weight: 400 900;
   font-style: normal;
   font-display: swap;
 }
