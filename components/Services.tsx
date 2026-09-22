@@ -3,10 +3,12 @@ import { SERVICES } from "@/lib/content";
 
 export function Services() {
   return (
-    <section className="services">
+    <section className="sec services">
       <div className="shell">
-        <h2 className="services__title">아직도 혼자서 알아보시나요?</h2>
-        <ul className="services__list">
+        <div className="sec-head" data-reveal>
+          <h2 className="sec-title sec-title--md">아직도 혼자서 알아보시나요?</h2>
+        </div>
+        <ul className="services__list" data-reveal-group>
           {SERVICES.map((s) => (
             <li key={s.title}>
               <a className="svc" href={s.href} data-tone={s.tone}>

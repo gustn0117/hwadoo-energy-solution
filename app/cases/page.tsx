@@ -27,7 +27,7 @@ export default async function CasesPage() {
           {cases.length === 0 ? (
             <p className="cases__empty">설치사례를 준비하고 있습니다.</p>
           ) : (
-            <ul className="cases__grid">
+            <ul className="cases__grid" data-reveal-group>
               {cases.map((c) => (
                 <li key={c.id} className="caseCard">
                   <div className="caseCard__img">

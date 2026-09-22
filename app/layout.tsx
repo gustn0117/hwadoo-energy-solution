@@ -7,24 +7,25 @@ export const metadata: Metadata = {
     "전국 아파트 1,300개 현장, 충전기 12,000대 설치. 주요 충전사업자를 한 번에 비교하고 전문 컨설턴트와 1:1 맞춤 상담을 받아보세요.",
 };
 
+/** JS가 켜진 환경에서만 스크롤 등장 효과용 숨김 상태를 켠다 (모션 줄이기 설정이면 끔) */
+const REVEAL_BOOT = `if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('reveal')`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="ko" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+        <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOT }} />
+        <link rel="preload" href="/fonts/JalnanGothic.woff2" as="font" type="font/woff2" crossOrigin="" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        {/* 본문: Noto Sans KR (고객사 지정) · 숫자: Poppins */}
         <link
           rel="stylesheet"
-          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Poppins:wght@600;700&display=swap"
         />
       </head>
       <body>{children}</body>

@@ -1,4 +1,5 @@
 import { AddressSearch } from "@/components/AddressSearch";
+import { ConsultModal } from "@/components/ConsultModal";
 import { Brands } from "@/components/Brands";
 import { ContactBanner } from "@/components/ContactBanner";
 import { CtaBand } from "@/components/CtaBand";
@@ -8,6 +9,7 @@ import { FloatingDock } from "@/components/FloatingDock";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { ScrollReveal } from "@/components/ScrollReveal";
 import { Services } from "@/components/Services";
 import { Stats } from "@/components/Stats";
 import { WhyHwadoo } from "@/components/WhyHwadoo";
@@ -37,6 +39,8 @@ export default async function Page() {
       </main>
       <Footer />
       <FloatingDock />
+      <ConsultModal />
+      <ScrollReveal />
     </>
   );
 }

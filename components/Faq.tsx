@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Close, Plus } from "@/components/Icons";
+import { Plus } from "@/components/Icons";
 
 type Item = { q: string; answer: string };
 
@@ -46,12 +46,12 @@ export function Faq({
   const [open, setOpen] = useState<number | null>(defaultOpen);
 
   return (
-    <section className="faq" id="faq">
+    <section className="sec faq" id="faq">
       <div className="shell">
         {title ? (
-          <div className="faq__head">
-            <h2 className="faq__title">
-              <small>FAQ</small>
+          <div className="sec-head faq__head" data-reveal>
+            <h2 className="sec-title">
+              <small className="sec-eyebrow">FAQ</small>
               자주 묻는 질문
             </h2>
             {moreHref ? (
@@ -62,7 +62,7 @@ export function Faq({
           </div>
         ) : null}
 
-        <ul className="faq__list">
+        <ul className="faq__list" data-reveal-group>
           {items.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -75,11 +75,15 @@ export function Faq({
                     onClick={() => setOpen(isOpen ? null : i)}
                   >
                     {f.q}
-                    {isOpen ? <Close /> : <Plus />}
+                    {/* 열리면 오른쪽으로 45° 돌아 × 가 된다 */}
+                    <Plus className="faq__icon" />
                   </button>
                 </h3>
-                <div className="faq__a" id={`faq-a${i}`} role="region" aria-labelledby={`faq-q${i}`} hidden={!isOpen}>
-                  <Answer text={f.answer} />
+                {/* 0fr → 1fr 로 높이를 자연스럽게 펼친다 */}
+                <div className="faq__panel" id={`faq-a${i}`} role="region" aria-labelledby={`faq-q${i}`} inert={!isOpen}>
+                  <div className="faq__a">
+                    <Answer text={f.answer} />
+                  </div>
                 </div>
               </li>
             );

@@ -1,11 +1,11 @@
 /**
- * 확정 시안(2026.09.18 전달)의 문구와 이미지 경로.
- * 이미지는 public/images/ — 고객사 전달 원본(0918.zip).
+ * 확정 시안(2026.09.18 전달) · 피드백(09.21)의 문구와 이미지 경로.
+ * 이미지는 public/images/ — 고객사 전달 원본(0918.zip, 0921 추가분).
  * 값이 null인 이미지는 원본 미전달분 — 경로를 채우면 빗금 자리가 이미지로 바뀐다.
  */
 
-/** 주소 검색 섹션 배경 — 흐린 아파트 단지와 전기차 충전 공간 */
-export const FINDER_BG: string | null = "/images/generated/finder-apartment-bg.webp";
+/** 주소 검색 섹션 배경 — 흐린 아파트 단지 (고객사 전달 원본) */
+export const FINDER_BG: string | null = "/images/apartment-banner.jpg";
 
 export const COMPANY = {
   name: "화두에너지솔루션",
@@ -53,9 +53,9 @@ export const STATS = [
 ] as const;
 
 export const SERVICES = [
-  { icon: "/images/installation-diagnosis.png", title: "충전기 설치 진단", desc: "주소 기반으로 설치여부 확인", href: "#diagnosis", tone: "purple" },
-  { icon: "/images/charging-business-compare.png", title: "충전사업소 비교", desc: "사업자별 조건 및 혜택 비교", href: "#compare", tone: "navy" },
-  { icon: "/images/installation-operation.png", title: "설치·운영", desc: "설치부터 유지관리까지", href: "#service", tone: "purple" },
+  { icon: "/images/installation-diagnosis.png", title: "충전기 설치 진단", desc: "주소 기반으로 설치여부 확인", href: "/#diagnosis", tone: "purple" },
+  { icon: "/images/charging-business-compare.png", title: "충전사업소 비교", desc: "사업자별 조건 및 혜택 비교", href: "/#compare", tone: "navy" },
+  { icon: "/images/installation-operation.png", title: "설치·운영", desc: "설치부터 유지관리까지", href: "/#service", tone: "purple" },
   { icon: "/images/installation-case.png", title: "설치 사례", desc: "실제 구축현장 확인", href: "/cases", tone: "navy" },
 ] as const;
 
@@ -75,31 +75,34 @@ export const BRANDS: {
   { name: "에버온", logo: "/images/brands/everon.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
   { name: "현대엔지니어링", logo: "/images/brands/hyundai-engineering.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
   { name: "SK일렉링크", logo: "/images/brands/sk-electlink.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  // 5·6번 박스는 고객사가 내용을 채울 자리 — 로고가 없으면 빗금으로 표시된다
+  { name: "충전사업자 5", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "충전사업자 6", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
 ];
 
 export const WHY = [
   {
     title: ["충전기 전문가가", "제안하는 맞춤 설치 상담"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/generated/why-consultation.webp" as string | null,
+    image: "/images/install-process-01.jpg" as string | null,
     imageLabel: "사진 · 현장 상담",
   },
   {
     title: ["현장 확인부터", "설치 전 과정 지원"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/generated/why-site-inspection.webp" as string | null,
+    image: "/images/install-process-02.jpg" as string | null,
     imageLabel: "사진 · 현장 점검",
   },
   {
     title: ["설치 이후", "안정적인 관리 지원"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/generated/why-monitoring.webp" as string | null,
+    image: "/images/install-process-03.jpg" as string | null,
     imageLabel: "사진 · 관제 모니터링",
   },
   {
     title: ["충전기 전문가가", "제안하는 맞춤 설치 상담"],
     desc: ["아파트 현 상황과 여러가지를 고려하여 혜택이 좋은", "사업자 브랜드로 찾아드려요."],
-    image: "/images/generated/why-installation-handover.webp" as string | null,
+    image: "/images/install-process-04.jpg" as string | null,
     imageLabel: "사진 · 설치 상담",
   },
 ] as const;

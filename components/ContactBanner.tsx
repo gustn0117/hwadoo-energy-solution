@@ -3,18 +3,18 @@ import { COMPANY, TEL_HREF } from "@/lib/content";
 
 export function ContactBanner() {
   return (
-    <section className="contact" aria-label="대표전화 및 문의">
+    <section className="contact is-dark" aria-label="대표전화 및 문의">
       <div className="shell contact__inner">
-        <img className="contact__img" src="/images/bottom-banner-icon.png" alt="" width={500} height={400} loading="lazy" />
-        <div className="contact__copy">
-          <h2>
+        <img className="contact__img" src="/images/bottom-banner-icon.png" alt="" width={500} height={400} loading="lazy" data-reveal />
+        <div className="contact__copy" data-reveal>
+          <h2 className="sec-title sec-title--md">
             화두에너지솔루션
             <br />
             <em>더 스마트한 내일을 위한 선택</em>
           </h2>
-          <p>아파트 단지에 가장 적합한 충전 솔루션을 제안합니다.</p>
+          <p className="sec-desc">아파트 단지에 가장 적합한 충전 솔루션을 제안합니다.</p>
         </div>
-        <div className="contact__action">
+        <div className="contact__action" data-reveal>
           <p className="contact__tel">
             대표전화
             <a className="num" href={TEL_HREF}>
