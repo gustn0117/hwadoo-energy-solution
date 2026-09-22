@@ -21,14 +21,58 @@ export const COMPANY = {
 
 export const TEL_HREF = `tel:${COMPANY.tel.replaceAll("-", "")}`;
 
-/** 헤더 메뉴 — 설치사례·고객지원은 별도 페이지, 나머지는 메인의 해당 섹션 */
+/**
+ * 헤더 전체메뉴 — PC에서는 어느 상위 메뉴에 들어가도 전 열이 함께 열리고,
+ * 태블릿·모바일에서는 햄버거 안에 같은 구조를 모두 보여준다.
+ */
 export const MENU = [
-  { label: "화두에너지솔루션", href: "/#about" },
-  { label: "비교하기", href: "/#compare" },
-  { label: "설치·운영", href: "/#service" },
-  { label: "화재안전", href: "/#fire" },
-  { label: "설치사례", href: "/cases" },
-  { label: "고객지원", href: "/faq" },
+  {
+    label: "화두에너지솔루션",
+    href: "/#about",
+    items: [
+      { label: "주요 실적", href: "/#about" },
+      { label: "화두의 강점", href: "/#service" },
+      { label: "1:1 설치 상담", href: "/#consult" },
+    ],
+  },
+  {
+    label: "비교하기",
+    href: "/#compare",
+    items: [
+      { label: "충전사업자 비교", href: "/#compare" },
+      { label: "아파트 설치 진단", href: "/#diagnosis" },
+    ],
+  },
+  {
+    label: "설치·운영",
+    href: "/#service",
+    items: [
+      { label: "맞춤 설치 상담", href: "/#service" },
+      { label: "현장 확인·설치", href: "/#service" },
+      { label: "설치 후 관리", href: "/#service" },
+    ],
+  },
+  {
+    label: "화재안전",
+    href: "/#fire",
+    items: [
+      { label: "화재대응용품", href: "/#fire" },
+      { label: "관련 규정 FAQ", href: "/faq" },
+    ],
+  },
+  {
+    label: "설치사례",
+    href: "/cases",
+    items: [{ label: "설치사례 보기", href: "/cases" }],
+  },
+  {
+    label: "고객지원",
+    href: "/faq",
+    items: [
+      { label: "자주 묻는 질문", href: "/faq" },
+      { label: "1:1 설치 상담", href: "/#consult" },
+    ],
+  },
 ] as const;
 
 export const HERO_POINTS = [

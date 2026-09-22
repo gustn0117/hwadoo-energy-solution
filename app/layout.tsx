@@ -20,13 +20,11 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: REVEAL_BOOT }} />
         <link rel="preload" href="/fonts/JalnanGothic.woff2" as="font" type="font/woff2" crossOrigin="" />
+        <link rel="preload" href="/fonts/NotoSansKR-Variable.woff2" as="font" type="font/woff2" crossOrigin="" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        {/* 본문: Noto Sans KR (고객사 지정) · 숫자: Poppins */}
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Poppins:wght@600;700&display=swap"
-        />
+        {/* 본문 Noto Sans KR은 고객사 전달 원본을 로컬 사용 · 숫자만 Poppins */}
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" />
       </head>
       <body>{children}</body>
     </html>

@@ -1,8 +1,16 @@
-/* 폰트: Jalnan Gothic(자체 호스팅, KS X 1001 서브셋) · Noto Sans KR · Poppins(숫자) — app/layout.tsx에서 로드 */
+/* 폰트: 고객사 전달 Jalnan Gothic · Noto Sans KR을 자체 호스팅, Poppins는 숫자용 */
 @font-face {
   font-family: "Jalnan Gothic";
   src: url("/fonts/JalnanGothic.woff2") format("woff2");
   font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Noto Sans KR";
+  src: url("/fonts/NotoSansKR-Variable.woff2") format("woff2-variations");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -352,6 +360,10 @@ img {
   width: 172px;
 }
 
+.hd__logo {
+  flex: none;
+}
+
 .hd__nav {
   display: flex;
   gap: clamp(24px, 2.3vw, 44px);
@@ -364,6 +376,10 @@ img {
   color: var(--purple);
 }
 
+.hd__mobileMenu {
+  display: none;
+}
+
 .hd__navCta,
 .hd__burger {
   display: none;
@@ -374,6 +390,85 @@ img {
   padding: 0 32px;
   border-radius: 25px;
   font-size: 17px;
+}
+
+/* 전체메뉴 — 어느 상위 메뉴에 들어가도 모든 서브메뉴를 함께 보여준다 */
+.hd__mega {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #ececec;
+  border-bottom: 1px solid #e3e3e3;
+  background: #fff;
+  box-shadow: 0 22px 45px rgba(15, 25, 70, 0.1);
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 -10px;
+  transition:
+    opacity 0.22s var(--ease),
+    translate 0.22s var(--ease),
+    visibility 0.22s;
+}
+
+.hd[data-mega="true"] .hd__mega {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  translate: 0 0;
+}
+
+.hd__megaGrid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  padding-block: 32px 38px;
+}
+
+.hd__megaGroup {
+  min-width: 0;
+  padding-inline: 24px;
+  border-left: 1px solid #ececf2;
+}
+
+.hd__megaGroup:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.hd__megaGroup:last-child {
+  padding-right: 0;
+}
+
+.hd__megaTitle {
+  display: block;
+  color: var(--navy);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.hd__megaList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.hd__megaList a {
+  display: block;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.45;
+  transition:
+    color 0.2s,
+    translate 0.2s var(--ease);
+}
+
+.hd__megaList a:hover,
+.hd__megaList a:focus-visible {
+  color: var(--purple);
+  translate: 3px 0;
 }
 
 /* ============================================================
@@ -2008,11 +2103,13 @@ img {
     right: 0;
     flex-direction: column;
     gap: 0;
-    padding: 8px var(--gut) 24px;
+    max-height: calc(100dvh - var(--header-h));
+    padding: 0 var(--gut) 24px;
     border-bottom: 1px solid #e3e3e3;
     background: #fff;
     box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
     font-size: 17px;
+    overflow-y: auto;
     visibility: hidden;
     opacity: 0;
     translate: 0 -8px;
@@ -2028,9 +2125,42 @@ img {
     translate: 0 0;
   }
 
-  .hd__nav a:not(.btn) {
-    padding: 15px 0;
-    border-bottom: 1px solid #f0f0f0;
+  .hd__nav > a:not(.btn),
+  .hd__mega {
+    display: none;
+  }
+
+  .hd__mobileMenu {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 36px;
+    width: 100%;
+  }
+
+  .hd__mobileGroup {
+    padding: 22px 0;
+    border-bottom: 1px solid #eeeeef;
+  }
+
+  .hd__mobileTitle {
+    display: inline-block;
+    color: var(--navy);
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .hd__mobileGroup ul {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    margin-top: 12px;
+  }
+
+  .hd__mobileGroup li a {
+    display: block;
+    color: #555;
+    font-size: 15px;
+    line-height: 1.45;
   }
 
   .hd__navCta {
@@ -2299,6 +2429,14 @@ img {
 
   .hd__logo img {
     width: 120px;
+  }
+
+  .hd__mobileMenu {
+    grid-template-columns: 1fr;
+  }
+
+  .hd__mobileGroup {
+    padding: 18px 0;
   }
 
   /* 섹션 타이틀은 모두 가운데 정렬 */
