@@ -76,12 +76,12 @@ export async function deleteConsultation(fd: FormData) {
 
 const IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif"];
 
-async function uploadImage(file: File) {
+async function uploadImage(file: File, folder = "cases") {
   if (!IMAGE_TYPES.includes(file.type)) throw new Error("JPG, PNG, WEBP, GIF 이미지만 올릴 수 있습니다.");
   if (file.size > 10 * 1024 * 1024) throw new Error("이미지는 10MB 이하만 올릴 수 있습니다.");
 
   const ext = file.type.split("/")[1].replace("jpeg", "jpg");
-  const path = `cases/${Date.now()}-${randomUUID().slice(0, 8)}.${ext}`;
+  const path = `${folder}/${Date.now()}-${randomUUID().slice(0, 8)}.${ext}`;
   const storage = db().storage.from(BUCKET);
   const { error } = await storage.upload(path, file, { contentType: file.type });
   if (error) fail("이미지 업로드", error);
@@ -141,6 +141,86 @@ export async function deleteCase(fd: FormData) {
   await removeImage(data?.image_url ?? null);
   revalidatePath("/admin/cases");
   revalidatePath("/cases");
+}
+
+/* ---------- 공지·소식 ---------- */
+
+export async function saveNotice(fd: FormData) {
+  await requireAdmin();
+  const editing = fd.get("id") ? id(fd) : null;
+  const title = text(fd, "title");
+  const body = text(fd, "body");
+  if (!title || !body) throw new Error("제목과 내용을 모두 입력해주세요.");
+
+  const row = {
+    title,
+    body,
+    category: text(fd, "category") || "공지",
+    published_on: optional(fd, "published_on"),
+    is_published: fd.get("is_published") === "on",
+    is_pinned: fd.get("is_pinned") === "on",
+  };
+  const table = db().from("notices");
+  const { error } = editing ? await table.update(row).eq("id", editing) : await table.insert(row);
+  if (error) fail("공지 저장", error);
+
+  revalidatePath("/admin/notice");
+  revalidatePath("/notice");
+  redirect("/admin/notice");
+}
+
+export async function deleteNotice(fd: FormData) {
+  await requireAdmin();
+  const { error } = await db().from("notices").delete().eq("id", id(fd));
+  if (error) fail("공지 삭제", error);
+  revalidatePath("/admin/notice");
+  revalidatePath("/notice");
+}
+
+/* ---------- 프로모션 ---------- */
+
+export async function savePromotion(fd: FormData) {
+  await requireAdmin();
+  const editing = fd.get("id") ? id(fd) : null;
+  const title = text(fd, "title");
+  const body = text(fd, "body");
+  if (!title || !body) throw new Error("제목과 내용을 모두 입력해주세요.");
+
+  const row: Record<string, unknown> = {
+    title,
+    body,
+    summary: optional(fd, "summary"),
+    starts_on: optional(fd, "starts_on"),
+    ends_on: optional(fd, "ends_on"),
+    is_published: fd.get("is_published") === "on",
+    sort_order: Number(text(fd, "sort_order")) || 0,
+  };
+
+  const prevImage = optional(fd, "current_image");
+  const file = fd.get("image");
+  if (file instanceof File && file.size > 0) {
+    row.image_url = await uploadImage(file, "promotions");
+  } else if (fd.get("remove_image") === "on") {
+    row.image_url = null;
+  }
+
+  const table = db().from("promotions");
+  const { error } = editing ? await table.update(row).eq("id", editing) : await table.insert(row);
+  if (error) fail("프로모션 저장", error);
+  if (editing && "image_url" in row) await removeImage(prevImage);
+
+  revalidatePath("/admin/promotion");
+  revalidatePath("/promotion");
+  redirect("/admin/promotion");
+}
+
+export async function deletePromotion(fd: FormData) {
+  await requireAdmin();
+  const { data, error } = await db().from("promotions").delete().eq("id", id(fd)).select("image_url").single();
+  if (error) fail("프로모션 삭제", error);
+  await removeImage(data?.image_url ?? null);
+  revalidatePath("/admin/promotion");
+  revalidatePath("/promotion");
 }
 
 /* ---------- FAQ ---------- */

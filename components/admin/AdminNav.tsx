@@ -7,6 +7,8 @@ const ITEMS = [
   { href: "/admin", label: "상담 신청" },
   { href: "/admin/cases", label: "설치사례" },
   { href: "/admin/faq", label: "FAQ" },
+  { href: "/admin/notice", label: "공지·소식" },
+  { href: "/admin/promotion", label: "프로모션" },
 ];
 
 export function AdminNav() {

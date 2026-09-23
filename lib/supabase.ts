@@ -57,6 +57,32 @@ export type Faq = {
   sort_order: number;
 };
 
+export type Notice = {
+  id: number;
+  created_at: string;
+  published_on: string;
+  category: string;
+  title: string;
+  body: string;
+  is_published: boolean;
+  is_pinned: boolean;
+};
+
+export type Promotion = {
+  id: number;
+  created_at: string;
+  title: string;
+  summary: string | null;
+  body: string;
+  image_url: string | null;
+  starts_on: string | null;
+  ends_on: string | null;
+  is_published: boolean;
+  sort_order: number;
+};
+
+export const NOTICE_CATEGORIES = ["공지", "소식", "안내"] as const;
+
 export const STATUS_LABEL: Record<Consultation["status"], string> = {
   new: "신규",
   contacting: "상담중",

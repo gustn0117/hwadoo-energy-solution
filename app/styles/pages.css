@@ -1,0 +1,500 @@
+/* ============================================================
+   서브 페이지 공용 블록 — components/page/Blocks.tsx 에서만 쓴다
+   (메인 토큰/공통 클래스는 app/globals.css)
+   ============================================================ */
+.pg {
+  padding-block: var(--sec-py);
+}
+
+.pg--soft {
+  background: var(--bg-soft);
+}
+
+.pg--off {
+  background: var(--bg-off);
+}
+
+.pg__head {
+  margin-bottom: clamp(32px, 3.4vw, 56px);
+}
+
+.pg__body > * + * {
+  margin-top: clamp(24px, 2.4vw, 40px);
+}
+
+/* ---------- 문단 ---------- */
+.pg-prose {
+  max-width: 860px;
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.8;
+}
+
+.pg-prose > * + * {
+  margin-top: 16px;
+}
+
+.pg-prose strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ---------- 카드 그리드 ---------- */
+.pg-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 28px);
+}
+
+.pg-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: clamp(24px, 2.2vw, 36px);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.pg-card__icon {
+  width: 72px;
+  margin-bottom: 6px;
+}
+
+.pg-card__num {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.pg-card h3 {
+  font-size: clamp(18px, 1.35vw, 24px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.pg-card p {
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+}
+
+.pg-card__tag {
+  align-self: flex-start;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #efe9fe;
+  color: var(--purple);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pg-card--flat {
+  border: 0;
+  background: var(--bg-soft);
+}
+
+/* ---------- 사양/정보 표 ---------- */
+.pg-spec {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--line);
+}
+
+.pg-spec div {
+  display: grid;
+  grid-template-columns: minmax(140px, 200px) 1fr;
+  gap: 16px;
+  padding: 20px 24px;
+  background: #fff;
+}
+
+.pg-spec dt {
+  color: var(--navy);
+  font-size: var(--fs-body);
+  font-weight: 700;
+}
+
+.pg-spec dd {
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+/* ---------- 비교표 ---------- */
+.pg-tableWrap {
+  overflow-x: auto;
+  border-radius: 20px;
+  border: 1px solid var(--line);
+}
+
+.pg-table {
+  width: 100%;
+  min-width: 860px;
+  border-collapse: collapse;
+  font-size: clamp(14px, 1vw, 17px);
+}
+
+.pg-table th,
+.pg-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+  line-height: 1.55;
+}
+
+.pg-table thead th {
+  background: var(--bg-soft);
+  color: var(--navy);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pg-table tbody th {
+  width: 200px;
+  color: var(--ink);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pg-table tbody tr:last-child th,
+.pg-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.pg-table td[data-pick="true"] {
+  background: rgba(113, 60, 236, 0.05);
+}
+
+/* ---------- 단계 ---------- */
+.pg-steps {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
+  gap: 16px;
+  counter-reset: step;
+}
+
+.pg-steps li {
+  position: relative;
+  padding: 26px 22px;
+  border-radius: 18px;
+  background: var(--bg-soft);
+}
+
+.pg-steps li::before {
+  counter-increment: step;
+  content: "STEP " counter(step);
+  display: block;
+  margin-bottom: 8px;
+  color: var(--purple);
+  font-family: var(--font-num);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.pg-steps b {
+  display: block;
+  font-size: clamp(16px, 1.2vw, 20px);
+  font-weight: 700;
+}
+
+.pg-steps span {
+  display: block;
+  margin-top: 6px;
+  color: var(--gray);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ---------- 이미지 + 텍스트 ---------- */
+.pg-media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(24px, 3vw, 64px);
+}
+
+.pg-media[data-flip="true"] > figure {
+  order: 2;
+}
+
+.pg-media figure {
+  margin: 0;
+}
+
+.pg-media img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 24px;
+}
+
+.pg-media h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.pg-media p {
+  margin-top: 16px;
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.75;
+}
+
+/* ---------- 체크 목록 ---------- */
+.pg-checks {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: 14px 28px;
+}
+
+.pg-checks li {
+  display: flex;
+  gap: 12px;
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+}
+
+.pg-checks svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--purple);
+}
+
+.pg-checks b {
+  display: block;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ---------- 안내 박스 ---------- */
+.pg-note {
+  padding: clamp(20px, 2vw, 30px);
+  border-left: 4px solid var(--purple);
+  border-radius: 0 16px 16px 0;
+  background: var(--bg-soft);
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.7;
+}
+
+/* ---------- 목록(공지·프로모션) ---------- */
+.pg-list {
+  border-top: 2px solid var(--ink);
+}
+
+.pg-list li {
+  border-bottom: 1px solid var(--line);
+}
+
+.pg-list a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 8px;
+  transition: background-color 0.2s;
+}
+
+.pg-list a:hover {
+  background: var(--bg-soft);
+}
+
+.pg-list__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.pg-list h3 {
+  font-size: clamp(17px, 1.25vw, 21px);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.pg-list p {
+  margin-top: 6px;
+  color: var(--gray);
+  font-size: 15px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.pg-list time {
+  flex: none;
+  color: var(--gray);
+  font-family: var(--font-num);
+  font-size: 15px;
+}
+
+.pg-list__thumb {
+  flex: none;
+  width: 120px;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.pg-list__tag {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: #efe9fe;
+  color: var(--purple);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.pg-list__tag[data-state="ended"] {
+  background: #eef0f4;
+  color: #888;
+}
+
+.pg-empty {
+  padding: 80px 0;
+  color: var(--gray);
+  font-size: var(--fs-body);
+  text-align: center;
+}
+
+/* ---------- 글 상세 ---------- */
+.pg-article__head {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.pg-article__head h1 {
+  margin-top: 10px;
+  font-size: var(--fs-h3);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.pg-article__meta {
+  margin-top: 10px;
+  color: var(--gray);
+  font-family: var(--font-num);
+  font-size: 15px;
+}
+
+.pg-article__body {
+  padding: 36px 0 48px;
+  color: var(--text);
+  font-size: var(--fs-body);
+  line-height: 1.85;
+  white-space: pre-line;
+}
+
+.pg-article__body img {
+  margin: 24px 0;
+  border-radius: 20px;
+}
+
+.pg-article__nav {
+  display: flex;
+  justify-content: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- 페이지 하단 상담 유도 ---------- */
+.pg-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(28px, 3vw, 48px);
+  border-radius: 24px;
+  background: linear-gradient(90deg, #0334b5 0%, #3c39d2 55%, #6c3cea 100%);
+  color: #fff;
+}
+
+.pg-cta h3 {
+  font-size: clamp(20px, 1.8vw, 32px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.pg-cta p {
+  margin-top: 8px;
+  font-size: var(--fs-body);
+  opacity: 0.9;
+}
+
+.pg-cta .btn {
+  flex: none;
+}
+
+@media (max-width: 900px) {
+  .pg-grid,
+  .pg-steps,
+  .pg-checks {
+    --cols: 2;
+  }
+
+  .pg-spec {
+    --cols: 1;
+  }
+
+  .pg-media,
+  .pg-media[data-flip="true"] {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-media[data-flip="true"] > figure {
+    order: 0;
+  }
+
+  .pg-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .pg__head {
+    text-align: center;
+  }
+
+  .pg-grid,
+  .pg-steps,
+  .pg-checks {
+    --cols: 1;
+  }
+
+  .pg-spec div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 16px 18px;
+  }
+
+  .pg-list a {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 20px 4px;
+  }
+
+  .pg-list__thumb {
+    width: 88px;
+  }
+
+  .pg-cta .btn {
+    width: 100%;
+  }
+}

@@ -16,8 +16,8 @@ export function Footer() {
         <div className="ft__top">
           <img className="ft__logo" src="/images/logo-img.png" alt={COMPANY.name} width={500} height={181} loading="lazy" />
           <nav className="ft__links" aria-label="약관">
-            <a href="#">이용약관</a>
-            <a href="#">개인정보처리방침</a>
+            <a href="/terms">이용약관</a>
+            <a href="/privacy">개인정보처리방침</a>
           </nav>
         </div>
         <dl className="ft__info">

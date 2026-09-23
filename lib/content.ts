@@ -22,55 +22,54 @@ export const COMPANY = {
 export const TEL_HREF = `tel:${COMPANY.tel.replaceAll("-", "")}`;
 
 /**
- * 헤더 메뉴 — 시안(0922) 기준 전체메뉴 구성.
+ * 헤더 메뉴 — 시안(0922) 구성. 각 항목은 실제 페이지로 연결된다.
  * nav:false 인 그룹(설치진단)은 상단 메뉴에는 없고 전체메뉴에만 나온다.
- * 아직 페이지가 없는 항목은 가장 가까운 섹션으로 연결하고, 없는 것은 "#"로 둔다.
  */
 export const MENU = [
   {
     label: "화두에너지솔루션",
-    href: "/#about",
+    href: "/about",
     items: [
-      { label: "회사소개", href: "/#about" },
-      { label: "사업영역", href: "/#service" },
-      { label: "선택하는 이유", href: "/#service" },
-      { label: "주요 파트너", href: "/#compare" },
+      { label: "회사소개", href: "/about" },
+      { label: "사업영역", href: "/about/business" },
+      { label: "선택하는 이유", href: "/about/why" },
+      { label: "주요 파트너", href: "/about/partners" },
     ],
   },
   {
     label: "비교하기",
-    href: "/#compare",
+    href: "/compare",
     items: [
-      { label: "충전사업자 순위", href: "/#compare" },
-      { label: "한눈에 비교", href: "/#compare" },
-      { label: "제휴 충전사업자", href: "/#compare" },
+      { label: "충전사업자 순위", href: "/compare/ranking" },
+      { label: "한눈에 비교", href: "/compare" },
+      { label: "제휴 충전사업자", href: "/compare/partners" },
     ],
   },
   {
     label: "설치·운영",
-    href: "/#service",
+    href: "/service",
     items: [
-      { label: "제품안내", href: "/#service" },
-      { label: "설치·시공", href: "/#service" },
-      { label: "운영·유지관리", href: "/#service" },
-      { label: "설치절차", href: "/#service" },
+      { label: "제품안내", href: "/service/product" },
+      { label: "설치·시공", href: "/service/install" },
+      { label: "운영·유지관리", href: "/service/operation" },
+      { label: "설치절차", href: "/service/process" },
     ],
   },
   {
     label: "설치진단",
-    href: "/#diagnosis",
+    href: "/diagnosis",
     nav: false,
-    items: [{ label: "설치진단", href: "/#diagnosis" }],
+    items: [{ label: "설치진단", href: "/diagnosis" }],
   },
   {
     label: "화재안전",
-    href: "/#fire",
+    href: "/fire",
     items: [
-      { label: "화재 대응 소화기", href: "/#fire" },
-      { label: "질식소화포", href: "/#fire" },
-      { label: "상방향 주수장치", href: "/#fire" },
-      { label: "열화상카메라", href: "/#fire" },
-      { label: "충전소 격벽", href: "/#fire" },
+      { label: "화재 대응 소화기", href: "/fire/extinguisher" },
+      { label: "질식소화포", href: "/fire/blanket" },
+      { label: "상방향 주수장치", href: "/fire/sprinkler" },
+      { label: "열화상카메라", href: "/fire/thermal" },
+      { label: "충전소 격벽", href: "/fire/barrier" },
     ],
   },
   {
@@ -83,8 +82,8 @@ export const MENU = [
     href: "/faq",
     items: [
       { label: "자주 묻는 질문", href: "/faq" },
-      { label: "공지·소식", href: "#" },
-      { label: "프로모션", href: "#" },
+      { label: "공지·소식", href: "/notice" },
+      { label: "프로모션", href: "/promotion" },
     ],
   },
 ] as const;
