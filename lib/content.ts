@@ -22,58 +22,75 @@ export const COMPANY = {
 export const TEL_HREF = `tel:${COMPANY.tel.replaceAll("-", "")}`;
 
 /**
- * 헤더 전체메뉴 — PC에서는 어느 상위 메뉴에 들어가도 전 열이 함께 열리고,
- * 태블릿·모바일에서는 햄버거 안에 같은 구조를 모두 보여준다.
+ * 헤더 메뉴 — 시안(0922) 기준 전체메뉴 구성.
+ * nav:false 인 그룹(설치진단)은 상단 메뉴에는 없고 전체메뉴에만 나온다.
+ * 아직 페이지가 없는 항목은 가장 가까운 섹션으로 연결하고, 없는 것은 "#"로 둔다.
  */
 export const MENU = [
   {
     label: "화두에너지솔루션",
     href: "/#about",
     items: [
-      { label: "주요 실적", href: "/#about" },
-      { label: "화두의 강점", href: "/#service" },
-      { label: "1:1 설치 상담", href: "/#consult" },
+      { label: "회사소개", href: "/#about" },
+      { label: "사업영역", href: "/#service" },
+      { label: "선택하는 이유", href: "/#service" },
+      { label: "주요 파트너", href: "/#compare" },
     ],
   },
   {
     label: "비교하기",
     href: "/#compare",
     items: [
-      { label: "충전사업자 비교", href: "/#compare" },
-      { label: "아파트 설치 진단", href: "/#diagnosis" },
+      { label: "충전사업자 순위", href: "/#compare" },
+      { label: "한눈에 비교", href: "/#compare" },
+      { label: "제휴 충전사업자", href: "/#compare" },
     ],
   },
   {
     label: "설치·운영",
     href: "/#service",
     items: [
-      { label: "맞춤 설치 상담", href: "/#service" },
-      { label: "현장 확인·설치", href: "/#service" },
-      { label: "설치 후 관리", href: "/#service" },
+      { label: "제품안내", href: "/#service" },
+      { label: "설치·시공", href: "/#service" },
+      { label: "운영·유지관리", href: "/#service" },
+      { label: "설치절차", href: "/#service" },
     ],
+  },
+  {
+    label: "설치진단",
+    href: "/#diagnosis",
+    nav: false,
+    items: [{ label: "설치진단", href: "/#diagnosis" }],
   },
   {
     label: "화재안전",
     href: "/#fire",
     items: [
-      { label: "화재대응용품", href: "/#fire" },
-      { label: "관련 규정 FAQ", href: "/faq" },
+      { label: "화재 대응 소화기", href: "/#fire" },
+      { label: "질식소화포", href: "/#fire" },
+      { label: "상방향 주수장치", href: "/#fire" },
+      { label: "열화상카메라", href: "/#fire" },
+      { label: "충전소 격벽", href: "/#fire" },
     ],
   },
   {
     label: "설치사례",
     href: "/cases",
-    items: [{ label: "설치사례 보기", href: "/cases" }],
+    items: [{ label: "설치사례", href: "/cases" }],
   },
   {
     label: "고객지원",
     href: "/faq",
     items: [
       { label: "자주 묻는 질문", href: "/faq" },
-      { label: "1:1 설치 상담", href: "/#consult" },
+      { label: "공지·소식", href: "#" },
+      { label: "프로모션", href: "#" },
     ],
   },
 ] as const;
+
+/** 상단 가로 메뉴 */
+export const NAV = MENU.filter((m) => !("nav" in m && m.nav === false));
 
 export const HERO_POINTS = [
   { icon: "/images/apartment-icon.png", title: "전국 아파트", desc: "설치 경험 보유" },

@@ -382,7 +382,6 @@ img {
   display: none;
 }
 
-.hd__navCta,
 .hd__burger {
   display: none;
 }
@@ -394,83 +393,161 @@ img {
   font-size: 17px;
 }
 
-/* 전체메뉴 — 어느 상위 메뉴에 들어가도 모든 서브메뉴를 함께 보여준다 */
+/* 전체메뉴 — 어느 상위 메뉴에 올려도 전체 구성이 함께 열린다 (시안 0922) */
 .hd__mega {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  border-top: 1px solid #ececec;
+  display: grid;
+  grid-template-rows: 0fr;
   border-bottom: 1px solid #e3e3e3;
   background: #fff;
-  box-shadow: 0 22px 45px rgba(15, 25, 70, 0.1);
   visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-  translate: 0 -10px;
   transition:
-    opacity 0.22s var(--ease),
-    translate 0.22s var(--ease),
-    visibility 0.22s;
+    grid-template-rows 0.32s var(--ease),
+    visibility 0.32s;
 }
 
 .hd[data-mega="true"] .hd__mega {
+  grid-template-rows: 1fr;
   visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-  translate: 0 0;
+  box-shadow: 0 22px 45px rgba(15, 25, 70, 0.08);
+}
+
+.hd__megaInner {
+  min-height: 0;
+  overflow: hidden;
 }
 
 .hd__megaGrid {
   display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  padding-block: 32px 38px;
+  grid-template-columns: 300px repeat(4, minmax(0, 1fr));
+  column-gap: 36px;
+  row-gap: 48px;
+  padding-block: 34px 70px;
 }
 
-.hd__megaGroup {
-  min-width: 0;
-  padding-inline: 24px;
-  border-left: 1px solid #ececf2;
+/* 좌측 고객센터 패널은 두 줄 전체를 차지한다 */
+.hd__mega .hd__aside {
+  grid-row: span 2;
 }
 
-.hd__megaGroup:first-child {
-  padding-left: 0;
-  border-left: 0;
+.hd__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  align-self: start;
 }
 
-.hd__megaGroup:last-child {
-  padding-right: 0;
+.hd__center {
+  padding: 22px 24px 26px;
+  border-radius: 14px;
+  background: #f4f7fd;
+  text-align: center;
 }
 
-.hd__megaTitle {
-  display: block;
+.hd__centerTitle {
+  color: #555;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.hd__centerTel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
   color: var(--navy);
-  font-size: 18px;
-  font-weight: 800;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.hd__centerSub {
+  margin-top: 8px;
+  color: #8a8f9c;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.hd__asideCta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 66px;
+  border-radius: 12px;
+  background: var(--purple);
+  color: #fff;
+  font-size: 17px;
+  font-weight: 700;
+  transition: background-color 0.2s;
+}
+
+.hd__asideCta:hover {
+  background: var(--purple-deep);
+}
+
+.hd__group {
+  min-width: 0;
+}
+
+.hd__groupTitle {
+  display: block;
+  font-size: 19px;
+  font-weight: 700;
   line-height: 1.35;
 }
 
-.hd__megaList {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 18px;
+.hd__groupTitle:hover {
+  color: var(--purple);
 }
 
-.hd__megaList a {
+.hd__groupList {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.hd__groupList a {
   display: block;
-  color: #555;
-  font-size: 15px;
+  color: #6b6b73;
+  font-size: 16px;
   line-height: 1.45;
   transition:
     color 0.2s,
     translate 0.2s var(--ease);
 }
 
-.hd__megaList a:hover,
-.hd__megaList a:focus-visible {
+.hd__groupList a:hover,
+.hd__groupList a:focus-visible {
   color: var(--purple);
   translate: 3px 0;
+}
+
+/* 전체메뉴가 열리면 본문을 어둡게 덮는다 */
+.hd__dim {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--header-h);
+  bottom: 0;
+  z-index: -1;
+  background: rgba(17, 20, 40, 0.45);
+  opacity: 0;
+  visibility: hidden;
+  cursor: default;
+  transition:
+    opacity 0.32s var(--ease),
+    visibility 0.32s;
+}
+
+.hd[data-mega="true"] .hd__dim {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* ============================================================
@@ -2132,44 +2209,48 @@ img {
     display: none;
   }
 
+  /* 햄버거 안에 전체메뉴 구성을 그대로 */
   .hd__mobileMenu {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 36px;
+    column-gap: 32px;
     width: 100%;
   }
 
-  .hd__mobileGroup {
-    padding: 22px 0;
+  .hd__mobileMenu .hd__group {
+    padding: 20px 0;
     border-bottom: 1px solid #eeeeef;
   }
 
-  .hd__mobileTitle {
-    display: inline-block;
-    color: var(--navy);
+  .hd__mobileMenu .hd__groupTitle {
     font-size: 17px;
-    font-weight: 800;
   }
 
-  .hd__mobileGroup ul {
-    display: flex;
-    flex-direction: column;
+  .hd__mobileMenu .hd__groupList {
     gap: 9px;
     margin-top: 12px;
   }
 
-  .hd__mobileGroup li a {
-    display: block;
-    color: #555;
+  .hd__mobileMenu .hd__groupList a {
     font-size: 15px;
-    line-height: 1.45;
   }
 
-  .hd__navCta {
-    display: inline-flex;
-    margin-top: 18px;
-    height: 52px;
-    font-size: 17px;
+  .hd__mobileMenu .hd__aside {
+    grid-column: 1 / -1;
+    margin-top: 22px;
+  }
+
+  .hd__centerTel {
+    font-size: 25px;
+  }
+
+  .hd__asideCta {
+    height: 58px;
+    font-size: 16px;
+  }
+
+  .hd__dim {
+    display: none;
   }
 
   /* 메인 비주얼: 카피 · 일러스트 한 줄, 폼은 아래 가로형 */
@@ -2437,7 +2518,7 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .hd__mobileGroup {
+  .hd__mobileMenu .hd__group {
     padding: 18px 0;
   }
 
