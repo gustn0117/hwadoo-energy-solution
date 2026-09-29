@@ -1,0 +1,412 @@
+/* ============================================================
+   고객지원 게시판 (시안 0929) — 연한 상단 띠 + 탭 + 카드 목록
+   ============================================================ */
+.sup {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(40px, 4.4vw, 68px) 0 clamp(36px, 4vw, 60px);
+  background: #ecf0ff;
+}
+
+/* 좌우 장식 원 */
+.sup::before,
+.sup::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(113, 60, 236, 0.07);
+  pointer-events: none;
+}
+
+.sup::before {
+  left: -180px;
+  top: -160px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
+}
+
+.sup::after {
+  right: -140px;
+  bottom: -220px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+}
+
+.sup__inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.sup__eyebrow {
+  color: #9aa1bb;
+  font-size: clamp(13px, 0.95vw, 16px);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.sup__title {
+  margin-top: 10px;
+  font-size: clamp(26px, 2.2vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.sup__desc {
+  color: #6b7186;
+  font-size: clamp(14px, 1vw, 18px);
+}
+
+/* ---------- 탭 ---------- */
+.supTabs {
+  border-bottom: 1px solid #e6e6ea;
+}
+
+.supTabs__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.supTabs__list a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(52px, 4.2vw, 64px);
+  border-radius: 12px 12px 0 0;
+  color: #9a9a9a;
+  font-size: clamp(14px, 1.05vw, 19px);
+  transition: color 0.2s, background-color 0.2s;
+}
+
+.supTabs__list a:hover {
+  color: var(--ink);
+}
+
+.supTabs__list a[aria-current="page"] {
+  background: var(--purple);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* ---------- 목록 공통 ---------- */
+.board {
+  padding: clamp(40px, 4.6vw, 76px) 0 clamp(64px, 7vw, 120px);
+}
+
+.board__intro {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.4vw, 44px);
+  margin-bottom: clamp(28px, 3vw, 48px);
+  padding: clamp(22px, 2.4vw, 36px) clamp(24px, 3vw, 48px);
+  border-radius: 20px;
+  background: #f0f6fd;
+}
+
+.board__intro img {
+  flex: none;
+  width: clamp(88px, 8vw, 130px);
+}
+
+.board__intro h2 {
+  font-size: clamp(17px, 1.5vw, 26px);
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.board__intro em {
+  color: var(--purple);
+}
+
+.board__intro p {
+  margin-top: 10px;
+  color: #555;
+  font-size: clamp(13px, 1.05vw, 17px);
+  line-height: 1.6;
+}
+
+.board__bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: clamp(20px, 2vw, 32px);
+}
+
+.board__count {
+  color: #444;
+  font-size: clamp(14px, 1vw, 17px);
+  white-space: nowrap;
+}
+
+.board__count b {
+  color: var(--purple);
+  font-weight: 700;
+}
+
+.board__filters {
+  display: flex;
+  gap: 10px;
+  padding-left: 14px;
+  border-left: 1px solid #e0e0e6;
+}
+
+.board__filters select {
+  height: 44px;
+  padding: 0 38px 0 16px;
+  border: 1px solid #e3e3e8;
+  border-radius: 10px;
+  background: #fff
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23666' stroke-width='1.6' stroke-linecap='round'><path d='m6 8 4 4 4-4'/></svg>")
+    no-repeat right 12px center;
+  color: #555;
+  font-size: clamp(13px, 0.95vw, 16px);
+  appearance: none;
+  cursor: pointer;
+}
+
+.board__search {
+  position: relative;
+  flex: 0 1 460px;
+  margin-left: auto;
+}
+
+.board__search input {
+  width: 100%;
+  height: 48px;
+  padding: 0 52px 0 20px;
+  border: 1px solid #e3e3e8;
+  border-radius: 10px;
+  background: #fff;
+  font-size: clamp(13px, 0.95vw, 16px);
+}
+
+.board__search input::placeholder {
+  color: #a6a6a6;
+}
+
+.board__search button {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  color: #333;
+}
+
+.board__search button:hover {
+  background: #f3f3f6;
+}
+
+.board__empty {
+  padding: 90px 0;
+  color: var(--gray);
+  font-size: var(--fs-body);
+  text-align: center;
+}
+
+.board__more {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(32px, 3.4vw, 56px);
+}
+
+.board__more button {
+  height: 54px;
+  padding: 0 46px;
+  border: 1px solid #dcdce2;
+  border-radius: 999px;
+  background: #fff;
+  font-size: clamp(14px, 1vw, 17px);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.board__more button:hover {
+  border-color: var(--purple);
+  background: #faf8ff;
+}
+
+/* ---------- 카드 ---------- */
+.board__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 2), minmax(0, 1fr));
+  gap: clamp(20px, 2.2vw, 36px) clamp(18px, 2vw, 32px);
+}
+
+.bcard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #ececf0;
+  border-radius: 16px;
+  background: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s var(--ease);
+}
+
+.bcard:hover {
+  border-color: var(--purple);
+  box-shadow: 0 14px 30px rgba(113, 60, 236, 0.12);
+  transform: translateY(-2px);
+}
+
+.bcard__thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: var(--ratio, 2 / 1);
+  overflow: hidden;
+  background: var(--bg-soft);
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.bcard__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 종료된 이벤트 */
+.bcard[data-state="ended"] .bcard__thumb::after {
+  content: attr(data-ended);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 700;
+}
+
+.bcard[data-state="ended"] .bcard__title,
+.bcard[data-state="ended"] .bcard__meta {
+  color: #8d8d8d;
+}
+
+.bcard__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: clamp(16px, 1.4vw, 22px) clamp(16px, 1.5vw, 24px) clamp(18px, 1.6vw, 26px);
+}
+
+.bcard__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.bcard__cpo {
+  color: #666;
+  font-size: clamp(13px, 0.95vw, 16px);
+}
+
+.bcard__badge {
+  flex: none;
+  padding: 5px 16px;
+  border-radius: 999px;
+  background: var(--purple);
+  color: #fff;
+  font-size: clamp(12px, 0.85vw, 14px);
+  font-weight: 700;
+}
+
+.bcard__badge[data-state="ended"] {
+  background: #424242;
+}
+
+.bcard__badge[data-state="upcoming"] {
+  background: #0134b4;
+}
+
+.bcard__title {
+  font-size: clamp(15px, 1.15vw, 20px);
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.bcard__meta {
+  margin-top: 10px;
+  color: #888;
+  font-size: clamp(13px, 0.95vw, 16px);
+}
+
+/* 설치사례 카드 하단 줄 */
+.bcard__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.bcard__qty {
+  padding: 7px 18px;
+  border-radius: 999px;
+  background: #eae2fc;
+  color: var(--purple);
+  font-size: clamp(13px, 0.95vw, 16px);
+  font-weight: 700;
+}
+
+@media (max-width: 1100px) {
+  .board__bar {
+    flex-wrap: wrap;
+  }
+
+  .board__search {
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  /* 인라인 --cols 보다 우선하도록 속성을 직접 지정한다 */
+  .board__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .board__intro {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .sup__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .supTabs__list a {
+    border-radius: 10px 10px 0 0;
+  }
+
+  .board__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .board__filters {
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .board__filters select {
+    flex: 1;
+    height: 42px;
+  }
+}

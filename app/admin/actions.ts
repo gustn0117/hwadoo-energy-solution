@@ -108,6 +108,7 @@ export async function saveCase(fd: FormData) {
     title,
     region: optional(fd, "region"),
     cpo: optional(fd, "cpo"),
+    facility_type: optional(fd, "facility_type"),
     charger_count: Number.isFinite(count) && count > 0 ? Math.round(count) : null,
     installed_on: optional(fd, "installed_on"),
     description: optional(fd, "description"),
@@ -189,6 +190,7 @@ export async function savePromotion(fd: FormData) {
   const row: Record<string, unknown> = {
     title,
     body,
+    cpo: optional(fd, "cpo"),
     summary: optional(fd, "summary"),
     starts_on: optional(fd, "starts_on"),
     ends_on: optional(fd, "ends_on"),

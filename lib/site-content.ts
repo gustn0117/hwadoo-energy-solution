@@ -100,10 +100,10 @@ export const COMPARE = {
   pick: 0,
   heads: ["에버온", "플러그링크", "현대엔지니어링", "SK일렉링크"],
   images: [
-    "/images/generated/charger-1.webp",
-    "/images/generated/charger-2.webp",
-    "/images/generated/charger-3.webp",
-    "/images/generated/charger-4.webp",
+    "/images/photos/charger-1.webp",
+    "/images/photos/charger-2.webp",
+    "/images/photos/charger-3.webp",
+    "/images/photos/charger-4.webp",
   ],
   logos: [
     "/images/brands/everon.svg",
@@ -319,7 +319,7 @@ export const FIRE_PRODUCTS = [
     slug: "extinguisher",
     name: "화재 대응 소화기",
     summary: "리튬이온 배터리 화재에 대응하도록 설계된 전기차 전용 소화 약제입니다.",
-    image: "/images/generated/fire-3.webp",
+    image: "/images/photos/fire-3.webp",
     desc: "일반 분말소화기는 배터리 내부의 열폭주를 멈추기 어렵습니다. 전기차 전용 소화기는 냉각 성능이 높은 약제를 써서 초기 화염을 잡고 배터리 온도를 낮추는 데 목적이 있습니다.",
     features: [
       { b: "냉각 중심 약제", t: " — 표면 화염 진압과 동시에 배터리 온도를 낮춥니다." },
@@ -331,7 +331,7 @@ export const FIRE_PRODUCTS = [
     slug: "blanket",
     name: "질식소화포",
     summary: "차량 전체를 덮어 산소를 차단하고, 옆 차량으로 불이 번지는 것을 막습니다.",
-    image: "/images/generated/fire-2.webp",
+    image: "/images/photos/fire-2.webp",
     desc: "지하주차장에서는 연소 확대를 막는 것이 가장 중요합니다. 질식소화포는 차량을 통째로 덮어 산소 공급을 끊고 복사열을 차단해, 소방대가 도착할 때까지 피해 범위를 좁혀 줍니다.",
     features: [
       { b: "고온 내열 소재", t: " — 반복 사용이 가능한 내열 원단을 사용합니다." },
@@ -343,7 +343,7 @@ export const FIRE_PRODUCTS = [
     slug: "sprinkler",
     name: "상방향 주수장치",
     summary: "차량 하부 배터리팩에 직접 물을 뿌려 열폭주를 억제합니다.",
-    image: "/images/generated/fire-1.webp",
+    image: "/images/photos/fire-1.webp",
     desc: "전기차 화재는 차량 하부 배터리팩에서 시작되는 경우가 많습니다. 상방향 주수장치는 차량 아래에서 위로 물을 분사해 배터리팩을 직접 냉각하기 때문에, 상부 스프링클러보다 열폭주 억제에 효과적입니다.",
     features: [
       { b: "하부 직접 주수", t: " — 배터리팩을 직접 냉각해 온도 상승을 늦춥니다." },
@@ -355,7 +355,7 @@ export const FIRE_PRODUCTS = [
     slug: "thermal",
     name: "열화상카메라",
     summary: "충전 중 배터리 온도 이상을 영상으로 감지해 관리실에 즉시 알립니다.",
-    image: "/images/generated/fire-5.webp",
+    image: "/images/photos/fire-5.webp",
     desc: "화재는 불꽃보다 온도가 먼저 오릅니다. 열화상카메라는 충전 구역을 상시 감시해 기준 온도를 넘으면 관리사무소와 담당자에게 경보를 보내, 불이 붙기 전에 조치할 시간을 벌어 줍니다.",
     features: [
       { b: "실시간 온도 감시", t: " — 구역별 온도를 24시간 기록합니다." },
@@ -367,7 +367,7 @@ export const FIRE_PRODUCTS = [
     slug: "barrier",
     name: "충전소 격벽",
     summary: "충전 구역을 물리적으로 구획해 화재 확산 경로를 차단합니다.",
-    image: "/images/generated/fire-4.webp",
+    image: "/images/photos/fire-4.webp",
     desc: "충전 구역과 일반 주차 구역 사이에 내화 격벽을 세우면, 화재가 발생해도 옆 차량으로 번지는 속도를 늦출 수 있습니다. 지하주차장 기둥 배치와 주차 동선을 함께 검토해 설치 위치를 정합니다.",
     features: [
       { b: "내화 구조", t: " — 복사열과 화염 확산을 차단하는 구조로 제작합니다." },

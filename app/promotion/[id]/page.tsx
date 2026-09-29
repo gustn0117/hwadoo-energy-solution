@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageCta, PageSection } from "@/components/page/Blocks";
-import { SubPage } from "@/components/SubPage";
+import { SupportShell } from "@/components/support/SupportShell";
 import { getPromotion, promotionState } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -25,7 +25,7 @@ export default async function PromotionDetailPage({ params }: { params: Promise<
   const state = promotionState(promotion);
 
   return (
-    <SubPage eyebrow="고객지원" title={<><em>프로모션</em></>}>
+    <SupportShell current="/promotion">
       <PageSection>
         <article>
           <header className="pg-article__head">
@@ -49,6 +49,6 @@ export default async function PromotionDetailPage({ params }: { params: Promise<
         </article>
         <PageCta title="이 혜택으로 상담받고 싶으신가요?" desc="상담 신청 시 담당자가 적용 가능 여부를 확인해드립니다." />
       </PageSection>
-    </SubPage>
+    </SupportShell>
   );
 }

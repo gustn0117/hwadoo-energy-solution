@@ -37,7 +37,7 @@ export default function ServicePage() {
             안내합니다. 각 항목에서 단지가 준비할 것과 화두가 대신 처리할 것을 구분해 확인하실 수 있습니다.
           </p>
         </Prose>
-        <MediaRow image="/images/generated/service.webp" alt="아파트 지하주차장 전기차 충전구역" title="단지 상황부터 확인합니다">
+        <MediaRow image="/images/photos/service.webp" alt="아파트 지하주차장 전기차 충전구역" title="단지 상황부터 확인합니다">
           같은 장비라도 단지마다 설치 가능한 위치와 수량이 다릅니다. 진단 결과를 실사보고서로 먼저 드리고, 그 위에서 장비와
           공사 범위를 정합니다.
         </MediaRow>

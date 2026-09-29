@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageSection } from "@/components/page/Blocks";
-import { SubPage } from "@/components/SubPage";
+import { SupportShell } from "@/components/support/SupportShell";
 import { getNotice } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -22,7 +22,7 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
   if (!notice) notFound();
 
   return (
-    <SubPage eyebrow="고객지원" title={<>공지·<em>소식</em></>}>
+    <SupportShell current="/notice">
       <PageSection>
         <article>
           <header className="pg-article__head">
@@ -40,6 +40,6 @@ export default async function NoticeDetailPage({ params }: { params: Promise<{ i
           </footer>
         </article>
       </PageSection>
-    </SubPage>
+    </SupportShell>
   );
 }

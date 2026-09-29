@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/Faq";
-import { SubPage } from "@/components/SubPage";
+import { SupportShell } from "@/components/support/SupportShell";
 import { getFaqs } from "@/lib/data";
 
 export const dynamic = "force-dynamic";
@@ -14,18 +14,10 @@ export default async function FaqPage() {
   const faqs = await getFaqs();
 
   return (
-    <SubPage
-      eyebrow="고객지원"
-      title={
-        <>
-          자주 묻는 <em>질문</em>
-        </>
-      }
-      desc="충전기 설치 전에 가장 많이 물어보시는 내용을 모았습니다."
-    >
+    <SupportShell current="/faq" desc="충전기 설치 전에 가장 많이 물어보시는 내용을 모았습니다">
       <div className="faqPage">
         <Faq items={faqs} defaultOpen={0} title={false} />
       </div>
-    </SubPage>
+    </SupportShell>
   );
 }

@@ -106,6 +106,11 @@ export const BUILDING_OPTIONS = [
   "기타건물(오피스텔 등)",
 ] as const;
 
+/** 설치사례 시설유형 · 공지 분류 (관리자 선택 목록) */
+export const FACILITY_TYPES = ["아파트", "오피스텔", "상업시설", "지식산업센터", "관공서", "기타"] as const;
+
+export const NOTICE_CATEGORIES = ["공지", "소식", "안내"] as const;
+
 export const STATS = [
   { label: "전국 아파트", value: "1,300" },
   { label: "충전기 설치", value: "12,000" },

@@ -33,7 +33,7 @@ export default function OperationPage() {
             담당자는 설치 때와 동일한 사람이 이어서 맡습니다.
           </p>
         </Prose>
-        <MediaRow image="/images/generated/dashboard.webp" alt="충전기 관제 시스템 화면" title="상태는 원격으로 먼저 봅니다">
+        <MediaRow image="/images/photos/dashboard.webp" alt="충전기 관제 시스템 화면" title="상태는 원격으로 먼저 봅니다">
           충전기 상태와 가동률, 이상 발생은 관제 시스템에서 상시 확인합니다. 현장에서 신고가 들어오기 전에 원격으로
           확인하고, 리모트 리셋으로 해결되는 장애는 방문 없이 조치합니다.
         </MediaRow>

@@ -33,7 +33,7 @@ export default function ProductPage() {
           </p>
         </Prose>
         <MediaRow
-          image="/images/generated/charger-1.webp"
+          image="/images/photos/charger-1.webp"
           alt="아파트 주차장에 설치된 완속충전기"
           title="벽부형 · 스탠드형"
         >
@@ -66,7 +66,7 @@ export default function ProductPage() {
 
       {/* 앱 기능 */}
       <PageSection tone="soft" eyebrow="APP" title="앱 기능" desc="입주민이 카드 없이 충전하고 내역을 확인합니다.">
-        <MediaRow image="/images/generated/app.webp" alt="충전 앱 화면" title="꽂으면 끝, 오토차징" flip>
+        <MediaRow image="/images/photos/app.webp" alt="충전 앱 화면" title="꽂으면 끝, 오토차징" flip>
           차량을 한 번 등록해두면 커플러를 꽂는 것만으로 인증과 결제가 끝납니다. 회원카드를 들고 다니거나 앱을 열 필요가
           없어, 고령 입주민의 문의가 크게 줄어듭니다.
         </MediaRow>

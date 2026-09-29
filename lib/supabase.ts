@@ -40,6 +40,7 @@ export type Case = {
   title: string;
   region: string | null;
   cpo: string | null;
+  facility_type: string | null;
   charger_count: number | null;
   installed_on: string | null;
   image_url: string | null;
@@ -71,6 +72,7 @@ export type Notice = {
 export type Promotion = {
   id: number;
   created_at: string;
+  cpo: string | null;
   title: string;
   summary: string | null;
   body: string;
@@ -80,8 +82,6 @@ export type Promotion = {
   is_published: boolean;
   sort_order: number;
 };
-
-export const NOTICE_CATEGORIES = ["공지", "소식", "안내"] as const;
 
 export const STATUS_LABEL: Record<Consultation["status"], string> = {
   new: "신규",

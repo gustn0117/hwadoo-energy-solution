@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { saveCase } from "@/app/admin/actions";
-import { CPO_OPTIONS } from "@/lib/content";
+import { CPO_OPTIONS, FACILITY_TYPES } from "@/lib/content";
 import type { Case } from "@/lib/supabase";
 
 const MAX = 10 * 1024 * 1024;
@@ -34,6 +34,16 @@ export function CaseForm({ item }: { item?: Case }) {
               <option key={o} value={o} />
             ))}
           </datalist>
+        </label>
+        <label className="adm-field">
+          <span>시설유형</span>
+          <select name="facility_type" defaultValue={item?.facility_type ?? ""}>
+            <option value="">선택 안 함</option>
+            {FACILITY_TYPES.map((t) => (
+              <option key={t}>{t}</option>
+            ))}
+          </select>
+          <small>설치사례 목록의 시설유형 필터에 쓰입니다.</small>
         </label>
         <label className="adm-field">
           <span>설치 대수</span>

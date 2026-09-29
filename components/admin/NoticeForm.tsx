@@ -1,5 +1,6 @@
 import { saveNotice } from "@/app/admin/actions";
-import { NOTICE_CATEGORIES, type Notice } from "@/lib/supabase";
+import { NOTICE_CATEGORIES } from "@/lib/content";
+import type { Notice } from "@/lib/supabase";
 
 /** KST 기준 오늘 (date input 기본값) */
 const today = () => new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);

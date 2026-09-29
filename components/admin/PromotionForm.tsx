@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { savePromotion } from "@/app/admin/actions";
+import { CPO_OPTIONS } from "@/lib/content";
 import type { Promotion } from "@/lib/supabase";
 
 const MAX = 10 * 1024 * 1024;
@@ -18,6 +19,17 @@ export function PromotionForm({ item }: { item?: Promotion }) {
       <label className="adm-field">
         <span>제목 *</span>
         <input name="title" defaultValue={item?.title} required maxLength={200} placeholder="예) 9월 무상설치 상담 이벤트" />
+      </label>
+
+      <label className="adm-field">
+        <span>충전사업자</span>
+        <input name="cpo" defaultValue={item?.cpo ?? ""} list="promo-cpo" placeholder="선택 또는 직접 입력" />
+        <datalist id="promo-cpo">
+          {CPO_OPTIONS.map((o) => (
+            <option key={o} value={o} />
+          ))}
+        </datalist>
+        <small>목록 카드에 표시되고 충전사업자 필터에 쓰입니다.</small>
       </label>
 
       <label className="adm-field">

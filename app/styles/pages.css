@@ -319,6 +319,7 @@
   min-width: 0;
 }
 
+.pg-list h2,
 .pg-list h3 {
   font-size: clamp(17px, 1.25vw, 21px);
   font-weight: 700;
