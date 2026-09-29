@@ -22,33 +22,24 @@ export const COMPANY = {
 export const TEL_HREF = `tel:${COMPANY.tel.replaceAll("-", "")}`;
 
 /**
- * 헤더 메뉴 — 시안(0922) 구성. 각 항목은 실제 페이지로 연결된다.
- * nav:false 인 그룹(설치진단)은 상단 메뉴에는 없고 전체메뉴에만 나온다.
+ * 헤더 메뉴 — 시안(1006) 기준 5개 구성.
+ * 설치·운영과 설치진단은 상위 메뉴가 없어 관련 그룹 아래에 배치했다 (고객사 확인 필요).
  */
 export const MENU = [
   {
-    label: "화두에너지솔루션",
-    href: "/about",
-    items: [
-      { label: "회사소개", href: "/about" },
-      { label: "사업영역", href: "/about/business" },
-      { label: "선택하는 이유", href: "/about/why" },
-      { label: "주요 파트너", href: "/about/partners" },
-    ],
-  },
-  {
-    label: "비교하기",
-    href: "/compare",
+    label: "충전사업자 비교",
+    href: "/compare/ranking",
     items: [
       { label: "충전사업자 순위", href: "/compare/ranking" },
-      { label: "한눈에 비교", href: "/compare" },
-      { label: "제휴 충전사업자", href: "/compare/partners" },
+      { label: "한 눈에 비교", href: "/compare" },
+      { label: "설치진단", href: "/diagnosis" },
     ],
   },
   {
-    label: "설치·운영",
-    href: "/service",
+    label: "제휴 충전사업자",
+    href: "/compare/partners",
     items: [
+      { label: "제휴 충전사업자", href: "/compare/partners" },
       { label: "제품안내", href: "/service/product" },
       { label: "설치·시공", href: "/service/install" },
       { label: "운영·유지관리", href: "/service/operation" },
@@ -56,13 +47,7 @@ export const MENU = [
     ],
   },
   {
-    label: "설치진단",
-    href: "/diagnosis",
-    nav: false,
-    items: [{ label: "설치진단", href: "/diagnosis" }],
-  },
-  {
-    label: "화재안전",
+    label: "화재안전용품",
     href: "/fire",
     items: [
       { label: "화재 대응 소화기", href: "/fire/extinguisher" },
@@ -73,23 +58,28 @@ export const MENU = [
     ],
   },
   {
-    label: "설치사례",
-    href: "/cases",
-    items: [{ label: "설치사례", href: "/cases" }],
-  },
-  {
     label: "고객지원",
-    href: "/faq",
+    href: "/promotion",
     items: [
+      { label: "프로모션", href: "/promotion" },
       { label: "자주 묻는 질문", href: "/faq" },
       { label: "공지·소식", href: "/notice" },
-      { label: "프로모션", href: "/promotion" },
+      { label: "설치사례", href: "/cases" },
+    ],
+  },
+  {
+    label: "회사소개",
+    href: "/about",
+    items: [
+      { label: "회사소개", href: "/about" },
+      { label: "사업영역", href: "/about/business" },
+      { label: "선택하는 이유", href: "/about/why" },
     ],
   },
 ] as const;
 
 /** 상단 가로 메뉴 */
-export const NAV = MENU.filter((m) => !("nav" in m && m.nav === false));
+export const NAV = MENU;
 
 export const HERO_POINTS = [
   { icon: "/images/apartment-icon.png", title: "전국 아파트", desc: "설치 경험 보유" },

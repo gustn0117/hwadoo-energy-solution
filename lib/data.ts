@@ -1,6 +1,6 @@
 import "server-only";
 import { FAQ } from "@/lib/content";
-import { db, type Case, type Notice, type Promotion } from "@/lib/supabase";
+import { db, type Case, type CpoRanking, type Notice, type Promotion } from "@/lib/supabase";
 
 export type FaqItem = { q: string; answer: string };
 
@@ -90,4 +90,32 @@ export function promotionState(p: Promotion): "ongoing" | "upcoming" | "ended" {
   if (p.ends_on && p.ends_on < today) return "ended";
   if (p.starts_on && p.starts_on > today) return "upcoming";
   return "ongoing";
+}
+
+export type Rankings = { fast: CpoRanking[]; slow: CpoRanking[]; asOf: string | null };
+
+/** 충전사업자 순위 — 급속/완속으로 나눠서 순서대로 */
+export async function getRankings(): Promise<Rankings> {
+  try {
+    const { data, error } = await db()
+      .from("cpo_rankings")
+      .select("*")
+      .order("sort_order", { ascending: true })
+      .order("id", { ascending: true });
+    if (error) throw error;
+    const rows = (data ?? []) as CpoRanking[];
+    return {
+      fast: rows.filter((r) => r.kind === "fast"),
+      slow: rows.filter((r) => r.kind === "slow"),
+      asOf: rows.find((r) => r.as_of)?.as_of ?? null,
+    };
+  } catch (e) {
+    console.error("[rankings] load failed", e);
+    return { fast: [], slow: [], asOf: null };
+  }
+}
+
+/** 26.08.20 형식 */
+export function shortDate(date: string | null) {
+  return date ? date.slice(2).replaceAll("-", ".") : "";
 }

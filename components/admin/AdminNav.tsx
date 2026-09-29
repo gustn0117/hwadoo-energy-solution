@@ -9,6 +9,7 @@ const ITEMS = [
   { href: "/admin/faq", label: "FAQ" },
   { href: "/admin/notice", label: "공지·소식" },
   { href: "/admin/promotion", label: "프로모션" },
+  { href: "/admin/ranking", label: "충전사업자 순위" },
 ];
 
 export function AdminNav() {

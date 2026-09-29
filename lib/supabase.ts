@@ -83,6 +83,16 @@ export type Promotion = {
   sort_order: number;
 };
 
+export type CpoRanking = {
+  id: number;
+  kind: "fast" | "slow";
+  name: string;
+  charger_count: number | null;
+  price: number | null;
+  sort_order: number;
+  as_of: string | null;
+};
+
 export const STATUS_LABEL: Record<Consultation["status"], string> = {
   new: "신규",
   contacting: "상담중",

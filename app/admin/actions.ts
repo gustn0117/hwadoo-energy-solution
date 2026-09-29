@@ -225,6 +225,46 @@ export async function deletePromotion(fd: FormData) {
   revalidatePath("/promotion");
 }
 
+/* ---------- 충전사업자 순위 ---------- */
+
+/** 한 줄 = 사업자명, 대수, 요금 */
+function parseRankingLines(raw: string, kind: "fast" | "slow", asOf: string | null) {
+  return raw
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line, i) => {
+      const [name, count, price] = line.split(",").map((v) => v.trim());
+      const num = (v?: string) => {
+        const n = Number((v ?? "").replace(/[^0-9]/g, ""));
+        return Number.isFinite(n) && n > 0 ? n : null;
+      };
+      return { kind, name, charger_count: num(count), price: num(price), sort_order: i + 1, as_of: asOf };
+    })
+    .filter((r) => r.name);
+}
+
+export async function saveRankings(fd: FormData) {
+  await requireAdmin();
+  const asOf = optional(fd, "as_of");
+  const rows = [
+    ...parseRankingLines(text(fd, "fast"), "fast", asOf),
+    ...parseRankingLines(text(fd, "slow"), "slow", asOf),
+  ];
+
+  const table = db().from("cpo_rankings");
+  const { error: delError } = await table.delete().gt("id", 0);
+  if (delError) fail("순위 저장", delError);
+  if (rows.length) {
+    const { error } = await table.insert(rows);
+    if (error) fail("순위 저장", error);
+  }
+
+  revalidatePath("/admin/ranking");
+  revalidatePath("/compare/ranking");
+  redirect("/admin/ranking");
+}
+
 /* ---------- FAQ ---------- */
 
 export async function saveFaq(fd: FormData) {

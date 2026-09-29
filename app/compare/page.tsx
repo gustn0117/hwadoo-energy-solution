@@ -10,7 +10,7 @@ import {
   Prose,
   Steps,
 } from "@/components/page/Blocks";
-import { SubPage } from "@/components/SubPage";
+import { CompareShell } from "@/components/compare/CompareShell";
 import { COMPARE, COMPARE_CRITERIA, COMPARE_FLOW } from "@/lib/site-content";
 
 export const metadata: Metadata = {
@@ -29,15 +29,7 @@ export default function ComparePage() {
   const terms = valsOf("계약기간 / 무상 유지보수");
 
   return (
-    <SubPage
-      eyebrow="비교하기"
-      title={
-        <>
-          충전사업자, <em>한눈에 비교</em>
-        </>
-      }
-      desc="같은 기준으로 정리했습니다. 단지에 맞는 조건을 한 표에서 확인하세요."
-    >
+    <CompareShell current="/compare">
       {/* 왜 비교가 필요한지 */}
       <PageSection
         eyebrow="비교가 필요한 이유"
@@ -129,6 +121,6 @@ export default function ComparePage() {
           label="비교표 받기"
         />
       </PageSection>
-    </SubPage>
+    </CompareShell>
   );
 }
