@@ -74,6 +74,7 @@ export default function ComparePartnersPage() {
             return (
               <Card
                 key={b.name}
+                id={b.slug}
                 icon={b.logo ?? undefined}
                 tag={i >= 0 ? `환경부 등록 ${COMPARE.volumes[i].toLocaleString()}기` : "제휴 준비중"}
                 title={b.name}
@@ -102,6 +103,7 @@ export default function ComparePartnersPage() {
         {COMPARE.heads.map((name, i) => (
           <MediaRow
             key={name}
+            id={BRANDS.find((b) => b.name === name)?.slug}
             image={COMPARE.images[i]}
             alt={`${name} 완속충전기 설치 이미지`}
             title={name}

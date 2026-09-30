@@ -59,6 +59,7 @@ export function Card({
   title,
   children,
   flat,
+  id,
 }: {
   icon?: string;
   num?: number | string;
@@ -66,9 +67,10 @@ export function Card({
   title: string;
   children?: React.ReactNode;
   flat?: boolean;
+  id?: string;
 }) {
   return (
-    <li className={`pg-card ${flat ? "pg-card--flat" : ""}`}>
+    <li className={`pg-card ${flat ? "pg-card--flat" : ""}`} id={id}>
       {icon ? <img className="pg-card__icon" src={icon} alt="" loading="lazy" /> : null}
       {num !== undefined ? <span className="pg-card__num num">{num}</span> : null}
       {tag ? <span className="pg-card__tag">{tag}</span> : null}
@@ -152,15 +154,17 @@ export function MediaRow({
   title,
   flip,
   children,
+  id,
 }: {
   image: string;
   alt?: string;
   title: string;
   flip?: boolean;
   children: React.ReactNode;
+  id?: string;
 }) {
   return (
-    <div className="pg-media" data-flip={flip || undefined} data-reveal-group>
+    <div className="pg-media" id={id} data-flip={flip || undefined} data-reveal-group>
       <figure>
         <img src={image} alt={alt} loading="lazy" />
       </figure>

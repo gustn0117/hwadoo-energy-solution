@@ -317,7 +317,7 @@ export const INSTALL_DOCS = [
 export const FIRE_PRODUCTS = [
   {
     slug: "extinguisher",
-    name: "화재 대응 소화기",
+    name: "소화기",
     summary: "리튬이온 배터리 화재에 대응하도록 설계된 전기차 전용 소화 약제입니다.",
     image: "/images/photos/fire-3.webp",
     desc: "일반 분말소화기는 배터리 내부의 열폭주를 멈추기 어렵습니다. 전기차 전용 소화기는 냉각 성능이 높은 약제를 써서 초기 화염을 잡고 배터리 온도를 낮추는 데 목적이 있습니다.",

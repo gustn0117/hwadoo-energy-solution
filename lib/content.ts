@@ -21,10 +21,22 @@ export const COMPANY = {
 
 export const TEL_HREF = `tel:${COMPANY.tel.replaceAll("-", "")}`;
 
-/**
- * 헤더 메뉴 — 시안(1006) 기준 5개 구성.
- * 설치·운영과 설치진단은 상위 메뉴가 없어 관련 그룹 아래에 배치했다 (고객사 확인 필요).
- */
+/** 제휴 충전사업자 — 마인드맵(0930) 기준 6개사. slug 는 제휴 페이지 앵커로 쓴다 */
+export const BRANDS: {
+  name: string;
+  slug: string;
+  logo: string | null;
+  features: readonly string[];
+}[] = [
+  { name: "에버온", slug: "everon", logo: "/images/brands/everon.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "현대엔지니어링", slug: "hyundai", logo: "/images/brands/hyundai-engineering.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "SK일렉링크", slug: "sk", logo: "/images/brands/sk-electlink.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "나이스차저", slug: "nicecharger", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "플러그링크", slug: "pluglink", logo: "/images/brands/pluglink.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+  { name: "그리드위즈", slug: "gridwiz", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
+];
+
+/** 헤더 메뉴 — 마인드맵(0930) 구성 */
 export const MENU = [
   {
     label: "충전사업자 비교",
@@ -32,25 +44,18 @@ export const MENU = [
     items: [
       { label: "충전사업자 순위", href: "/compare/ranking" },
       { label: "한 눈에 비교", href: "/compare" },
-      { label: "설치진단", href: "/diagnosis" },
     ],
   },
   {
     label: "제휴 충전사업자",
     href: "/compare/partners",
-    items: [
-      { label: "제휴 충전사업자", href: "/compare/partners" },
-      { label: "제품안내", href: "/service/product" },
-      { label: "설치·시공", href: "/service/install" },
-      { label: "운영·유지관리", href: "/service/operation" },
-      { label: "설치절차", href: "/service/process" },
-    ],
+    items: BRANDS.map((b) => ({ label: b.name, href: `/compare/partners#${b.slug}` })),
   },
   {
     label: "화재안전용품",
     href: "/fire",
     items: [
-      { label: "화재 대응 소화기", href: "/fire/extinguisher" },
+      { label: "소화기", href: "/fire/extinguisher" },
       { label: "질식소화포", href: "/fire/blanket" },
       { label: "상방향 주수장치", href: "/fire/sprinkler" },
       { label: "열화상카메라", href: "/fire/thermal" },
@@ -62,7 +67,7 @@ export const MENU = [
     href: "/promotion",
     items: [
       { label: "프로모션", href: "/promotion" },
-      { label: "자주 묻는 질문", href: "/faq" },
+      { label: "FAQ", href: "/faq" },
       { label: "공지·소식", href: "/notice" },
       { label: "설치사례", href: "/cases" },
     ],
@@ -73,10 +78,15 @@ export const MENU = [
     items: [
       { label: "회사소개", href: "/about" },
       { label: "사업영역", href: "/about/business" },
-      { label: "선택하는 이유", href: "/about/why" },
+      { label: "Why 화두?", href: "/about/why" },
     ],
   },
-] as const;
+  {
+    label: "설치 상담",
+    href: "/#consult",
+    items: [{ label: "상담신청", href: "/#consult" }],
+  },
+];
 
 /** 상단 가로 메뉴 */
 export const NAV = MENU;
@@ -119,21 +129,6 @@ export const SEARCH_STEPS = [
   { icon: "/images/complex-info.png", title: "단지정보 확인", desc: ["설치 가능한 위치와", "상세정보 확인"] },
   { icon: "/images/additional-installation.png", title: "추가설치 검토", desc: ["추가 설치 가능여부", "간편하게 확인"] },
 ] as const;
-
-/** 충전사업자 공식 로고 */
-export const BRANDS: {
-  name: string;
-  logo: string | null;
-  features: readonly string[];
-}[] = [
-  { name: "플러그링크", logo: "/images/brands/pluglink.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "에버온", logo: "/images/brands/everon.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "현대엔지니어링", logo: "/images/brands/hyundai-engineering.png", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "SK일렉링크", logo: "/images/brands/sk-electlink.svg", features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  // 5·6번 박스는 고객사가 내용을 채울 자리 — 로고가 없으면 빗금으로 표시된다
-  { name: "충전사업자 5", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-  { name: "충전사업자 6", logo: null, features: ["화재예방부터 보상까지", "2025년 완속 충전기 1위", "교통카드 연동"] },
-];
 
 export const WHY = [
   {

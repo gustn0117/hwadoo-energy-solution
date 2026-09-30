@@ -6,7 +6,7 @@ import { ArrowRight, Close } from "@/components/Icons";
 import type { CpoRanking } from "@/lib/supabase";
 
 type Metric = "count" | "price";
-const TOP = 5;
+const TOP = 10; // 시안 수정 요청(0930) — 10위까지 노출
 const MEDAL = ["🥇", "🥈", "🥉"];
 
 const value = (r: CpoRanking, metric: Metric) =>
