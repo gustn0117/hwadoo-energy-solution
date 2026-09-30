@@ -274,7 +274,9 @@
    ============================================================ */
 .rmodal {
   width: min(1420px, calc(100vw - 32px));
-  max-height: calc(100dvh - 32px);
+  /* dialog 는 기본값이면 화면 높이만큼 늘어난다 — 내용 높이로 잡고 최대치만 제한 */
+  height: fit-content;
+  max-height: min(calc(100dvh - 40px), 980px);
   padding: 0;
   border: 0;
   border-radius: 26px;
@@ -286,7 +288,7 @@
 .rmodal__box {
   display: flex;
   flex-direction: column;
-  max-height: calc(100dvh - 32px);
+  max-height: min(calc(100dvh - 40px), 980px);
 }
 
 .rmodal::backdrop {
@@ -373,9 +375,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(16px, 1.6vw, 26px);
+  flex: 0 1 auto; /* 내용이 적으면 그만큼만, 길어지면 줄어들며 표가 스크롤된다 */
+  min-height: 0;
 }
 
 .rpanel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   overflow: hidden;
   border-radius: 18px;
   background: #f7f8fd;
@@ -427,12 +434,42 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
+  flex: 1;
+  min-height: 0;
   padding: clamp(10px, 1vw, 16px);
 }
 
 .rtable {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   overflow: hidden;
   border-radius: 12px;
+  background: #fff;
+}
+
+/* 순위가 길어지면 표 안에서만 스크롤된다 (머리글은 고정) */
+.rtable__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.rtable__scroll::-webkit-scrollbar {
+  width: 8px;
+}
+
+.rtable__scroll::-webkit-scrollbar-thumb {
+  border: 2px solid #fff;
+  border-radius: 999px;
+  background: #d5d7e0;
+}
+
+.rtable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   background: #fff;
 }
 

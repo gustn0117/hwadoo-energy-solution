@@ -41,24 +41,26 @@ function Table({ title, items, metric }: { title: string; items: CpoRanking[]; m
   return (
     <div className="rtable">
       <h4>{title}</h4>
-      <table>
-        <thead>
-          <tr>
-            <th scope="col">순위</th>
-            <th scope="col">사업자명</th>
-            <th scope="col">{metric === "count" ? "대수" : "요금"}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {items.map((r, i) => (
-            <tr key={r.id} data-top={i + 1}>
-              <td>{i < 3 ? <Medal rank={i + 1} size={22} /> : i + 1}</td>
-              <td>{r.name}</td>
-              <td className="num">{value(r, metric)}</td>
+      <div className="rtable__scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">순위</th>
+              <th scope="col">사업자명</th>
+              <th scope="col">{metric === "count" ? "대수" : "요금"}</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {items.map((r, i) => (
+              <tr key={r.id} data-top={i + 1}>
+                <td>{i < 3 ? <Medal rank={i + 1} size={22} /> : i + 1}</td>
+                <td>{r.name}</td>
+                <td className="num">{value(r, metric)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
