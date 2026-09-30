@@ -1,4 +1,4 @@
-/* 폰트: 고객사 전달 Jalnan Gothic · Noto Sans KR을 자체 호스팅, Poppins는 숫자용 */
+/* 폰트: 고객사 전달 Jalnan Gothic · Noto Sans KR 자체 호스팅 */
 @font-face {
   font-family: "Jalnan Gothic";
   src: url("/fonts/JalnanGothic.woff2") format("woff2");
@@ -47,7 +47,7 @@
 
   --font-display: "Jalnan Gothic", "Noto Sans KR", sans-serif;
   --font-sans: "Noto Sans KR", -apple-system, system-ui, "Apple SD Gothic Neo", sans-serif;
-  --font-num: Poppins, var(--font-sans);
+  --font-num: var(--font-sans); /* 숫자도 본문과 같은 Noto Sans KR */
 
   /* 타입 스케일 — 1920 시안 기준 최대값, 360px까지 부드럽게 줄어든다 */
   --fs-hero-lg: clamp(40px, 4.35vw, 84px);
@@ -154,6 +154,7 @@ img {
 
 .num {
   font-family: var(--font-num);
+  font-variant-numeric: tabular-nums;
   letter-spacing: 0;
 }
 
