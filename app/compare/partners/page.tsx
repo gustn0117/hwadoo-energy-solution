@@ -5,7 +5,7 @@ import { BRANDS } from "@/lib/content";
 import { COMPARE, PARTNER_COMMONS } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "제휴 충전사업자 — 화두에너지솔루션",
+  title: "제휴 충전사업자",
   description:
     "화두에너지솔루션이 제휴한 전기차 충전사업자를 업체별 카드로 소개합니다. 운영 수량과 A/S 체계, 보상 범위를 함께 확인하세요.",
 };

@@ -6,7 +6,7 @@ import { getCases } from "@/lib/data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "설치사례 — 화두에너지솔루션",
+  title: "설치사례",
   description: "화두에너지솔루션이 전국 아파트와 상업시설에 구축한 전기차 충전 인프라 사례입니다.",
 };
 

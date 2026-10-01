@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { ABOUT_VALUES, WHY_REASONS } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "선택하는 이유 — 화두에너지솔루션",
+  title: "선택하는 이유",
   description:
     "특정 사업자의 대리점이 아닌 비교 제안, 설치 가능 여부 사전 진단, 행정 절차 대행, 개통 이후 관리까지 화두에너지솔루션을 선택하는 이유입니다.",
 };

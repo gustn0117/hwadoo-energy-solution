@@ -21,6 +21,12 @@ export const COMPANY = {
 
 export const TEL_HREF = `tel:${COMPANY.tel.replaceAll("-", "")}`;
 
+/** 공유 미리보기(카카오톡·메신저) 링크 기준 주소 — 실제 도메인이 정해지면 이 값만 바꾸면 된다 */
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://hwadoo-energy-solution.hsweb.pics";
+
+/** 카카오톡 미리보기 이미지 (고객사 전달 원본, 800x400) */
+export const OG_IMAGE = "/images/og-image.png";
+
 /** 제휴 충전사업자 — 마인드맵(0930) 기준 6개사. slug 는 제휴 페이지 앵커로 쓴다 */
 export const BRANDS: {
   name: string;

@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { OPERATION_CHECKS, OPERATION_SERVICES } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "운영·유지관리 — 화두에너지솔루션",
+  title: "운영·유지관리",
   description:
     "365일 고장 접수, 정기 점검, 원격 모니터링, 민원 대응, 사용 리포트까지 개통 이후의 충전기 관리 체계를 안내합니다.",
 };

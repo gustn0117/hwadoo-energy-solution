@@ -5,7 +5,7 @@ import { SubPage } from "@/components/SubPage";
 import { INSTALL_STEPS } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "설치진단 — 화두에너지솔루션",
+  title: "설치진단",
   description: "아파트 주소로 충전기 설치 현황과 추가 설치 가능 여부를 확인하고, 실사보고서까지 받아보세요.",
 };
 

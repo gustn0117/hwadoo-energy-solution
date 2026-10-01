@@ -443,14 +443,15 @@
 }
 
 @media (max-width: 900px) {
+  /* 인라인 --cols 보다 우선하도록 속성을 직접 지정한다 */
   .pg-grid,
   .pg-steps,
   .pg-checks {
-    --cols: 2;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .pg-spec {
-    --cols: 1;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .pg-media,
@@ -476,7 +477,7 @@
   .pg-grid,
   .pg-steps,
   .pg-checks {
-    --cols: 1;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .pg-spec div {

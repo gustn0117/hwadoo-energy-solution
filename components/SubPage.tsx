@@ -21,7 +21,7 @@ export function SubPage({
     <>
       <Header />
       <main>
-        <section className="subHero is-dark">
+        <section className="subHero">
           <div className="shell sec-head" data-reveal>
             <p className="sec-eyebrow">{eyebrow}</p>
             <h1 className="sec-title">{title}</h1>

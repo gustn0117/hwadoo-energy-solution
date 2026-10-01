@@ -5,33 +5,8 @@
   position: relative;
   overflow: hidden;
   padding: clamp(40px, 4.4vw, 68px) 0 clamp(36px, 4vw, 60px);
-  background: #ecf0ff;
-}
-
-/* 좌우 장식 원 */
-.sup::before,
-.sup::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(113, 60, 236, 0.07);
-  pointer-events: none;
-}
-
-.sup::before {
-  left: -180px;
-  top: -160px;
-  width: 420px;
-  height: 420px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
-}
-
-.sup::after {
-  right: -140px;
-  bottom: -220px;
-  width: 520px;
-  height: 520px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+  /* 고객사 전달 서브타이틀 배경 (1920x246) */
+  background: #eef1ff url("/images/sub-title-bg.jpg") no-repeat center / cover;
 }
 
 .sup__inner {
@@ -194,6 +169,15 @@
   color: #a6a6a6;
 }
 
+/* 셀렉트·검색창을 선택했을 때 오렌지 외곽선 대신 보라 테두리만 (시안 1001) */
+.board__filters select:focus,
+.board__filters select:focus-visible,
+.board__search input:focus,
+.board__search input:focus-visible {
+  outline: none;
+  border-color: var(--purple);
+}
+
 .board__search button {
   position: absolute;
   right: 6px;
@@ -261,6 +245,14 @@
   border-color: var(--purple);
   box-shadow: 0 14px 30px rgba(113, 60, 236, 0.12);
   transform: translateY(-2px);
+}
+
+/* 설치사례는 상세 페이지가 없어 호버 효과를 두지 않는다 (시안 1001) */
+.board--cases .bcard,
+.board--cases .bcard:hover {
+  border-color: #ececf0;
+  box-shadow: none;
+  transform: none;
 }
 
 .bcard__thumb {
@@ -410,7 +402,20 @@
     grid-template-columns: 1fr;
   }
 
+  /* 검색창이 맨 위, 그 아래 총 건수와 필터 (시안 1001) */
+  .board__search {
+    order: -1;
+    flex-basis: 100%;
+    margin-left: 0;
+  }
+
+  .board__count {
+    order: 0;
+  }
+
   .board__filters {
+    order: 1;
+    flex: 1;
     padding-left: 0;
     border-left: 0;
   }

@@ -14,7 +14,7 @@ import { CompareShell } from "@/components/compare/CompareShell";
 import { COMPARE, COMPARE_CRITERIA, COMPARE_FLOW } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "한눈에 비교 — 화두에너지솔루션",
+  title: "한눈에 비교",
   description:
     "주요 전기차 충전사업자의 충전요금, 계약기간, 무상 유지보수, 보상 범위, 점검 주기를 같은 기준으로 정리한 비교표입니다.",
 };

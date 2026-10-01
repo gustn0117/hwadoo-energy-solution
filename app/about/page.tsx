@@ -5,7 +5,7 @@ import { COMPANY } from "@/lib/content";
 import { ABOUT_INTRO, ABOUT_STATS, ABOUT_VALUES } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "회사소개 — 화두에너지솔루션",
+  title: "회사소개",
   description:
     "화두에너지솔루션은 아파트 전기차 충전 인프라를 상담부터 설치, 운영까지 맡는 충전 인프라 전문 기업입니다.",
 };

@@ -474,10 +474,27 @@
 }
 
 .rtable h4 {
-  padding: 10px 14px;
+  margin: 0; /* 브라우저 기본 여백 때문에 제목 띠가 떠 보이던 것을 없앰 */
   background: #f1f2f7;
   font-size: clamp(13px, 1vw, 17px);
   font-weight: 700;
+}
+
+.rtable__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 14px;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  /* PC 는 접지 않으므로 버튼처럼 보이지 않게 둔다 */
+  cursor: default;
+}
+
+.rtable__icon {
+  display: none;
 }
 
 .rtable table {
@@ -586,5 +603,79 @@
 
   .rank__cta img {
     width: 72px;
+  }
+
+  /* 모바일 팝업 — 표를 열었다 접었다 하고, 스크롤은 팝업 전체가 맡는다 (시안 1001) */
+  .rmodal__box {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  .rmodal__panels,
+  .rpanel,
+  .rpanel__tables,
+  .rtable,
+  .rtable__scroll {
+    flex: none;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .rtable__toggle {
+    cursor: pointer;
+  }
+
+  .rtable__icon {
+    display: block;
+    flex: none;
+    transition: rotate 0.25s var(--ease);
+  }
+
+  .rtable[data-open] .rtable__icon {
+    rotate: 45deg;
+  }
+
+  .rtable:not([data-open]) .rtable__scroll {
+    display: none;
+  }
+
+  /* 접힌 표는 제목 높이만 차지하게 한다 */
+  .rpanel__tables {
+    grid-auto-rows: min-content;
+    align-items: start;
+  }
+
+  /* 좁은 화면에서는 머리말을 두 줄로 내려 글자가 눌리지 않게 한다 */
+  .rmodal__head {
+    flex-wrap: wrap;
+    align-items: flex-start;
+    row-gap: 12px;
+    padding-right: 44px; /* 닫기 버튼 자리 */
+  }
+
+  .rmodal__icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .rmodal__icon img {
+    width: 26px;
+  }
+
+  .rmodal__notice {
+    order: 3;
+    width: 100%;
+    margin-left: 0;
+    line-height: 1.5;
+  }
+
+  .rmodal__close {
+    position: absolute;
+    right: clamp(18px, 1.6vw, 28px);
+    top: clamp(18px, 1.6vw, 28px);
+  }
+
+  .rmodal__box {
+    position: relative;
   }
 }

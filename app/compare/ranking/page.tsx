@@ -6,7 +6,7 @@ import { getRankings, shortDate } from "@/lib/data";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "충전사업자 순위 — 화두에너지솔루션",
+  title: "충전사업자 순위",
   description: "급속·완속 충전기 운영 대수와 충전 요금을 기준으로 충전사업자 순위를 한눈에 확인하세요.",
 };
 

@@ -41,7 +41,7 @@ export function CaseBoard({ items }: { items: Case[] }) {
   ].filter(Boolean) as { label: string; value: string; options: string[]; onChange: (v: string) => void }[];
 
   return (
-    <section className="board">
+    <section className="board board--cases">
       <div className="shell">
         <div className="board__intro" data-reveal>
           <img src="/images/installation-diagnosis.png" alt="" width={306} height={286} />

@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { INSTALL_DOCS, INSTALL_NOTICES, INSTALL_WORKS } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "설치·시공 — 화두에너지솔루션",
+  title: "설치·시공",
   description:
     "현장 실사부터 전기 공사, 충전기 설치, 검수·개통까지의 공사 범위와 단지에서 준비할 서류, 소요 기간을 안내합니다.",
 };

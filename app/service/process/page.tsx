@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { INSTALL_DOCS, INSTALL_STEPS } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "설치절차 — 화두에너지솔루션",
+  title: "설치절차",
   description:
     "상담 신청부터 현장 실사, 계약, 환경부 접수·승인, 설치 시공, 개통까지 아파트 전기차 충전기 설치 8단계 절차를 안내합니다.",
 };

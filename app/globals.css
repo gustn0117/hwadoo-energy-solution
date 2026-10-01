@@ -359,6 +359,10 @@ img {
   height: var(--header-h);
 }
 
+.hd__logo a {
+  display: block;
+}
+
 .hd__logo img {
   width: 172px;
 }
@@ -1739,7 +1743,11 @@ img {
    푸터
    ============================================================ */
 .ft {
+  position: relative;
   padding-top: 42px;
+  background: #fff;
+  /* 시안처럼 본문과 경계를 쉐도우로 구분 */
+  box-shadow: 0 -10px 30px rgba(20, 24, 60, 0.08);
 }
 
 .ft__top {
@@ -1759,8 +1767,129 @@ img {
   font-weight: 700;
 }
 
-.ft__links a:last-child {
+.ft__links a:last-child,
+.ft__links button:last-child {
   color: var(--orange);
+}
+
+.ft__links button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.ft__links button:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   약관 팝업 — 이용약관 · 개인정보처리방침 (시안 1001)
+   ============================================================ */
+.lmodal {
+  width: min(860px, calc(100vw - 32px));
+  height: fit-content;
+  max-height: min(calc(100dvh - 40px), 860px);
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.lmodal::backdrop {
+  background: rgba(10, 14, 40, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.lmodal[open] {
+  animation: cmodal-in 0.35s var(--ease);
+}
+
+.lmodal__box {
+  display: flex;
+  flex-direction: column;
+  max-height: min(calc(100dvh - 40px), 860px);
+}
+
+.lmodal__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(20px, 2vw, 30px) clamp(20px, 2.2vw, 34px);
+  border-bottom: 1px solid #ededf2;
+}
+
+.lmodal__head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.7vw, 26px);
+  color: var(--navy);
+}
+
+.lmodal__head p {
+  margin-top: 6px;
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.lmodal__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.lmodal__close:hover {
+  background: #f3f3f6;
+}
+
+.lmodal__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(20px, 2vw, 30px) clamp(20px, 2.2vw, 34px) clamp(26px, 2.6vw, 40px);
+  font-size: clamp(14px, 1vw, 16px);
+  line-height: 1.75;
+  color: #444;
+}
+
+.lmodal__body section + section {
+  margin-top: 26px;
+}
+
+.lmodal__body h3 {
+  margin-bottom: 8px;
+  color: var(--navy);
+  font-size: clamp(15px, 1.1vw, 18px);
+  font-weight: 700;
+}
+
+.lmodal__body p + p {
+  margin-top: 6px;
+}
+
+.lmodal__spec {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 30px;
+  padding: clamp(16px, 1.6vw, 24px);
+  border-radius: 14px;
+  background: #f5f6fb;
+}
+
+.lmodal__spec div {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 12px;
+}
+
+.lmodal__spec dt {
+  color: var(--navy);
+  font-weight: 700;
 }
 
 .ft__info {
@@ -1928,16 +2057,29 @@ img {
    서브 페이지 — 설치사례 · FAQ
    ============================================================ */
 .subHero {
-  padding: clamp(56px, 5.2vw, 100px) 0 clamp(48px, 4.7vw, 90px);
-  background: linear-gradient(90deg, #0334b5 0%, #3c39d2 50%, #6c3cea 100%);
+  padding: clamp(40px, 4.4vw, 68px) 0 clamp(36px, 4vw, 60px);
+  /* 고객사 전달 서브타이틀 배경 (1920x246) */
+  background: #eef1ff url("/images/sub-title-bg.jpg") no-repeat center / cover;
 }
 
 .subHero .sec-head {
   gap: 12px;
 }
 
+.subHero .sec-eyebrow {
+  color: var(--purple);
+}
+
+.subHero .sec-title {
+  color: var(--navy);
+}
+
+.subHero .sec-title em {
+  color: var(--purple);
+}
+
 .subHero .sec-desc {
-  opacity: 0.9;
+  color: #555;
 }
 
 .cases {

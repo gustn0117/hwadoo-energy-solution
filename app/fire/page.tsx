@@ -5,7 +5,7 @@ import { SubPage } from "@/components/SubPage";
 import { FIRE_PRODUCTS, FIRE_RULES } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "화재안전 — 화두에너지솔루션",
+  title: "화재안전",
   description:
     "충전구역 화재 대응 소화기, 질식소화포, 상방향 주수장치, 열화상카메라, 충전소 격벽까지 아파트 충전 인프라의 화재 안전 설비를 안내합니다.",
 };

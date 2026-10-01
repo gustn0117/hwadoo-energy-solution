@@ -2,7 +2,7 @@
 
 import "@/app/styles/ranking.css";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Close } from "@/components/Icons";
+import { ArrowRight, Close, Plus } from "@/components/Icons";
 import type { CpoRanking } from "@/lib/supabase";
 
 type Metric = "count" | "price";
@@ -36,11 +36,22 @@ function Rows({ items, metric, active }: { items: CpoRanking[]; metric: Metric; 
   );
 }
 
-/** 팝업 안의 표 한 개 */
+/**
+ * 팝업 안의 표 한 개.
+ * PC 는 표가 항상 펼쳐진 채 안쪽에서만 스크롤되고,
+ * 모바일은 제목을 눌러 열었다 접었다 한다 (시안 1001).
+ */
 function Table({ title, items, metric }: { title: string; items: CpoRanking[]; metric: Metric }) {
+  const [open, setOpen] = useState(false);
+
   return (
-    <div className="rtable">
-      <h4>{title}</h4>
+    <div className="rtable" data-open={open || undefined}>
+      <h4>
+        <button type="button" className="rtable__toggle" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+          {title}
+          <Plus className="rtable__icon" size={20} />
+        </button>
+      </h4>
       <div className="rtable__scroll">
         <table>
           <thead>

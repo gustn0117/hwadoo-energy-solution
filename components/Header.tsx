@@ -78,7 +78,9 @@ export function Header() {
     >
       <div className="shell hd__bar">
         <div className="hd__logo">
-          <img src="/images/logo-img.png" alt={COMPANY.name} width={500} height={181} />
+          <a href="/" aria-label={`${COMPANY.name} 메인으로`}>
+            <img src="/images/logo-img.png" alt={COMPANY.name} width={500} height={181} />
+          </a>
         </div>
 
         <nav

@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { APP_FEATURES, PRODUCT_SPEC, SAFETY_FEATURES } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "제품안내 — 화두에너지솔루션",
+  title: "제품안내",
   description:
     "아파트에 설치하는 완속충전기의 사양과 안전 기능, 입주민이 쓰는 앱 기능을 정리했습니다. 완속 7kW, KC 형식승인, IP44 이상 보호 등급.",
 };

@@ -1,3 +1,4 @@
+import { LegalModal } from "@/components/LegalModal";
 import { COMPANY } from "@/lib/content";
 
 export function Footer() {
@@ -15,10 +16,7 @@ export function Footer() {
       <div className="shell">
         <div className="ft__top">
           <img className="ft__logo" src="/images/logo-img.png" alt={COMPANY.name} width={500} height={181} loading="lazy" />
-          <nav className="ft__links" aria-label="약관">
-            <a href="/terms">이용약관</a>
-            <a href="/privacy">개인정보처리방침</a>
-          </nav>
+          <LegalModal />
         </div>
         <dl className="ft__info">
           {info.map(([k, v]) => (

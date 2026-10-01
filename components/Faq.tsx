@@ -37,32 +37,19 @@ export function Faq({
   defaultOpen = null,
   title = true,
   moreHref,
+  bare,
 }: {
   items: Item[];
   defaultOpen?: number | null;
   title?: boolean;
   moreHref?: string;
+  /** 바깥에서 이미 section·shell 을 감싼 경우 목록만 그린다 */
+  bare?: boolean;
 }) {
   const [open, setOpen] = useState<number | null>(defaultOpen);
 
-  return (
-    <section className="sec faq" id="faq">
-      <div className="shell">
-        {title ? (
-          <div className="sec-head faq__head" data-reveal>
-            <h2 className="sec-title">
-              <small className="sec-eyebrow">FAQ</small>
-              자주 묻는 질문
-            </h2>
-            {moreHref ? (
-              <a className="pill" href={moreHref}>
-                전체보기
-              </a>
-            ) : null}
-          </div>
-        ) : null}
-
-        <ul className="faq__list" data-reveal-group>
+  const list = (
+    <ul className="faq__list" data-reveal-group>
           {items.map((f, i) => {
             const isOpen = open === i;
             return (
@@ -88,7 +75,28 @@ export function Faq({
               </li>
             );
           })}
-        </ul>
+    </ul>
+  );
+
+  if (bare) return list;
+
+  return (
+    <section className="sec faq" id="faq">
+      <div className="shell">
+        {title ? (
+          <div className="sec-head faq__head" data-reveal>
+            <h2 className="sec-title">
+              <small className="sec-eyebrow">FAQ</small>
+              자주 묻는 질문
+            </h2>
+            {moreHref ? (
+              <a className="pill" href={moreHref}>
+                전체보기
+              </a>
+            ) : null}
+          </div>
+        ) : null}
+        {list}
       </div>
     </section>
   );

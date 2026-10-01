@@ -12,8 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const item of group.items) paths.add(item.href);
   }
   for (const p of FIRE_PRODUCTS) paths.add(`/fire/${p.slug}`);
-  paths.add("/terms");
-  paths.add("/privacy");
 
   return [...paths]
     .filter((p) => p.startsWith("/") && !p.includes("#"))

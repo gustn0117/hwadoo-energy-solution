@@ -5,7 +5,7 @@ import { BRANDS } from "@/lib/content";
 import { COMPARE_CRITERIA } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "주요 파트너 — 화두에너지솔루션",
+  title: "주요 파트너",
   description: "화두에너지솔루션이 제휴한 충전사업자와, 단지에 맞는 사업자를 고를 때 보는 비교 기준을 소개합니다.",
 };
 

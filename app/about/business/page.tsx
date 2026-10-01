@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { BUSINESS_AREAS, BUSINESS_FLOW } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "사업영역 — 화두에너지솔루션",
+  title: "사업영역",
   description:
     "충전 인프라 진단·설계, 충전사업자 비교·중개, 설치 시공과 행정 대행, 운영·유지관리, 화재 안전 설비까지 화두에너지솔루션의 사업영역입니다.",
 };

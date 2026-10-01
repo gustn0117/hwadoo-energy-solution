@@ -4,7 +4,7 @@ import { SubPage } from "@/components/SubPage";
 import { SERVICE_OVERVIEW } from "@/lib/site-content";
 
 export const metadata: Metadata = {
-  title: "설치·운영 — 화두에너지솔루션",
+  title: "설치·운영",
   description:
     "제품안내, 설치·시공, 운영·유지관리, 설치절차까지 화두에너지솔루션이 맡는 아파트 충전 인프라 구축 전 과정을 안내합니다.",
 };
