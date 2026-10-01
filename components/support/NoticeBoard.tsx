@@ -1,5 +1,6 @@
 "use client";
 
+import "@/app/styles/pages.css"; // 목록(.pg-list) 스타일
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { BoardBar } from "@/components/support/BoardBar";

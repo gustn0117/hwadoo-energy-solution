@@ -1892,6 +1892,25 @@ img {
   font-weight: 700;
 }
 
+/* 두 문서를 함께 두고 고른 쪽만 보여 준다 */
+.lmodal [data-doc] {
+  display: none;
+}
+
+.lmodal[data-kind="terms"] [data-doc="terms"],
+.lmodal[data-kind="privacy"] [data-doc="privacy"] {
+  display: block;
+}
+
+.lmodal__head [data-doc] {
+  display: none;
+}
+
+.lmodal[data-kind="terms"] .lmodal__head [data-doc="terms"],
+.lmodal[data-kind="privacy"] .lmodal__head [data-doc="privacy"] {
+  display: inline;
+}
+
 .ft__info {
   display: grid;
   grid-template-columns: 260px auto;
