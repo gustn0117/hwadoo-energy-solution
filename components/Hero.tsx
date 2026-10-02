@@ -1,48 +1,39 @@
 import { ArrowRight } from "@/components/Icons";
 import { ConsultForm } from "@/components/ConsultForm";
-import { HERO_POINTS } from "@/lib/content";
+import { getHero } from "@/lib/data";
 
 /**
- * 배치는 CSS grid 영역으로 바꾼다 — PC: 카피 | 폼 (일러스트는 폼 뒤로 겹침),
- * 태블릿: 카피 · 일러스트 / 폼, 모바일: 카피 → 일러스트 → 진단 버튼 (폼은 팝업으로 대체).
+ * 메인 첫 화면 — 배너 이미지와 버튼은 관리자(/admin/hero)에서 바꾼다 (시안 1002).
+ * PC: 배너 | 상담 폼, 모바일: 배너 → 버튼 (상담 폼은 팝업으로 대체).
  */
-export function Hero() {
+export async function Hero() {
+  const hero = await getHero();
+  const sameImage = hero.mobileImage === hero.pcImage;
+
   return (
     <section className="hero" id="top">
       <div className="shell hero__inner">
-        <div className="hero__copy" data-reveal>
-          <h1 className="hero__title">
-            <span className="hero__t1">아파트 전기차 충전기</span>
-            <span className="hero__t2">비교부터 설치까지</span>
-            <span className="hero__t3">한 번에 OK!</span>
-          </h1>
-
-          <ul className="hero__points">
-            {HERO_POINTS.map((p) => (
-              <li key={p.title}>
-                <img src={p.icon} alt="" width={220} height={220} />
-                <b>{p.title}</b>
-                <span>{p.desc}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="hero__banner" data-split={sameImage ? undefined : ""} data-reveal>
+          <img
+            className="hero__img hero__img--pc"
+            src={hero.pcImage}
+            alt="아파트 전기차 충전기, 비교부터 설치까지 한 번에 OK!"
+            fetchPriority="high"
+          />
+          {/* 모바일 이미지를 따로 올린 경우에만 두 장을 번갈아 보여준다 */}
+          {sameImage ? null : (
+            <img className="hero__img hero__img--mo" src={hero.mobileImage} alt="" fetchPriority="high" />
+          )}
         </div>
 
-        <img
-          className="hero__visual"
-          src="/images/main-visual-img.png"
-          alt=""
-          width={1390}
-          height={1012}
-          fetchPriority="high"
-        />
-
-        <div className="hero__cta" data-reveal>
-          <a className="btn btn--orange hero__btn" href="/#diagnosis">
-            충전기 설치 진단
-            <ArrowRight />
-          </a>
-        </div>
+        {hero.buttonLabel ? (
+          <div className="hero__cta" data-reveal>
+            <a className="btn btn--orange hero__btn" href={hero.buttonHref}>
+              {hero.buttonLabel}
+              <ArrowRight />
+            </a>
+          </div>
+        ) : null}
 
         <div className="hero__form">
           <ConsultForm />

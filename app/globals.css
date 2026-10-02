@@ -564,86 +564,33 @@ img {
 }
 
 /* PC: 카피 | 폼, 일러스트는 폼 뒤로 겹쳐 절대배치 */
+/* PC: 배너 | 상담 폼 */
 .hero__inner {
   position: relative;
   display: grid;
   grid-template-columns: 1fr 406px;
   grid-template-areas:
-    "copy form"
-    "cta  form";
+    "banner form"
+    "cta    form";
   align-items: start;
   column-gap: 40px;
 }
 
-.hero__copy {
-  grid-area: copy;
-  position: relative;
-  z-index: 1;
-  padding-top: 18px;
+/* 배너 이미지는 관리자(/admin/hero)에서 등록한다 */
+.hero__banner {
+  grid-area: banner;
+  align-self: center;
 }
 
-.hero__title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: -0.02em;
-}
-
-.hero__title span {
+.hero__img {
   display: block;
+  width: 100%;
+  height: auto;
 }
 
-.hero__t1 {
-  color: var(--navy);
-  font-size: var(--fs-hero-md);
-  line-height: 1.25;
-  margin-bottom: 12px;
-}
-
-.hero__t2,
-.hero__t3 {
-  font-size: var(--fs-hero-lg);
-  line-height: 1.15;
-}
-
-.hero__t2 {
-  color: var(--purple);
-}
-
-.hero__points {
-  display: flex;
-  margin-top: 36px;
-}
-
-.hero__points li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 22px;
-  text-align: center;
-}
-
-.hero__points li:first-child {
-  padding-left: 0;
-}
-
-.hero__points li + li {
-  border-left: 1px solid #e3e3e3;
-}
-
-.hero__points img {
-  width: 80px;
-  margin-bottom: 14px;
-}
-
-.hero__points b {
-  color: var(--purple);
-  font-size: clamp(15px, 1.1vw, 21px);
-  font-weight: 700;
-}
-
-.hero__points span {
-  color: #555;
-  font-size: clamp(13px, 0.92vw, 17px);
+/* 모바일 이미지를 따로 올렸을 때만 화면 폭에 따라 바뀐다 */
+.hero__img--mo {
+  display: none;
 }
 
 .hero__cta {
@@ -651,14 +598,6 @@ img {
   position: relative;
   z-index: 1;
   margin-top: 34px;
-}
-
-.hero__visual {
-  position: absolute;
-  right: 290px;
-  top: 76px;
-  width: min(640px, 36vw);
-  pointer-events: none;
 }
 
 .hero__form {
@@ -2253,10 +2192,6 @@ img {
 }
 
 @media (max-width: 1440px) {
-  .hero__visual {
-    right: 270px;
-  }
-
   .cta__btn {
     width: 270px;
   }
@@ -2277,11 +2212,6 @@ img {
 
   .hero__inner {
     grid-template-columns: 1fr 380px;
-  }
-
-  .hero__visual {
-    right: 250px;
-    width: min(560px, 40vw);
   }
 
   .consult__tel a {
@@ -2421,25 +2351,12 @@ img {
   }
 
   .hero__inner {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "copy visual"
-      "cta  visual"
-      "form form";
+      "banner"
+      "cta"
+      "form";
     column-gap: 24px;
-  }
-
-  .hero__copy {
-    padding-top: 0;
-  }
-
-  .hero__visual {
-    grid-area: visual;
-    position: static;
-    align-self: center;
-    width: 100%;
-    max-width: 480px;
-    justify-self: end;
   }
 
   .hero__form {
@@ -2606,14 +2523,6 @@ img {
 
 /* ---------- 태블릿 (세로) ---------- */
 @media (max-width: 900px) {
-  .hero__points li {
-    padding: 0 12px;
-  }
-
-  .hero__points b {
-    white-space: nowrap;
-  }
-
   .services__list {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2712,8 +2621,7 @@ img {
   .hero__inner {
     grid-template-columns: 1fr;
     grid-template-areas:
-      "copy"
-      "visual"
+      "banner"
       "cta";
   }
 
@@ -2721,24 +2629,13 @@ img {
     display: none;
   }
 
-  .hero__visual {
-    justify-self: center;
-    width: min(420px, 100%);
-    margin-top: 24px;
+  /* 모바일 이미지를 따로 올렸으면 그쪽을 쓴다 */
+  .hero__banner[data-split] .hero__img--pc {
+    display: none;
   }
 
-  .hero__points {
-    margin-top: 28px;
-  }
-
-  .hero__points li {
-    flex: 1;
-    padding: 0 8px;
-  }
-
-  .hero__points img {
-    width: 58px;
-    margin-bottom: 10px;
+  .hero__banner[data-split] .hero__img--mo {
+    display: block;
   }
 
   .hero__cta {

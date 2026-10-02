@@ -97,12 +97,6 @@ export const MENU = [
 /** 상단 가로 메뉴 */
 export const NAV = MENU;
 
-export const HERO_POINTS = [
-  { icon: "/images/apartment-icon.png", title: "전국 아파트", desc: "설치 경험 보유" },
-  { icon: "/images/charging-partner-icon.png", title: "주요 충전사업자", desc: "한 번에 비교" },
-  { icon: "/images/consultant-icon.png", title: "전문 컨설턴트", desc: "1:1 맞춤 상담" },
-] as const;
-
 export const CPO_OPTIONS = ["플러그링크", "에버온", "현대엔지니어링", "SK일렉링크"] as const;
 
 export const BUILDING_OPTIONS = [

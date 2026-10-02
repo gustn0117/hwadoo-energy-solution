@@ -62,7 +62,7 @@ public/               이미지·폰트
 | 하위 페이지 본문·수치 | `lib/site-content.ts` |
 | 이용약관·개인정보처리방침 | `lib/legal.ts` |
 | 색상·글자 크기·콘텐츠 폭 | `app/globals.css` 상단 토큰 (`--container` 등) |
-| 상담 신청 내역, 설치사례, FAQ, 공지, 프로모션 | 관리자 페이지 `/admin` |
+| 메인 배너 이미지·버튼, 상담 신청 내역, 설치사례, FAQ, 공지, 프로모션, 충전사업자 순위 | 관리자 페이지 `/admin` |
 
 ## 데이터베이스
 
@@ -73,8 +73,24 @@ public/               이미지·폰트
 - `faqs` 자주 묻는 질문
 - `notices` 공지·소식
 - `promotions` 프로모션
+- `cpo_rankings` 충전사업자 순위
+- `site_settings` 메인 배너 등 관리자에서 바꾸는 설정 (키-값)
 
-설치사례·프로모션 이미지는 Supabase Storage 버킷에 저장됩니다.
+설치사례·프로모션·메인 배너 이미지는 Supabase Storage 버킷에 저장됩니다.
+
+`site_settings` 는 아래 SQL 로 만듭니다. 테이블이 없으면 메인 배너는 기본 이미지로 나오고
+관리자 저장만 실패하므로, 사이트가 멈추지는 않습니다.
+
+```sql
+create table hwadoo_energy_solution.site_settings (
+  key        text primary key,
+  value      text,
+  updated_at timestamptz not null default now()
+);
+alter table hwadoo_energy_solution.site_settings enable row level security;
+```
+
+쓰는 키: `hero_pc_image`, `hero_mobile_image`, `hero_button_label`, `hero_button_href`
 
 ## 배포
 

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 const ITEMS = [
   { href: "/admin", label: "상담 신청" },
+  { href: "/admin/hero", label: "메인 배너" },
   { href: "/admin/cases", label: "설치사례" },
   { href: "/admin/faq", label: "FAQ" },
   { href: "/admin/notice", label: "공지·소식" },

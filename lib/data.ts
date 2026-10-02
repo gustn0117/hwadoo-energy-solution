@@ -1,6 +1,6 @@
 import "server-only";
 import { FAQ } from "@/lib/content";
-import { db, type Case, type CpoRanking, type Notice, type Promotion } from "@/lib/supabase";
+import { db, type Case, type CpoRanking, type Notice, type Promotion, type SiteSetting } from "@/lib/supabase";
 
 export type FaqItem = { q: string; answer: string };
 
@@ -118,4 +118,48 @@ export async function getRankings(): Promise<Rankings> {
 /** 26.08.20 형식 */
 export function shortDate(date: string | null) {
   return date ? date.slice(2).replaceAll("-", ".") : "";
+}
+
+
+/* ---------- 메인 배너 (관리자에서 등록) ---------- */
+
+export type Hero = {
+  pcImage: string;
+  mobileImage: string;
+  buttonLabel: string;
+  buttonHref: string;
+};
+
+/** 고객사 전달 원본 — 관리자에서 아직 등록하지 않았을 때 쓴다 */
+export const HERO_DEFAULT: Hero = {
+  pcImage: "/images/main-banner.jpg",
+  mobileImage: "/images/main-banner.jpg",
+  buttonLabel: "충전기 설치 진단",
+  buttonHref: "/#diagnosis",
+};
+
+export const HERO_KEYS = ["hero_pc_image", "hero_mobile_image", "hero_button_label", "hero_button_href"] as const;
+
+/** 설정 테이블을 아직 만들지 않았거나 값이 없으면 기본값으로 돌아간다 */
+export async function getSettings(keys: readonly string[]): Promise<Record<string, string>> {
+  try {
+    const { data, error } = await db().from("site_settings").select("key, value").in("key", [...keys]);
+    if (error) throw error;
+    return Object.fromEntries((data as SiteSetting[]).filter((r) => r.value).map((r) => [r.key, r.value as string]));
+  } catch (e) {
+    console.error("[settings] fallback to default", e);
+    return {};
+  }
+}
+
+export async function getHero(): Promise<Hero> {
+  const s = await getSettings(HERO_KEYS);
+  const pc = s.hero_pc_image || HERO_DEFAULT.pcImage;
+  return {
+    pcImage: pc,
+    // 모바일 이미지를 따로 올리지 않았으면 PC 이미지를 그대로 쓴다
+    mobileImage: s.hero_mobile_image || pc,
+    buttonLabel: s.hero_button_label || HERO_DEFAULT.buttonLabel,
+    buttonHref: s.hero_button_href || HERO_DEFAULT.buttonHref,
+  };
 }

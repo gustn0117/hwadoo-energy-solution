@@ -83,6 +83,12 @@ export type Promotion = {
   sort_order: number;
 };
 
+/** 관리자에서 바꾸는 사이트 설정 (키-값) */
+export type SiteSetting = {
+  key: string;
+  value: string | null;
+};
+
 export type CpoRanking = {
   id: number;
   kind: "fast" | "slow";

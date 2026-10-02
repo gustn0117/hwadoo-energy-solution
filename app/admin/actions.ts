@@ -265,6 +265,40 @@ export async function saveRankings(fd: FormData) {
   redirect("/admin/ranking");
 }
 
+/* ---------- 메인 배너 ---------- */
+
+/** 설정 한 건을 넣거나 바꾼다 */
+async function putSetting(key: string, value: string | null) {
+  const { error } = await db().from("site_settings").upsert({ key, value }, { onConflict: "key" });
+  if (error) fail("메인 배너 저장", error);
+}
+
+export async function saveHero(fd: FormData) {
+  await requireAdmin();
+
+  for (const [field, key, folder] of [
+    ["pc_image", "hero_pc_image", "banner"],
+    ["mobile_image", "hero_mobile_image", "banner"],
+  ] as const) {
+    const file = fd.get(field);
+    if (file instanceof File && file.size > 0) {
+      const old = optional(fd, `${field}_current`);
+      await putSetting(key, await uploadImage(file, folder));
+      await removeImage(old);
+    } else if (text(fd, `${field}_clear`) === "1") {
+      await removeImage(optional(fd, `${field}_current`));
+      await putSetting(key, null);
+    }
+  }
+
+  await putSetting("hero_button_label", optional(fd, "button_label"));
+  await putSetting("hero_button_href", optional(fd, "button_href"));
+
+  revalidatePath("/admin/hero");
+  revalidatePath("/");
+  redirect("/admin/hero");
+}
+
 /* ---------- FAQ ---------- */
 
 export async function saveFaq(fd: FormData) {
