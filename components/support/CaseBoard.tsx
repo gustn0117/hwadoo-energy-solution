@@ -1,10 +1,12 @@
 "use client";
 
+import "@/app/styles/pages.css"; // 목록(.pg-list) 스타일
 import { useMemo, useState } from "react";
 import { BoardBar } from "@/components/support/BoardBar";
+import { BOARD_INTRO, BoardIntro } from "@/components/support/BoardIntro";
 import type { Case } from "@/lib/supabase";
 
-const PAGE = 6;
+const PAGE = 8;
 
 export function CaseBoard({ items }: { items: Case[] }) {
   const [facility, setFacility] = useState("");
@@ -43,15 +45,7 @@ export function CaseBoard({ items }: { items: Case[] }) {
   return (
     <section className="board board--cases">
       <div className="shell">
-        <div className="board__intro" data-reveal>
-          <img src="/images/installation-diagnosis.png" alt="" width={306} height={286} />
-          <div>
-            <h2>
-              <em>아파트부터 대형 시설까지,</em> 현장에서 검증된 화두 충전 인프라
-            </h2>
-            <p>아파트는 물론 상업시설과 관공서까지, 화두의 설치 경험은 계속되고 있습니다.</p>
-          </div>
-        </div>
+        <BoardIntro {...BOARD_INTRO.cases} />
 
         <BoardBar
           total={filtered.length}
@@ -67,27 +61,30 @@ export function CaseBoard({ items }: { items: Case[] }) {
           <p className="board__empty">등록된 설치사례가 없습니다.</p>
         ) : (
           <>
-            <ul className="board__grid" style={{ "--cols": 3 } as React.CSSProperties}>
+            <ul className="pg-list pg-list--plain" data-reveal-group>
               {visible.map((c) => (
                 <li key={c.id}>
-                  <article className="bcard">
-                    <div className="bcard__thumb" style={{ "--ratio": "4 / 3" } as React.CSSProperties}>
-                      {c.image_url ? (
-                        <img src={c.image_url} alt={`${c.title} 충전기 설치 현장`} loading="lazy" />
-                      ) : (
-                        <span>사진 준비중</span>
-                      )}
-                    </div>
-                    <div className="bcard__body">
-                      <h2 className="bcard__title">{c.title}</h2>
-                      <div className="bcard__foot">
-                        {c.charger_count ? <span className="bcard__qty">{c.charger_count.toLocaleString()}기</span> : <span />}
-                        <span className="bcard__meta" style={{ marginTop: 0 }}>
-                          {c.installed_on ?? c.region ?? ""}
+                  {/* 설치사례는 상세 페이지가 없어 링크를 걸지 않는다 */}
+                  <div className="pg-list__row">
+                    {c.image_url ? (
+                      <img className="pg-list__thumb" src={c.image_url} alt={`${c.title} 충전기 설치 현장`} loading="lazy" />
+                    ) : (
+                      <span className="pg-list__thumb pg-list__thumb--empty">사진 준비중</span>
+                    )}
+                    <div className="pg-list__body">
+                      {c.facility_type || c.cpo ? (
+                        <span className="pg-list__tag">
+                          {[c.facility_type, c.cpo].filter(Boolean).join(" · ")}
                         </span>
-                      </div>
+                      ) : null}
+                      <h2>{c.title}</h2>
+                      {c.region ? <p>{c.region}</p> : null}
                     </div>
-                  </article>
+                    <span className="pg-list__meta">
+                      {c.charger_count ? <b className="num">{c.charger_count.toLocaleString()}기</b> : null}
+                      {c.installed_on ? <time>{c.installed_on.replaceAll("-", ".").slice(0, 7)}</time> : null}
+                    </span>
+                  </div>
                 </li>
               ))}
             </ul>

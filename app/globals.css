@@ -573,7 +573,8 @@ img {
     "banner form"
     "cta    form";
   align-items: start;
-  column-gap: 40px;
+  /* 배너 이미지와 상담 폼은 붙여 둔다 (시안 1004) */
+  column-gap: 0;
 }
 
 /* 배너 이미지는 관리자(/admin/hero)에서 등록한다 */

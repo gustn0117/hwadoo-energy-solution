@@ -343,12 +343,44 @@
   font-size: 15px;
 }
 
+/* 링크가 없는 줄(설치사례)도 링크와 같은 모양으로 */
+.pg-list__row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 26px 8px;
+}
+
 .pg-list__thumb {
   flex: none;
   width: 120px;
   aspect-ratio: 3 / 2;
   object-fit: cover;
   border-radius: 12px;
+}
+
+.pg-list__thumb--empty {
+  display: grid;
+  place-items: center;
+  background: var(--bg-soft);
+  color: var(--gray);
+  font-size: 12px;
+}
+
+/* 오른쪽 끝 — 충전기 수 · 설치 시기 */
+.pg-list__meta {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  color: var(--gray);
+  font-size: 15px;
+}
+
+.pg-list__meta b {
+  color: var(--purple);
+  font-weight: 700;
 }
 
 .pg-list__tag {
@@ -486,7 +518,8 @@
     padding: 16px 18px;
   }
 
-  .pg-list a {
+  .pg-list a,
+  .pg-list__row {
     flex-wrap: wrap;
     gap: 12px;
     padding: 20px 4px;
@@ -494,6 +527,11 @@
 
   .pg-list__thumb {
     width: 88px;
+  }
+
+  .pg-list__meta {
+    flex-direction: row;
+    gap: 10px;
   }
 
   .pg-cta .btn {

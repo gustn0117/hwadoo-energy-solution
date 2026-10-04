@@ -4,6 +4,7 @@ import "@/app/styles/pages.css"; // 목록(.pg-list) 스타일
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { BoardBar } from "@/components/support/BoardBar";
+import { BOARD_INTRO, BoardIntro } from "@/components/support/BoardIntro";
 import type { Notice } from "@/lib/supabase";
 
 const PAGE = 10;
@@ -31,6 +32,8 @@ export function NoticeBoard({ items }: { items: Notice[] }) {
   return (
     <section className="board board--notice">
       <div className="shell">
+        <BoardIntro {...BOARD_INTRO.notice} />
+
         <BoardBar
           total={filtered.length}
           query={query}

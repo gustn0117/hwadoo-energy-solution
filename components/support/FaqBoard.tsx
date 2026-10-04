@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Faq } from "@/components/Faq";
 import { BoardBar } from "@/components/support/BoardBar";
+import { BOARD_INTRO, BoardIntro } from "@/components/support/BoardIntro";
 
 const PAGE = 8;
 
@@ -22,6 +23,8 @@ export function FaqBoard({ items }: { items: { q: string; answer: string }[] }) 
   return (
     <section className="board board--faq">
       <div className="shell">
+        <BoardIntro {...BOARD_INTRO.faq} />
+
         <BoardBar
           total={filtered.length}
           query={query}
