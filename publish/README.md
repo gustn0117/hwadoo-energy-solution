@@ -24,6 +24,10 @@ sub/  compare/ ranking          충전사업자 순위 (전체보기 팝업 포�
       service/ index            설치·운영
                product / install / operation / process
       diagnosis/index           설치진단
+      consult/ index            설치 상담 1단계 (주소 검색 전)
+               step1-found      설치 상담 1단계 (주소 검색 후)
+               step2            설치 상담 2단계 (정보입력)
+               step3            설치 상담 3단계 (신청완료)
                                 ↑ 위 페이지는 모두 .php 와 .html 두 벌입니다
 include/ header.php, header.html   전 페이지 공통 머리말
          footer.php, footer.html   전 페이지 공통 꼬리말 (푸터·플로팅·팝업)
@@ -129,6 +133,29 @@ favicon.ico  apple-icon.png
   <a class="btn btn--orange hero__btn" href="/index.html#diagnosis">충전기 설치 진단 …</a>
 </div>
 ```
+
+## 설치 상담 (sub/consult/)
+
+주소 검색 → 정보입력 → 신청완료 3단계입니다. 정적 파일이라 단계마다 파일을 따로 두었고,
+`assets/js/site.js` 가 버튼에 맞춰 다음 파일로 보냅니다.
+
+```
+index.html        1단계 — 주소 검색 전 (다음 버튼 비활성)
+step1-found.html  1단계 — 주소 검색 후 (결과 카드 + 다음 버튼 활성)
+step2.html        2단계 — 충전기 수량 · 기본정보 입력
+step3.html        3단계 — 신청 완료
+```
+
+PHP 로 옮기실 때는 한 파일에서 단계만 바꿔 보여주셔도 됩니다.
+
+- **주소 검색 결과는 예시 값**입니다. 단지 정보 API 가 붙으면 `.addr` 영역의 값만 바꾸면 됩니다.
+  (기본 정보 4줄 + 현재 충전기 설치 현황 표)
+- 메인의 주소 검색창에서 검색하면 `설치 주소 확인` 팝업(`<dialog class="amodal">`)이 열리고,
+  다음을 누르면 2단계로 넘어갑니다.
+- 2단계 폼이 보내는 항목: `fast_now`(급속 기설), `slow_now`(완속 기설), `slow_add`(완속 추가),
+  `cpo`, `building`, `name`(신청자), `phone`(연락처), `agree`, `address`,
+  `website`(봇 차단용 숨은 값 — 값이 있으면 저장하지 마세요).
+  합계(`fast_total`, `slow_total`)는 화면에서 자동 계산되는 참고 값입니다.
 
 ## 서버 연동이 필요한 지점 (주석으로 표시됨)
 

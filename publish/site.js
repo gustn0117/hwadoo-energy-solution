@@ -5,12 +5,20 @@
  *   4) 브랜드 무한 슬라이드  5) 숫자 카운트업        6) 상담 팝업
  *   7) 주소 검색 → 팝업     8) TOP 버튼            9) 게시판 검색/필터/더보기
  *   10) 충전사업자 순위 전환 · 전체보기 팝업  11) 약관 팝업
- *   12) 순위 팝업 표 열기/접기(모바일)
+ *   12) 순위 팝업 표 열기/접기(모바일)  13) 설치 상담 3단계 이동
  */
 (function () {
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // 설치 상담은 단계마다 파일이 따로 있습니다 (PHP 에서 한 화면으로 합치셔도 됩니다)
+  var CONSULT = {
+    step1: "/sub/consult/index.html",
+    found: "/sub/consult/step1-found.html",
+    step2: "/sub/consult/step2.html",
+    step3: "/sub/consult/step3.html"
+  };
 
   /* ------------------------------------------------------------------
      1) 스크롤 등장 — [data-reveal], [data-reveal-group] > *
@@ -320,18 +328,21 @@
   function initFinder() {
     var form = document.querySelector("form.finder__bar");
     if (!form) return;
+    var modal = document.querySelector(".amodal");
     form.addEventListener("submit", function (e) {
       if (form.getAttribute("action")) return;
       e.preventDefault();
-      var q = (form.elements.q && form.elements.q.value || "").trim();
-      var modal = document.querySelector(".cmodal");
-      var target = modal && modal.querySelector(".cmodal__form");
-      if (target && target.elements.address) target.elements.address.value = q;
-      if (target) target.hidden = false;
-      var doneBox = modal && modal.querySelector(".cmodal__done");
-      if (doneBox) doneBox.hidden = true;
-      if (modal && modal.showModal) modal.showModal();
+      if (!modal) return;
+      // 팝업의 다음 버튼은 설치 상담 2단계로 보낸다
+      var next = modal.querySelector(".cw__next");
+      if (next) next.setAttribute("href", CONSULT.step2);
+      if (modal.showModal) modal.showModal();
     });
+    if (modal) {
+      var close = modal.querySelector(".amodal__close");
+      if (close) close.addEventListener("click", function () { modal.close(); });
+      modal.addEventListener("click", function (e) { if (e.target === modal) modal.close(); });
+    }
   }
 
   /* ------------------------------------------------------------------
@@ -497,6 +508,67 @@
     }
   }
 
+  /* ------------------------------------------------------------------
+     13) 설치 상담 3단계 — 정적 파일에서는 단계마다 파일이 따로 있습니다.
+        sub/consult/index.html → step2.html → step3.html
+        실제로는 PHP 에서 한 화면으로 처리하셔도 됩니다.
+     ------------------------------------------------------------------ */
+  function initConsultWizard() {
+    var wizard = document.querySelector(".cw");
+    if (!wizard) return;
+
+    // 1단계 — 주소를 넣고 검색하면 결과가 보이고 다음 버튼이 켜진다
+    var search = wizard.querySelector(".cw__search");
+    var empty = wizard.querySelector(".cw__empty");
+    var result = wizard.querySelector(".addr");
+    var next = wizard.querySelector(".cw__next");
+
+    if (search) {
+      search.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var q = (wizard.querySelector("#cw-q") || { value: "" }).value.trim();
+        if (!q) return;
+        // 검색 결과 화면은 파일이 따로 있습니다
+        location.href = CONSULT.found;
+      });
+    }
+
+    // 단계 이동
+    wizard.querySelectorAll(".cw__next, .cw__prev").forEach(function (btn) {
+      if (btn.tagName === "A") return; // 팝업의 다음 링크는 그대로 둔다
+      btn.addEventListener("click", function (e) {
+        var panel = wizard.querySelector(".cw__panel");
+        var isForm = panel && panel.tagName === "FORM";
+        if (btn.classList.contains("cw__prev")) {
+          e.preventDefault();
+          location.href = CONSULT.step1;
+          return;
+        }
+        if (btn.disabled) return;
+        e.preventDefault();
+        location.href = isForm ? CONSULT.step3 : CONSULT.step2;
+      });
+    });
+
+    // 현재(기설) + 추가 = 합계
+    var form = wizard.querySelector("form.cw__panel");
+    if (form) {
+      var num = function (name) {
+        var el = form.querySelector('[name="' + name + '"]');
+        var n = Number((el && el.value || "").replace(/\D/g, ""));
+        return isFinite(n) ? n : 0;
+      };
+      var put = function (name, v) {
+        var el = form.querySelector('[name="' + name + '"]');
+        if (el) el.value = String(v);
+      };
+      form.addEventListener("input", function () {
+        put("fast_total", num("fast_now"));
+        put("slow_total", num("slow_now") + num("slow_add"));
+      });
+    }
+  }
+
   function init() {
     initReveal();
     initHeader();
@@ -510,6 +582,7 @@
     initRanking();
     initRankTables();
     initLegal();
+    initConsultWizard();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

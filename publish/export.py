@@ -55,6 +55,12 @@ ROUTES = [
 
     # 설치진단
     ("/diagnosis", "sub/diagnosis/index.html", "설치진단"),
+
+    # 설치 상담 — 3단계 (시안 1007). 단계별로 따로 뽑는다
+    ("/consult", "sub/consult/index.html", "설치 상담 — 1 주소 검색"),
+    ("/consult?found=1", "sub/consult/step1-found.html", "설치 상담 — 1 주소 검색 후"),
+    ("/consult?step=2", "sub/consult/step2.html", "설치 상담 — 2 정보입력"),
+    ("/consult?step=3", "sub/consult/step3.html", "설치 상담 — 3 신청완료"),
 ]
 
 # 내부 링크를 바뀐 파일 경로로 바꾼다
@@ -93,6 +99,7 @@ def relink(soup):
             continue
         path, _, hash_ = href.partition("#")
         hash_ = ("#" + hash_) if hash_ else ""
+        path, _, query = path.partition("?")  # /consult?address=... 처럼 뒤에 붙는 값은 떼고 본다
         if path in LINKS:
             a["href"] = LINKS[path] + hash_
             continue

@@ -13,10 +13,19 @@ const STEPS = ["주소 검색", "정보입력", "신청완료"] as const;
  * 1 주소 검색 → 2 정보입력 → 3 신청완료.
  * 주소 검색은 단지 정보 API 가 붙기 전까지 예시 결과를 보여준다.
  */
-export function ConsultWizard({ initialAddress = "" }: { initialAddress?: string }) {
-  const [step, setStep] = useState(initialAddress ? 2 : 1);
+export function ConsultWizard({
+  initialAddress = "",
+  initialStep,
+  initialFound,
+}: {
+  initialAddress?: string;
+  initialStep?: number;
+  /** 퍼블리싱 추출용 — 검색 결과가 보이는 상태로 그린다 */
+  initialFound?: boolean;
+}) {
+  const [step, setStep] = useState(initialStep ?? (initialAddress ? 2 : 1));
   const [query, setQuery] = useState(initialAddress);
-  const [found, setFound] = useState(Boolean(initialAddress));
+  const [found, setFound] = useState(Boolean(initialAddress) || Boolean(initialFound));
   const [state, action, pending] = useActionState(submitConsultation, null);
 
   useEffect(() => {

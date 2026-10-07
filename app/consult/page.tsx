@@ -19,9 +19,10 @@ export const metadata: Metadata = {
 export default async function ConsultPage({
   searchParams,
 }: {
-  searchParams: Promise<{ address?: string }>;
+  searchParams: Promise<{ address?: string; step?: string; found?: string }>;
 }) {
-  const { address } = await searchParams;
+  const { address, step, found } = await searchParams;
+  const initialStep = step === "2" || step === "3" ? Number(step) : undefined;
 
   return (
     <>
@@ -31,7 +32,7 @@ export default async function ConsultPage({
         <div className="shell cguide__wrap">
           <ConsultGuide />
         </div>
-        <ConsultWizard initialAddress={address ?? ""} />
+        <ConsultWizard initialAddress={address ?? ""} initialStep={initialStep} initialFound={found === "1"} />
         <InstallSteps />
       </main>
       <Footer />
