@@ -1,13 +1,12 @@
 "use client";
 
-import "@/app/styles/pages.css"; // 목록(.pg-list) 스타일
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { BoardBar } from "@/components/support/BoardBar";
 import { BOARD_INTRO, BoardIntro } from "@/components/support/BoardIntro";
 import type { Promotion } from "@/lib/supabase";
 
-const PAGE = 6;
+const PAGE = 4;
 const STATE_LABEL = { ongoing: "진행중", upcoming: "예정", ended: "종료" } as const;
 type State = keyof typeof STATE_LABEL;
 
@@ -72,24 +71,23 @@ export function PromotionBoard({ items }: { items: (Promotion & { state: State }
           <p className="board__empty">등록된 프로모션이 없습니다.</p>
         ) : (
           <>
-            <ul className="pg-list" data-reveal-group>
+            <ul className="board__grid" style={{ "--cols": 2 } as React.CSSProperties}>
               {visible.map((p) => (
                 <li key={p.id}>
-                  <Link href={`/promotion/${p.id}`}>
-                    {p.image_url ? (
-                      <img className="pg-list__thumb" src={p.image_url} alt="" loading="lazy" />
-                    ) : (
-                      <span className="pg-list__thumb pg-list__thumb--empty">이미지 준비중</span>
-                    )}
-                    <div className="pg-list__body">
-                      <span className="pg-list__tag" data-state={p.state}>
-                        {p.cpo ? `${p.cpo} · ` : ""}
-                        {STATE_LABEL[p.state]}
-                      </span>
-                      <h2>{p.title}</h2>
-                      {p.summary ? <p>{p.summary}</p> : null}
+                  <Link className="bcard" href={`/promotion/${p.id}`} data-state={p.state}>
+                    <div className="bcard__thumb" data-ended="종료된 이벤트입니다.">
+                      {p.image_url ? <img src={p.image_url} alt="" loading="lazy" /> : <span>이미지 준비중</span>}
                     </div>
-                    <time>{period(p.starts_on, p.ends_on)}</time>
+                    <div className="bcard__body">
+                      <div className="bcard__top">
+                        <span className="bcard__cpo">{p.cpo ?? "전체"}</span>
+                        <span className="bcard__badge" data-state={p.state}>
+                          {STATE_LABEL[p.state]}
+                        </span>
+                      </div>
+                      <h2 className="bcard__title">{p.title}</h2>
+                      <p className="bcard__meta">{period(p.starts_on, p.ends_on)}</p>
+                    </div>
                   </Link>
                 </li>
               ))}

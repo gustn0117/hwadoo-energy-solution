@@ -276,15 +276,21 @@ def main():
 
     # CSS 합치기
     os.makedirs(os.path.join(OUT, "assets/css"), exist_ok=True)
+    # app/styles 안의 파일은 전부 담는다 — 새 스타일시트가 빠지는 일이 없도록 폴더를 훑는다
+    TITLES = {
+        "pages.css": "하위 페이지 공용 블록",
+        "board.css": "고객지원 게시판",
+        "ranking.css": "충전사업자 순위",
+        "consult.css": "설치 상담",
+    }
+    styles = sorted(os.listdir(os.path.join(SRC, "app/styles")))
     parts = []
-    for path, title in (
-        ("app/globals.css", "공통 토큰 · 메인 페이지"),
-        ("app/styles/pages.css", "하위 페이지 공용 블록"),
-        ("app/styles/board.css", "고객지원 게시판"),
-        ("app/styles/ranking.css", "충전사업자 순위"),
-    ):
+    for path, title in [("app/globals.css", "공통 토큰 · 메인 페이지")] + [
+        (f"app/styles/{name}", TITLES.get(name, name)) for name in styles if name.endswith(".css")
+    ]:
         with open(os.path.join(SRC, path), encoding="utf-8") as f:
             parts.append(f"/* ===== {title} ===== */\n" + f.read())
+    print(f"  assets/css/site.css              {len(parts)}개 스타일 합본")
     with open(os.path.join(OUT, "assets/css/site.css"), "w", encoding="utf-8") as f:
         f.write("\n\n".join(parts))
 

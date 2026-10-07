@@ -1,12 +1,11 @@
 "use client";
 
-import "@/app/styles/pages.css"; // 목록(.pg-list) 스타일
 import { useMemo, useState } from "react";
 import { BoardBar } from "@/components/support/BoardBar";
 import { BOARD_INTRO, BoardIntro } from "@/components/support/BoardIntro";
 import type { Case } from "@/lib/supabase";
 
-const PAGE = 8;
+const PAGE = 6;
 
 export function CaseBoard({ items }: { items: Case[] }) {
   const [facility, setFacility] = useState("");
@@ -61,30 +60,27 @@ export function CaseBoard({ items }: { items: Case[] }) {
           <p className="board__empty">등록된 설치사례가 없습니다.</p>
         ) : (
           <>
-            <ul className="pg-list pg-list--plain" data-reveal-group>
+            <ul className="board__grid" style={{ "--cols": 3 } as React.CSSProperties}>
               {visible.map((c) => (
                 <li key={c.id}>
-                  {/* 설치사례는 상세 페이지가 없어 링크를 걸지 않는다 */}
-                  <div className="pg-list__row">
-                    {c.image_url ? (
-                      <img className="pg-list__thumb" src={c.image_url} alt={`${c.title} 충전기 설치 현장`} loading="lazy" />
-                    ) : (
-                      <span className="pg-list__thumb pg-list__thumb--empty">사진 준비중</span>
-                    )}
-                    <div className="pg-list__body">
-                      {c.facility_type || c.cpo ? (
-                        <span className="pg-list__tag">
-                          {[c.facility_type, c.cpo].filter(Boolean).join(" · ")}
-                        </span>
-                      ) : null}
-                      <h2>{c.title}</h2>
-                      {c.region ? <p>{c.region}</p> : null}
+                  <article className="bcard">
+                    <div className="bcard__thumb" style={{ "--ratio": "4 / 3" } as React.CSSProperties}>
+                      {c.image_url ? (
+                        <img src={c.image_url} alt={`${c.title} 충전기 설치 현장`} loading="lazy" />
+                      ) : (
+                        <span>사진 준비중</span>
+                      )}
                     </div>
-                    <span className="pg-list__meta">
-                      {c.charger_count ? <b className="num">{c.charger_count.toLocaleString()}기</b> : null}
-                      {c.installed_on ? <time>{c.installed_on.replaceAll("-", ".").slice(0, 7)}</time> : null}
-                    </span>
-                  </div>
+                    <div className="bcard__body">
+                      <h2 className="bcard__title">{c.title}</h2>
+                      <div className="bcard__foot">
+                        {c.charger_count ? <span className="bcard__qty">{c.charger_count.toLocaleString()}기</span> : <span />}
+                        <span className="bcard__meta" style={{ marginTop: 0 }}>
+                          {c.installed_on ?? c.region ?? ""}
+                        </span>
+                      </div>
+                    </div>
+                  </article>
                 </li>
               ))}
             </ul>
