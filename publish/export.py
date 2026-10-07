@@ -117,8 +117,10 @@ def extract_includes(soup, out_dir):
     import os
 
     header = soup.select_one("header.hd")
+    # 스크립트 태그까지 넣어야 include 만으로 화면이 다 돌아간다
     pieces = [soup.select_one("footer.ft"), soup.select_one("aside.dock"),
-              soup.select_one("div.toast"), *soup.select("dialog")]
+              soup.select_one("div.toast"), *soup.select("dialog"),
+              soup.select_one('body > script[src]')]
     os.makedirs(os.path.join(out_dir, "include"), exist_ok=True)
 
     def write(name, html, note):
