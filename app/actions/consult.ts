@@ -23,6 +23,18 @@ export async function submitConsultation(_prev: ConsultState, fd: FormData): Pro
   if (digits.length < 9 || digits.length > 11) return { ok: false, message: "연락처를 정확히 입력해주세요." };
   if (fd.get("agree") !== "on") return { ok: false, message: "개인정보 수집·이용에 동의해주세요." };
 
+  // 설치 상담 단계에서 받은 충전기 수량은 메모로 남긴다 (컬럼을 늘리지 않고 관리자에서 함께 본다)
+  const qty = (key: string) => {
+    const n = Number(String(fd.get(key) ?? "").replace(/\D/g, ""));
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  };
+  const counts = [
+    ["급속 기설", qty("fast_now")],
+    ["완속 기설", qty("slow_now")],
+    ["완속 추가", qty("slow_add")],
+  ].filter(([, n]) => n);
+  const memo = counts.length ? counts.map(([k, n]) => `${k} ${n}대`).join(" / ") : null;
+
   const { error } = await db()
     .from("consultations")
     .insert({
@@ -31,6 +43,7 @@ export async function submitConsultation(_prev: ConsultState, fd: FormData): Pro
       address: text(fd, "address") || null,
       cpo: (CPO_OPTIONS as readonly string[]).includes(cpo) ? cpo : null,
       building: (BUILDING_OPTIONS as readonly string[]).includes(building) ? building : null,
+      memo,
     });
 
   if (error) {

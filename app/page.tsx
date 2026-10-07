@@ -1,4 +1,5 @@
 import { AddressSearch } from "@/components/AddressSearch";
+import { AddressModal } from "@/components/consult/AddressModal";
 import { ConsultModal } from "@/components/ConsultModal";
 import { Brands } from "@/components/Brands";
 import { ContactBanner } from "@/components/ContactBanner";
@@ -40,6 +41,7 @@ export default async function Page() {
       <Footer />
       <FloatingDock />
       <ConsultModal />
+      <AddressModal />
       <ScrollReveal />
     </>
   );

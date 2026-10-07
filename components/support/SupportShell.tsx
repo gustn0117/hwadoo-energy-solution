@@ -5,6 +5,7 @@ import { FloatingDock } from "@/components/FloatingDock";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SupHero } from "@/components/support/SupHero";
 
 /** 고객지원 탭 — 시안(0929) 기준 4개 */
 const TABS = [
@@ -28,15 +29,7 @@ export function SupportShell({
     <>
       <Header />
       <main>
-        <section className="sup">
-          <div className="shell sup__inner">
-            <div>
-              <p className="sup__eyebrow">HWADOO ENERGY</p>
-              <h1 className="sup__title">고객지원</h1>
-            </div>
-            {desc ? <p className="sup__desc">{desc}</p> : null}
-          </div>
-        </section>
+        <SupHero title="고객지원" desc={desc} />
 
         <nav className="supTabs" aria-label="고객지원 메뉴">
           <div className="shell">

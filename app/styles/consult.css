@@ -1,0 +1,852 @@
+/* ============================================================
+   설치 상담 — 3단계 신청 (시안 1007)
+   ============================================================ */
+
+/* ---------- 상단 안내 띠 ---------- */
+.cguide__wrap {
+  margin-top: clamp(28px, 3vw, 48px);
+}
+
+.cguide {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 34px);
+  padding: clamp(18px, 1.8vw, 28px) clamp(20px, 2.4vw, 40px);
+  border-radius: 18px;
+  background: #eef4ff;
+}
+
+.cguide img {
+  flex: none;
+  width: clamp(92px, 8vw, 132px);
+}
+
+.cguide h2 {
+  font-size: clamp(17px, 1.5vw, 25px);
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--ink);
+}
+
+.cguide em {
+  color: var(--purple);
+}
+
+.cguide p {
+  margin-top: 8px;
+  color: #555;
+  font-size: clamp(13px, 1.05vw, 17px);
+  line-height: 1.6;
+}
+
+/* ---------- 단계 카드 ---------- */
+.cw {
+  padding: clamp(22px, 2.4vw, 36px) 0 clamp(30px, 3vw, 50px);
+}
+
+.cw__box {
+  padding: clamp(28px, 3.2vw, 56px) clamp(20px, 3vw, 60px) clamp(28px, 3vw, 50px);
+  border-radius: 24px;
+  border: 1px solid #ededf2;
+  background: #fff;
+  box-shadow: 0 10px 40px rgba(20, 24, 60, 0.05);
+}
+
+/* 1 주소 검색 — 2 정보입력 — 3 신청완료 */
+.cw__steps {
+  display: flex;
+  justify-content: center;
+  gap: clamp(60px, 7vw, 120px);
+  margin-bottom: clamp(28px, 3.4vw, 60px);
+}
+
+.cw__steps li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 동그라미 사이를 잇는 선 */
+.cw__steps li + li::before {
+  content: "";
+  position: absolute;
+  right: calc(100% + 8px);
+  top: 18px;
+  width: clamp(44px, 5.4vw, 104px);
+  height: 2px;
+  background: #e2e3ea;
+}
+
+.cw__dot {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #dcdde5;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.cw__steps b {
+  color: #9b9ca6;
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 500;
+}
+
+.cw__steps li[data-state="on"] .cw__dot,
+.cw__steps li[data-state="done"] .cw__dot {
+  background: var(--navy);
+}
+
+.cw__steps li[data-state="on"] b {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ---------- 1단계 ---------- */
+.cw__lead h2 {
+  font-size: clamp(19px, 1.7vw, 28px);
+  font-weight: 700;
+}
+
+.cw__lead em {
+  color: var(--navy);
+}
+
+.cw__lead p {
+  margin-top: 10px;
+  color: #666;
+  font-size: clamp(13px, 1.05vw, 17px);
+  line-height: 1.6;
+}
+
+.cw__search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: clamp(18px, 2vw, 30px) 0 clamp(20px, 2.4vw, 36px);
+  padding-left: clamp(14px, 1.4vw, 22px);
+  border: 2px solid var(--navy);
+  border-radius: 14px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.cw__search img {
+  flex: none;
+  width: clamp(22px, 1.9vw, 30px);
+}
+
+.cw__search input {
+  flex: 1;
+  min-width: 0;
+  height: clamp(54px, 4.6vw, 72px);
+  border: 0;
+  background: none;
+  font-size: clamp(14px, 1.15vw, 19px);
+}
+
+.cw__search input::placeholder {
+  color: #a7a9b4;
+}
+
+.cw__search button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(56px, 5vw, 76px);
+  align-self: stretch;
+  background: var(--navy);
+  color: #fff;
+}
+
+.cw__search button:hover {
+  background: #0a2a8f;
+}
+
+/* 검색 전 안내 */
+.cw__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: clamp(34px, 4vw, 66px) 20px;
+  border-radius: 18px;
+  background: #f4f5f8;
+  text-align: center;
+}
+
+.cw__empty img {
+  width: clamp(190px, 18vw, 290px);
+  margin-bottom: clamp(10px, 1.4vw, 22px);
+}
+
+.cw__empty b {
+  font-size: clamp(16px, 1.45vw, 24px);
+  font-weight: 700;
+}
+
+.cw__empty em {
+  color: var(--navy);
+}
+
+.cw__empty span {
+  color: #777;
+  font-size: clamp(13px, 1.05vw, 17px);
+}
+
+/* ---------- 검색 결과 카드 ---------- */
+.addr__eyebrow {
+  color: #8a8c98;
+  font-size: clamp(12px, 0.95vw, 15px);
+}
+
+.addr__name {
+  margin: 6px 0 clamp(14px, 1.6vw, 24px);
+  font-size: clamp(18px, 1.6vw, 27px);
+  font-weight: 700;
+}
+
+.addr__cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(14px, 1.6vw, 26px);
+}
+
+.addrCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.addrCard h4 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: clamp(12px, 1.2vw, 18px) clamp(14px, 1.5vw, 24px);
+  color: #fff;
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 700;
+}
+
+.addrCard h4 img {
+  flex: none;
+  width: clamp(20px, 1.7vw, 28px);
+}
+
+.addrCard--basic {
+  background: linear-gradient(135deg, #1b4fd8, #2f6bf0);
+}
+
+.addrCard--chargers {
+  background: linear-gradient(135deg, #7a35e8, #9a5bf3);
+}
+
+.addrCard dl,
+.addrCard__tableWrap {
+  flex: 1;
+  margin: 0 clamp(8px, 0.8vw, 12px) clamp(8px, 0.8vw, 12px);
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.addrCard dl {
+  padding: clamp(6px, 0.7vw, 12px) clamp(10px, 1.1vw, 18px);
+}
+
+.addrCard dl > div {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 20px);
+  padding: clamp(7px, 0.8vw, 12px) 0;
+}
+
+.addrCard dl > div + div {
+  border-top: 1px solid #f0f0f4;
+}
+
+.addrCard dt {
+  flex: none;
+  width: clamp(62px, 6vw, 86px);
+  padding: 5px 0;
+  border-radius: 7px;
+  background: #eef1f8;
+  color: #4a4f63;
+  font-size: clamp(12px, 0.95vw, 15px);
+  font-weight: 700;
+  text-align: center;
+}
+
+.addrCard dd {
+  color: #333;
+  font-size: clamp(12px, 1vw, 16px);
+}
+
+.addrCard table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(11px, 0.95vw, 15px);
+  text-align: center;
+}
+
+.addrCard th,
+.addrCard td {
+  padding: clamp(7px, 0.8vw, 12px) 6px;
+  border-bottom: 1px solid #eff0f4;
+}
+
+.addrCard thead th {
+  background: #f5f6fa;
+  color: #4a4f63;
+  font-weight: 700;
+}
+
+.addrCard tbody th {
+  font-weight: 700;
+}
+
+.addrCard tbody th[data-kind="완속"] {
+  color: var(--navy);
+}
+
+.addrCard tbody th[data-kind="급속"] {
+  color: #1f9d68;
+}
+
+.addrCard tbody tr:last-child th,
+.addrCard tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.addr__total {
+  border-left: 1px solid #eff0f4;
+  font-weight: 700;
+}
+
+/* ---------- 2단계 ---------- */
+.cw__form {
+  margin-top: clamp(20px, 2.2vw, 34px);
+  padding: clamp(18px, 2vw, 30px) clamp(16px, 2vw, 30px) clamp(16px, 1.8vw, 26px);
+  border-radius: 16px;
+  background: #f7f8fb;
+}
+
+.cw__form h3 {
+  margin-bottom: 12px;
+  font-size: clamp(15px, 1.2vw, 19px);
+  font-weight: 700;
+}
+
+.cw__form h3 + h3,
+.cw__qtyWrap + h3 {
+  margin-top: clamp(18px, 2vw, 28px);
+}
+
+.cw__qtyWrap {
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid #e6e7ee;
+  background: #fff;
+}
+
+.cw__qty {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: clamp(12px, 1vw, 16px);
+}
+
+.cw__qty th,
+.cw__qty td {
+  padding: 10px clamp(8px, 1vw, 16px);
+  border-bottom: 1px solid #eff0f4;
+}
+
+.cw__qty thead th {
+  background: #f5f6fa;
+  color: #4a4f63;
+  font-weight: 700;
+}
+
+.cw__qty tbody th {
+  width: 120px;
+  color: var(--navy);
+  font-weight: 700;
+}
+
+.cw__qty tbody tr:last-child th,
+.cw__qty tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cw__none {
+  color: #b0b2bc;
+}
+
+.cw__qtyCell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: #f1f4fb;
+}
+
+.cw__qtyCell input {
+  flex: 1;
+  min-width: 0;
+  height: 38px;
+  border: 0;
+  background: none;
+  font-size: clamp(12px, 1vw, 16px);
+  font-weight: 700;
+  text-align: right;
+}
+
+.cw__qtyCell input:read-only {
+  color: #555;
+}
+
+.cw__qtyCell i {
+  flex: none;
+  color: #666;
+  font-style: normal;
+  font-size: clamp(11px, 0.9vw, 14px);
+}
+
+/* 기본정보 — 라벨 칩 + 입력 */
+.cw__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px clamp(12px, 1.4vw, 22px);
+}
+
+.cw__field {
+  display: flex;
+  align-items: stretch;
+  border-radius: 10px;
+  border: 1px solid #e6e7ee;
+  background: #fff;
+  overflow: hidden;
+}
+
+.cw__field > span {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: clamp(84px, 8vw, 112px);
+  background: #eef1f8;
+  color: #4a4f63;
+  font-size: clamp(12px, 0.95vw, 15px);
+  font-weight: 700;
+}
+
+.cw__field input,
+.cw__field select {
+  flex: 1;
+  min-width: 0;
+  height: clamp(42px, 3.4vw, 50px);
+  padding: 0 14px;
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  font-size: clamp(12px, 1vw, 16px);
+}
+
+.cw__field select {
+  appearance: none;
+  padding-right: 36px;
+  background: #fff
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%23666' stroke-width='1.6' stroke-linecap='round'><path d='m6 8 4 4 4-4'/></svg>")
+    no-repeat right 12px center;
+  cursor: pointer;
+}
+
+.cw__field input::placeholder {
+  color: #a7a9b4;
+}
+
+.cw__field input:focus,
+.cw__field input:focus-visible,
+.cw__field select:focus,
+.cw__field select:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--purple);
+}
+
+.cw__agree {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: clamp(14px, 1.6vw, 22px);
+  font-size: clamp(12px, 1vw, 16px);
+}
+
+.cw__agree input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--navy);
+}
+
+.cw__agree b {
+  font-weight: 700;
+}
+
+.cw__terms {
+  color: var(--navy);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.cw__error {
+  margin-top: 12px;
+  color: #d33;
+  font-size: clamp(12px, 1vw, 15px);
+}
+
+/* ---------- 버튼 ---------- */
+.cw__actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: clamp(22px, 2.6vw, 40px);
+}
+
+.cw__next,
+.cw__prev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: clamp(120px, 11vw, 150px);
+  height: clamp(44px, 3.6vw, 52px);
+  border-radius: 10px;
+  font-size: clamp(13px, 1.05vw, 17px);
+  font-weight: 700;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.cw__next {
+  background: var(--orange);
+  color: #fff;
+}
+
+.cw__next:hover:not(:disabled) {
+  background: #e67e00;
+}
+
+.cw__next:disabled {
+  background: #dcdde5;
+  color: #fff;
+  cursor: not-allowed;
+}
+
+.cw__prev {
+  background: #c9cad3;
+  color: #fff;
+}
+
+.cw__prev:hover {
+  background: #b4b5c0;
+}
+
+/* ---------- 3단계 ---------- */
+.cw__done {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: clamp(24px, 3vw, 50px) 0 clamp(30px, 3.4vw, 56px);
+  text-align: center;
+}
+
+.cw__done img {
+  width: clamp(220px, 20vw, 320px);
+  margin-bottom: clamp(10px, 1.4vw, 20px);
+}
+
+.cw__done h2 {
+  font-size: clamp(22px, 2.2vw, 38px);
+  font-weight: 700;
+}
+
+.cw__done em {
+  color: var(--purple);
+}
+
+.cw__done p {
+  color: #777;
+  font-size: clamp(13px, 1.1vw, 18px);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   설치 절차 8단계 띠
+   ============================================================ */
+.iproc {
+  padding-bottom: clamp(40px, 4.4vw, 76px);
+}
+
+.iproc__box {
+  position: relative;
+  padding: clamp(20px, 2.4vw, 36px) clamp(18px, 2.2vw, 36px) clamp(22px, 2.6vw, 38px);
+  border-radius: 20px;
+  background: #ccd0e4;
+}
+
+.iproc__head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(16px, 1.8vw, 26px);
+}
+
+.iproc__eyebrow {
+  color: #6d7290;
+  font-size: clamp(11px, 0.9vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.iproc__head h2 {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 1.8vw, 30px);
+  font-weight: 400;
+  color: var(--ink);
+}
+
+.iproc__desc {
+  color: #4e5370;
+  font-size: clamp(12px, 1vw, 16px);
+}
+
+.iproc__list {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: clamp(4px, 0.6vw, 10px);
+  padding: clamp(14px, 1.6vw, 24px) clamp(8px, 1vw, 16px);
+  border-radius: 14px;
+  background: #dfe2ef;
+}
+
+.iproc__list li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.iproc__icon {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(54px, 5vw, 76px);
+  height: clamp(54px, 5vw, 76px);
+  border-radius: 50%;
+  background: #fff;
+}
+
+.iproc__icon img {
+  width: 60%;
+}
+
+.iproc__icon em {
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  display: grid;
+  place-items: center;
+  width: clamp(20px, 1.7vw, 24px);
+  height: clamp(20px, 1.7vw, 24px);
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: clamp(10px, 0.8vw, 13px);
+  font-weight: 700;
+  font-style: normal;
+}
+
+.iproc__list b {
+  color: #333;
+  font-size: clamp(10px, 0.85vw, 14px);
+  font-weight: 700;
+  word-break: keep-all;
+}
+
+.iproc__arrow {
+  position: absolute;
+  left: calc(100% - 6px);
+  top: clamp(17px, 1.6vw, 26px);
+  color: #9aa0bd;
+}
+
+/* ============================================================
+   반응형
+   ============================================================ */
+@media (max-width: 1100px) {
+  .iproc__list {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    row-gap: clamp(16px, 2vw, 24px);
+  }
+
+  /* 4개씩 두 줄이 되므로 줄 끝 화살표는 숨긴다 */
+  .iproc__list li:nth-child(4n) .iproc__arrow {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .addr__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .cw__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .iproc__head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cguide {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cw__steps {
+    gap: clamp(36px, 14vw, 70px);
+  }
+
+  .cw__steps li + li::before {
+    width: clamp(26px, 10vw, 54px);
+  }
+
+  .iproc__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* 두 칸씩 접히면 화살표가 엉뚱한 곳을 가리키므로 감춘다 */
+  .iproc__arrow {
+    display: none;
+  }
+
+  .cw__next,
+  .cw__prev {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+/* ============================================================
+   설치 주소 확인 팝업 — 메인 주소 검색에서 연다 (시안 1007)
+   ============================================================ */
+.amodal {
+  width: min(1000px, calc(100vw - 32px));
+  height: fit-content;
+  max-height: min(calc(100dvh - 40px), 900px);
+  padding: 0;
+  border: 0;
+  border-radius: 20px;
+  background: #fff;
+  color: var(--ink);
+  overflow: hidden;
+}
+
+.amodal::backdrop {
+  background: rgba(10, 14, 40, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.amodal[open] {
+  animation: cmodal-in 0.35s var(--ease);
+}
+
+.amodal__box {
+  display: flex;
+  flex-direction: column;
+  max-height: min(calc(100dvh - 40px), 900px);
+}
+
+.amodal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(18px, 1.8vw, 26px) clamp(20px, 2.2vw, 34px);
+  border-bottom: 1px solid #ededf2;
+}
+
+.amodal__head h2 {
+  font-size: clamp(17px, 1.4vw, 23px);
+  font-weight: 700;
+}
+
+.amodal__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  color: #333;
+}
+
+.amodal__close:hover {
+  background: #f3f3f6;
+}
+
+.amodal__close:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 0;
+}
+
+.amodal__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(20px, 2.2vw, 34px);
+}
+
+.amodal__foot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin-top: clamp(16px, 1.8vw, 26px);
+  padding: clamp(18px, 2vw, 28px) 20px;
+  border-radius: 14px;
+  background: #f7f8fb;
+  text-align: center;
+}
+
+.amodal__foot b {
+  font-size: clamp(14px, 1.2vw, 19px);
+  font-weight: 700;
+}
+
+.amodal__foot span {
+  color: #777;
+  font-size: clamp(11px, 0.95vw, 15px);
+  line-height: 1.6;
+}
+
+.amodal__foot .cw__next {
+  margin-top: clamp(10px, 1.2vw, 18px);
+}

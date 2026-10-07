@@ -89,13 +89,45 @@ export const MENU = [
   },
   {
     label: "설치 상담",
-    href: "/#consult",
-    items: [{ label: "상담신청", href: "/#consult" }],
+    href: "/consult",
+    items: [{ label: "상담신청", href: "/consult" }],
   },
 ];
 
 /** 상단 가로 메뉴 */
 export const NAV = MENU;
+
+/** 설치 상담 하단 절차 띠 (시안 1007) */
+export const INSTALL_STEPS = [
+  { icon: "/images/process/01.png", label: "상담신청" },
+  { icon: "/images/process/02.png", label: "담당자상담" },
+  { icon: "/images/process/03.png", label: "현장실사" },
+  { icon: "/images/process/04.png", label: "설치보고서" },
+  { icon: "/images/process/05.png", label: "계약서 작성" },
+  { icon: "/images/process/06.png", label: "환경부승인/승인" },
+  { icon: "/images/process/07.png", label: "설치시공" },
+  { icon: "/images/process/08.png", label: "개통 / 사용" },
+] as const;
+
+/**
+ * 주소 검색 결과 예시 (시안 1007).
+ * 단지 정보 API 가 붙기 전까지 이 값을 보여준다 — 연동 시 이 모양 그대로 받아오면 된다.
+ */
+export const ADDRESS_SAMPLE = {
+  name: "동대구 우방아이유쉘 아파트",
+  basic: [
+    { key: "지번", val: "경기도 고양시 000구 000동 124" },
+    { key: "도로명", val: "경기도 고양시 000구 000로 12" },
+    { key: "유형도", val: "공동주택" },
+    { key: "총주차면", val: "1,086대 (자주식: 000대 / 기계식: 000대)" },
+  ],
+  chargers: [
+    { kind: "완속", cpo: "에버온", power: "7kW", count: "11" },
+    { kind: "완속", cpo: "클린그린크", power: "7kW", count: "11" },
+    { kind: "급속", cpo: "-", power: "-", count: "-" },
+  ],
+  total: "22",
+} as const;
 
 export const CPO_OPTIONS = ["플러그링크", "에버온", "현대엔지니어링", "SK일렉링크"] as const;
 

@@ -136,6 +136,14 @@ img {
   outline-offset: 2px;
 }
 
+/* 팝업을 열면 닫기 버튼에 포커스가 가므로, 여기서는 차분한 색으로 (시안 1001·1007) */
+.cmodal__close:focus-visible,
+.lmodal__close:focus-visible,
+.rmodal__close:focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 0;
+}
+
 .shell {
   width: 100%;
   max-width: calc(var(--container) + var(--gut) * 2);

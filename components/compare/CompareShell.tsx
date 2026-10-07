@@ -4,6 +4,7 @@ import { FloatingDock } from "@/components/FloatingDock";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SupHero } from "@/components/support/SupHero";
 
 const TABS = [
   { label: "충전사업자 순위", href: "/compare/ranking" },
@@ -22,15 +23,7 @@ export function CompareShell({
     <>
       <Header />
       <main>
-        <section className="sup">
-          <div className="shell sup__inner">
-            <div>
-              <p className="sup__eyebrow">HWADOO ENERGY</p>
-              <h1 className="sup__title">충전사업자 비교</h1>
-            </div>
-            <p className="sup__desc">다양한 충전사업자를 한눈에 비교하고 간편하게 선택하세요.</p>
-          </div>
-        </section>
+        <SupHero title="충전사업자 비교" desc="다양한 충전사업자를 한눈에 비교하고 간편하게 선택하세요." />
 
         <nav className="supTabs" aria-label="충전사업자 비교 메뉴">
           <div className="shell">

@@ -1,6 +1,5 @@
 "use client";
 
-import { openConsult } from "@/lib/consult-events";
 import { FINDER_BG, SEARCH_STEPS } from "@/lib/content";
 
 export function AddressSearch() {
@@ -31,12 +30,8 @@ export function AddressSearch() {
           className="finder__bar"
           role="search"
           data-reveal
-          onSubmit={(e) => {
-            e.preventDefault();
-            // 단지 조회 API 연동 전까지는 입력한 주소로 상담 팝업을 연다
-            const q = String(new FormData(e.currentTarget).get("q") ?? "").trim();
-            openConsult({ address: q });
-          }}
+          // 제출은 '설치 주소 확인' 팝업(components/consult/AddressModal)이 받는다
+          onSubmit={(e) => e.preventDefault()}
         >
           <img src="/images/logo-emblem.png" alt="" width={150} height={180} />
           <label className="sr-only" htmlFor="finder-q">
