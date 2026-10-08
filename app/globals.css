@@ -585,7 +585,7 @@ img {
   column-gap: 0;
 }
 
-/* 배너 이미지는 관리자(/admin/hero)에서 등록한다 */
+/* 메인 첫 화면 배너 이미지 */
 .hero__banner {
   grid-area: banner;
   align-self: center;

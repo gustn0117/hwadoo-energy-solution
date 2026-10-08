@@ -1,11 +1,15 @@
 /*!
  * 화두에너지솔루션 — 퍼블리싱 스크립트
- * 의존성 없는 순수 JS. 아래 기능이 모두 이 한 파일에 들어 있습니다.
- *   1) 스크롤 등장 효과   2) 헤더 전체메뉴/햄버거   3) FAQ 아코디언
- *   4) 브랜드 무한 슬라이드  5) 숫자 카운트업        6) 상담 팝업
- *   7) 주소 검색 → 팝업     8) TOP 버튼            9) 게시판 검색/필터/더보기
- *   10) 충전사업자 순위 전환 · 전체보기 팝업  11) 약관 팝업
- *   12) 순위 팝업 표 열기/접기(모바일)  13) 설치 상담 3단계 이동
+ *
+ * 화면을 눈으로 확인하는 데 필요한 동작만 들어 있습니다 (의존성 없는 순수 JS).
+ * 데이터 처리·폼 전송·검색 같은 기능은 들어 있지 않습니다 — 서버단에서 붙여 주세요.
+ *
+ *   1) 스크롤 등장 효과      2) 헤더 전체메뉴 / 모바일 햄버거
+ *   3) FAQ 아코디언          4) 브랜드 무한 슬라이드
+ *   5) 숫자 카운트업         6) 팝업 열고 닫기 (상담 · 주소 확인 · 약관)
+ *   7) TOP 버튼             8) 충전사업자 순위 운영대수/충전요금 전환
+ *   9) 순위 전체보기 팝업     10) 순위 표 열기/접기 (모바일)
+ *   11) 설치 상담 단계 사이 화면 이동
  */
 (function () {
   "use strict";
@@ -262,10 +266,9 @@
   }
 
   /* ------------------------------------------------------------------
-     6) 상담 팝업
-        href="/#consult" 인 링크를 누르면 열립니다.
-        폼 action 이 비어 있으면 완료 메시지만 보여 줍니다 —
-        PHP 연동 시 .cmodal__form 에 action 과 method 를 넣어 주세요.
+     6) 상담 팝업 — href="/#consult" 인 링크를 누르면 열립니다.
+        화면 확인용으로 열고 닫기만 합니다. 폼 전송은 붙어 있지 않으니
+        .cmodal__form 에 action 과 method 를 넣어 서버로 보내 주세요.
      ------------------------------------------------------------------ */
   function initConsult() {
     var modal = document.querySelector(".cmodal");
@@ -293,7 +296,8 @@
       var a = e.target.closest && e.target.closest("a");
       if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey) return;
       var href = a.getAttribute("href") || "";
-      if (href === "/#consult" || href === "#consult" || /\/index\.(html|php)#consult$/.test(href)) {
+      // "#consult", "/#consult", "index.html#consult", "../../index.php#consult" 모두 받는다
+      if (/(^|\/)(index\.(html|php))?#consult$/.test(href)) {
         e.preventDefault();
         open(null);
       }
@@ -308,26 +312,6 @@
       done.hidden = true;
     }
 
-    // 메인 상담 폼 → 입력값을 팝업으로 넘김
-    var main = document.querySelector("form.consult");
-    if (main) {
-      main.addEventListener("submit", function (e) {
-        e.preventDefault();
-        var fd = new FormData(main);
-        open({ cpo: fd.get("cpo"), building: fd.get("building"), name: fd.get("name"), address: fd.get("address") });
-      });
-    }
-
-    // 팝업 폼 전송 — action 이 비어 있을 때만 화면에서 처리
-    if (form) {
-      form.addEventListener("submit", function (e) {
-        if (form.getAttribute("action")) return; // PHP 로 그대로 전송
-        e.preventDefault();
-        if (form.elements.website && form.elements.website.value) return; // 봇 차단
-        form.hidden = true;
-        if (done) done.hidden = false;
-      });
-    }
   }
 
   /* ------------------------------------------------------------------
@@ -363,50 +347,6 @@
     btn.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
     });
-  }
-
-  /* ------------------------------------------------------------------
-     9) 게시판 — 검색/필터/더보기
-        카드형(프로모션·설치사례), FAQ 아코디언, 공지 목록을 모두 같은 방식으로 다룹니다.
-        정적 화면 확인용의 단순 동작입니다.
-        실제 서비스에서는 PHP 에서 조건 검색과 페이징을 처리하시고,
-        이 블록은 그대로 두거나 지우셔도 됩니다.
-     ------------------------------------------------------------------ */
-  function initBoard() {
-    var grid = document.querySelector(".board__grid, .board .faq__list, .board .pg-list");
-    if (!grid) return;
-    var items = Array.prototype.slice.call(grid.children);
-    var count = document.querySelector(".board__count b");
-    var moreWrap = document.querySelector(".board__more");
-    var moreBtn = moreWrap ? moreWrap.querySelector("button") : null;
-    var step = items.length;
-    var shown = items.length;
-    var touched = false; // 검색·필터를 쓰기 전에는 더보기 버튼을 그대로 둔다 (PHP 페이징 자리)
-
-    function apply() {
-      var search = document.getElementById("board-q");
-      var q = (search ? search.value : "").trim().toLowerCase();
-      var selects = Array.prototype.slice.call(document.querySelectorAll(".board__filters select"));
-      var matched = 0;
-      items.forEach(function (li) {
-        var text = li.textContent.toLowerCase();
-        var ok =
-          (!q || text.indexOf(q) > -1) &&
-          selects.every(function (s) { return !s.value || text.indexOf(s.value.toLowerCase()) > -1; });
-        if (ok) matched++;
-        li.hidden = !ok || matched > shown;
-      });
-      if (count) count.textContent = String(matched);
-      if (moreWrap) moreWrap.style.display = !touched || matched > shown ? "" : "none";
-    }
-
-    var search = document.getElementById("board-q");
-    if (search) search.addEventListener("input", function () { touched = true; shown = step; apply(); });
-    document.querySelectorAll(".board__filters select").forEach(function (s) {
-      s.addEventListener("change", function () { touched = true; shown = step; apply(); });
-    });
-    if (moreBtn) moreBtn.addEventListener("click", function () { touched = true; shown += step; apply(); });
-    apply();
   }
 
   /* ------------------------------------------------------------------
@@ -526,11 +466,8 @@
     var wizard = document.querySelector(".cw");
     if (!wizard) return;
 
-    // 1단계 — 주소를 넣고 검색하면 결과가 보이고 다음 버튼이 켜진다
+    // 1단계 — 검색 버튼을 누르면 '검색 후' 화면으로 넘어갑니다 (실제 검색은 아닙니다)
     var search = wizard.querySelector(".cw__search");
-    var empty = wizard.querySelector(".cw__empty");
-    var result = wizard.querySelector(".addr");
-    var next = wizard.querySelector(".cw__next");
 
     if (search) {
       search.addEventListener("submit", function (e) {
@@ -559,23 +496,9 @@
       });
     });
 
-    // 현재(기설) + 추가 = 합계
+    // 2단계 폼은 화면만 보여 줍니다 — 엔터로 제출되지 않게 막아 둡니다
     var form = wizard.querySelector("form.cw__panel");
-    if (form) {
-      var num = function (name) {
-        var el = form.querySelector('[name="' + name + '"]');
-        var n = Number((el && el.value || "").replace(/\D/g, ""));
-        return isFinite(n) ? n : 0;
-      };
-      var put = function (name, v) {
-        var el = form.querySelector('[name="' + name + '"]');
-        if (el) el.value = String(v);
-      };
-      form.addEventListener("input", function () {
-        put("fast_total", num("fast_now"));
-        put("slow_total", num("slow_now") + num("slow_add"));
-      });
-    }
+    if (form) form.addEventListener("submit", function (e) { e.preventDefault(); });
   }
 
   function init() {
@@ -587,7 +510,6 @@
     initConsult();
     initFinder();
     initTop();
-    initBoard();
     initRanking();
     initRankTables();
     initLegal();
