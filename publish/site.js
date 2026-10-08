@@ -12,12 +12,21 @@
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* 이 파일이 어디서 불려왔는지로 기준 경로를 잡는다.
+     (루트 기준이면 "/", 상대 경로면 "../../" 처럼 나와 어느 방식이든 그대로 동작합니다) */
+  var PREFIX = (function () {
+    var tags = document.querySelectorAll('script[src$="assets/js/site.js"]');
+    var src = tags.length ? tags[tags.length - 1].getAttribute("src") : "/assets/js/site.js";
+    return src.replace(/assets\/js\/site\.js$/, "");
+  })();
+
   // 설치 상담은 단계마다 파일이 따로 있습니다 (PHP 에서 한 화면으로 합치셔도 됩니다)
+  var EXT = /\.php(\?|#|$)/.test(location.pathname) ? ".php" : ".html";
   var CONSULT = {
-    step1: "/sub/consult/index.html",
-    found: "/sub/consult/step1-found.html",
-    step2: "/sub/consult/step2.html",
-    step3: "/sub/consult/step3.html"
+    step1: PREFIX + "sub/consult/index" + EXT,
+    found: PREFIX + "sub/consult/step1-found" + EXT,
+    step2: PREFIX + "sub/consult/step2" + EXT,
+    step3: PREFIX + "sub/consult/step3" + EXT
   };
 
   /* ------------------------------------------------------------------
