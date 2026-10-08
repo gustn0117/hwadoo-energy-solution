@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { PageCta, PageSection } from "@/components/page/Blocks";
 import { SupportShell } from "@/components/support/SupportShell";
 import { getPromotion, promotionState } from "@/lib/data";
+import { PreviewNotice } from "@/components/PreviewNotice";
+import { SAMPLE_PROMOTIONS } from "@/lib/sample";
 
 export const dynamic = "force-dynamic";
 
@@ -18,14 +20,24 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function PromotionDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PromotionDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ preview?: string }>;
+}) {
   const { id } = await params;
-  const promotion = await getPromotion(Number(id));
+  const preview = (await searchParams).preview === "1";
+  const promotion = preview
+    ? (SAMPLE_PROMOTIONS.find((p) => p.id === Number(id)) ?? SAMPLE_PROMOTIONS[0])
+    : await getPromotion(Number(id));
   if (!promotion) notFound();
   const state = promotionState(promotion);
 
   return (
     <SupportShell current="/promotion">
+      {preview ? <PreviewNotice /> : null}
       <PageSection>
         <article>
           <header className="pg-article__head">

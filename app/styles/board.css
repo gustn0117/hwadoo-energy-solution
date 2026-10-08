@@ -425,3 +425,23 @@
     height: 42px;
   }
 }
+
+/* ============================================================
+   미리보기 안내 — 주소 끝에 ?preview=1 을 붙였을 때만 보인다
+   ============================================================ */
+.previewBar {
+  width: 100%;
+  max-width: calc(var(--container) + var(--gut) * 2);
+  margin: clamp(16px, 1.8vw, 26px) auto 0;
+  padding: 12px clamp(16px, 2vw, 24px);
+  border-radius: 10px;
+  border: 1px dashed #f0b35a;
+  background: #fff8ec;
+  color: #8a5a10;
+  font-size: clamp(12px, 1vw, 15px);
+  text-align: center;
+}
+
+.previewBar b {
+  font-weight: 700;
+}

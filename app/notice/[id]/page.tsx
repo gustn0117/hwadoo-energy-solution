@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { PageSection } from "@/components/page/Blocks";
 import { SupportShell } from "@/components/support/SupportShell";
 import { getNotice } from "@/lib/data";
+import { PreviewNotice } from "@/components/PreviewNotice";
+import { SAMPLE_NOTICES } from "@/lib/sample";
 
 export const dynamic = "force-dynamic";
 
@@ -16,13 +18,23 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   };
 }
 
-export default async function NoticeDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function NoticeDetailPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ preview?: string }>;
+}) {
   const { id } = await params;
-  const notice = await getNotice(Number(id));
+  const preview = (await searchParams).preview === "1";
+  const notice = preview
+    ? (SAMPLE_NOTICES.find((n) => n.id === Number(id)) ?? SAMPLE_NOTICES[0])
+    : await getNotice(Number(id));
   if (!notice) notFound();
 
   return (
     <SupportShell current="/notice">
+      {preview ? <PreviewNotice /> : null}
       <PageSection>
         <article>
           <header className="pg-article__head">
