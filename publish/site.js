@@ -9,7 +9,7 @@
  *   5) 숫자 카운트업         6) 팝업 열고 닫기 (상담 · 주소 확인 · 약관)
  *   7) TOP 버튼             8) 충전사업자 순위 운영대수/충전요금 전환
  *   9) 순위 전체보기 팝업     10) 순위 표 열기/접기 (모바일)
- *   11) 설치 상담 단계 사이 화면 이동
+ *   11) 설치 상담 단계 사이 화면 이동   12) 한 눈에 비교 분류 탭 · 좌우 이동
  */
 (function () {
   "use strict";
@@ -501,6 +501,65 @@
     if (form) form.addEventListener("submit", function (e) { e.preventDefault(); });
   }
 
+  /* ------------------------------------------------------------------
+     14) 한 눈에 비교 — 분류 탭과 좌우 이동
+        PC 는 표를 한 열씩 밀고, 모바일은 카드를 한 장씩 넘깁니다.
+     ------------------------------------------------------------------ */
+  function initCompare() {
+    var board = document.querySelector(".cmp");
+    if (!board) return;
+    var tabs = Array.prototype.slice.call(board.querySelectorAll(".cmp__tabs button"));
+    var cards = board.querySelector(".cmp__cards");
+    var scroll = board.querySelector(".cmp__scroll");
+    var dots = Array.prototype.slice.call(board.querySelectorAll(".cmp__dots span"));
+    var page = 0;
+
+    // 분류 탭 — 고른 분류의 줄만 보여준다
+    tabs.forEach(function (btn, i) {
+      btn.addEventListener("click", function () {
+        tabs.forEach(function (t, k) { t.setAttribute("aria-selected", k === i ? "true" : "false"); });
+        board.querySelectorAll(".cmp__cardRow").forEach(function (row) {
+          row.hidden = row.getAttribute("data-group") !== String(i);
+        });
+      });
+    });
+
+    function mark() {
+      dots.forEach(function (d, i) {
+        if (i === page) d.setAttribute("data-on", "");
+        else d.removeAttribute("data-on");
+      });
+    }
+
+    // 손가락으로 넘겼을 때 점 맞추기
+    if (cards) {
+      cards.addEventListener("scroll", function () {
+        var card = cards.children[0];
+        if (!card) return;
+        page = Math.round(cards.scrollLeft / (card.offsetWidth + 14));
+        mark();
+      }, { passive: true });
+    }
+
+    board.querySelectorAll(".cmp__nav button").forEach(function (btn, i) {
+      var dir = i === 0 ? -1 : 1;
+      btn.addEventListener("click", function () {
+        if (scroll) {
+          var col = scroll.querySelector("tbody td");
+          var table = scroll.querySelector("table");
+          var gap = table ? parseFloat(getComputedStyle(table).borderSpacing) || 0 : 0;
+          scroll.scrollBy({ left: ((col ? col.offsetWidth : 210) + gap) * dir, behavior: "smooth" });
+        }
+        if (cards) {
+          page = Math.min(cards.children.length - 1, Math.max(0, page + dir));
+          var target = cards.children[page];
+          if (target) cards.scrollTo({ left: target.offsetLeft - cards.offsetLeft, behavior: "smooth" });
+          mark();
+        }
+      });
+    });
+  }
+
   function init() {
     initReveal();
     initHeader();
@@ -514,6 +573,7 @@
     initRankTables();
     initLegal();
     initConsultWizard();
+    initCompare();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

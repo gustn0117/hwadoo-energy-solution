@@ -62,7 +62,6 @@ export function CompareBoard() {
   const cards = useRef<HTMLDivElement>(null);
 
   const total = COMPARE_BRANDS.length;
-  const rows = COMPARE_GROUPS[group].rows;
 
   /** PC — 한 열씩 좌우로 */
   const slide = (dir: -1 | 1) => {
@@ -166,16 +165,19 @@ export function CompareBoard() {
           </table>
         </div>
 
-        {/* 모바일 — 사업자 카드가 좌우로 넘어간다 */}
+        {/* 모바일 — 사업자 카드가 좌우로 넘어간다.
+            분류를 모두 그려 두고 고른 것만 보여준다 (정적 파일에서도 탭이 돌아가도록) */}
         <div className="cmp__cards" ref={cards}>
           {COMPARE_BRANDS.map((b, i) => (
             <article className="cmp__card" key={b.name}>
-              {rows.map((r) => (
-                <div className="cmp__cardRow" key={r.key}>
-                  {"brand" in r.cells[i] ? null : <p className="cmp__cardLabel">{r.key}</p>}
-                  <Cell cell={r.cells[i]} brand={b} />
-                </div>
-              ))}
+              {COMPARE_GROUPS.map((g, gi) =>
+                g.rows.map((r) => (
+                  <div className="cmp__cardRow" data-group={gi} hidden={gi !== group} key={`${g.label}-${r.key}`}>
+                    {"brand" in r.cells[i] ? null : <p className="cmp__cardLabel">{r.key}</p>}
+                    <Cell cell={r.cells[i]} brand={b} />
+                  </div>
+                )),
+              )}
             </article>
           ))}
         </div>
