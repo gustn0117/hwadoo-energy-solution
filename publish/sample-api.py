@@ -1,16 +1,13 @@
-"""퍼블리싱 추출 전용 로컬 목 API.
-운영 DB 는 그대로 두고, 게시판 세 테이블만 샘플 행을 돌려준다. 나머지는 실제 API 로 넘긴다."""
-import json, os, re, urllib.request, urllib.error
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+"""퍼블리싱 추출 전용 로컬 샘플 API.
 
-ENV = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), ".env.local")
-cfg = {}
-for line in open(ENV, encoding="utf-8"):
-    line = line.strip()
-    if line and not line.startswith("#") and "=" in line:
-        k, v = line.split("=", 1)
-        cfg[k.strip()] = v.strip().strip('"').strip("'")
-REAL = cfg["SUPABASE_URL"].rstrip("/")
+운영 DB 는 건드리지 않는다. 게시판·순위·FAQ 샘플을 돌려주고,
+나머지 테이블은 빈 목록으로 답해 바깥을 전혀 부르지 않는다.
+
+    python3 publish/sample-api.py          # 127.0.0.1:5599
+    SUPABASE_URL=http://127.0.0.1:5599 npx next start -p 3457
+"""
+import json, re
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 B = "샘플 본문입니다. 실제 글로 교체해 주세요."
 
@@ -61,10 +58,38 @@ CPO_RANKINGS = [
     for i in range(50)
 ]
 
-TABLES = {"promotions": PROMOTIONS, "cases": CASES, "notices": NOTICES, "cpo_rankings": CPO_RANKINGS}
+# FAQ 도 여기서 준다 — 바깥 호출을 하지 않아 추출이 빨라진다
+FAQS = [
+    dict(id=1, question="친환경자동차법에 따른 충전시설 의무설치란 무엇일까요?",
+         answer="- ‘환경친화적 자동차의 개발 및 보급 촉진에 관한 법률 시행령’이 2022년 1월 28일부터 시행되었습니다.\n"
+                "- 신축/공공 기축시설은 총 주차면수의 5% 이상, 기축시설은 2% 이상을 설치해야 합니다.\n"
+                "- 의무설치 기한은 2025년 1월 27일(유예기간 2026년 1월 27일)이며, 미이행 시 시정명령 및 3,000만원 이하의 이행강제금이 부과될 수 있습니다.",
+         is_published=True, sort_order=1),
+    dict(id=2, question="충전구역 설치 위치 지정시 핵심 고려 사항은 무엇이 있을까요?",
+         answer="국토교통부·LH가 발간한 공동주택 전기자동차 화재대응 매뉴얼에 따르면 아래와 같습니다.\n"
+                "- 어린이 놀이터, 유치원, 노유자시설 등과 20m 이상 이격 설치\n"
+                "- 쓰레기 처리장 등 가연물 보관장소와 20m 이상 이격 설치\n"
+                "- 지하주차장의 경우 지하 3층 이하의 층은 충전구역 설치 제한\n"
+                "- 소방대가 쉽게 접근 가능한 위치 선정 필요",
+         is_published=True, sort_order=2),
+    dict(id=3, question="전기차 주차구역 설치는 입대의 의결로 진행 가능한 사항일까요?",
+         answer="- 공동주택관리법 제14조 제11항에 따라 단지 안의 주차장 등의 유지·운영 기준은 입주자대표회의 의결사항입니다.\n"
+                "- 고정형 충전기 및 충전 전용 주차구획을 설치·교체하는 행위로서 입대의의 동의를 받은 경우를 규정하고 있습니다.",
+         is_published=True, sort_order=3),
+    dict(id=4, question="행위신고와 행위 허가의 차이점이 무엇일까요?",
+         answer="- 행위신고 — 고정형 충전기 설치/교체/이동 등을 입주자 대표회의 의결로 신고하는 절차. 입대의 회의록이 필요합니다.\n"
+                "- 행위허가 — 부대시설 및 입주자 공유인 복리시설의 파손 철거 시 진행하는 절차. 지하주차장은 전체 입주자의 1/2 이상, 지상주차장은 2/3 이상의 동의서가 필요합니다.",
+         is_published=True, sort_order=4),
+]
+
+TABLES = {"promotions": PROMOTIONS, "cases": CASES, "notices": NOTICES,
+          "cpo_rankings": CPO_RANKINGS, "faqs": FAQS}
 
 
 class H(BaseHTTPRequestHandler):
+    # 기본값(HTTP/1.0)이면 연결이 닫힐 때까지 호출한 쪽이 기다려 한 요청에 7초씩 걸린다
+    protocol_version = "HTTP/1.1"
+
     def log_message(self, *a):
         pass
 
@@ -86,25 +111,12 @@ class H(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(body)
             return
-        # 나머지는 실제 API 로 (읽기만)
-        req = urllib.request.Request(REAL + self.path, method="GET")
-        for k, v in self.headers.items():
-            if k.lower() not in ("host", "connection", "content-length", "accept-encoding"):
-                req.add_header(k, v)
-        try:
-            with urllib.request.urlopen(req) as r:
-                data = r.read()
-                self.send_response(r.status)
-                self.send_header("Content-Type", r.headers.get("Content-Type", "application/json"))
-                self.send_header("Content-Length", str(len(data)))
-                self.end_headers()
-                self.wfile.write(data)
-        except urllib.error.HTTPError as e:
-            data = e.read()
-            self.send_response(e.code)
-            self.send_header("Content-Length", str(len(data)))
-            self.end_headers()
-            self.wfile.write(data)
+        # 모르는 테이블은 빈 목록으로 — 바깥을 부르지 않아 추출이 빠르고 결과가 늘 같다
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", "2")
+        self.end_headers()
+        self.wfile.write(b"[]")
 
 
 ThreadingHTTPServer(("127.0.0.1", 5599), H).serve_forever()

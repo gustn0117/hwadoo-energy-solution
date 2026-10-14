@@ -2,7 +2,8 @@
 
 import "@/app/styles/ranking.css";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Close, Plus } from "@/components/Icons";
+import { Close, Plus } from "@/components/Icons";
+import { RankingCta } from "@/components/compare/RankingCta";
 import type { CpoRanking } from "@/lib/supabase";
 
 type Metric = "count" | "price";
@@ -157,19 +158,9 @@ export function RankingBoard({
           <button onClick={() => dialog.current?.showModal()}>전체보기</button>
         </div>
 
-        <div className="rank__cta" data-reveal>
-          <img src="/images/bottom-banner-icon.png" alt="" width={500} height={400} loading="lazy" />
-          <h3>
-            아파트 전기차 충전기,
-            <br />
-            어디서 부터 시작해야 할지 고민되시나요?
-          </h3>
-          <a className="btn btn--orange" href="/#consult">
-            설치 상담하기
-            <ArrowRight />
-          </a>
-        </div>
       </div>
+
+      <RankingCta />
 
       {/* 전체보기 팝업 */}
       <dialog

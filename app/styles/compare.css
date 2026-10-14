@@ -1,0 +1,335 @@
+/* ============================================================
+   한 눈에 비교 — 충전사업자 비교표 (시안 1014)
+   ============================================================ */
+.cmp {
+  padding: clamp(36px, 4vw, 70px) 0 clamp(40px, 4.4vw, 76px);
+}
+
+.cmp .sec-head {
+  margin-bottom: clamp(26px, 3vw, 48px);
+}
+
+/* 항목 분류 탭 — PC 에서는 숨기고 모바일에서만 쓴다 */
+.cmp__tabs {
+  display: none;
+  gap: 8px;
+  margin-bottom: 18px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cmp__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.cmp__tabs button {
+  flex: none;
+  height: 44px;
+  padding: 0 18px;
+  border: 1px solid #e3e3e8;
+  border-radius: 999px;
+  background: #fff;
+  color: #777;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cmp__tabs button[aria-selected="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* 총 n개 + 좌우 버튼 */
+.cmp__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: clamp(14px, 1.6vw, 22px);
+}
+
+.cmp__count {
+  color: #8a8c98;
+  font-size: clamp(14px, 1.1vw, 18px);
+}
+
+.cmp__count b {
+  color: var(--ink);
+  font-size: clamp(16px, 1.3vw, 21px);
+  font-weight: 700;
+}
+
+.cmp__nav {
+  display: flex;
+  gap: 10px;
+}
+
+/* ---------- PC 비교표 ---------- */
+.cmp__scroll {
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.cmp__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* 열 폭을 고정해 화면보다 넓어지게 한다 — 좌우로 넘겨 보는 표 (시안 1014) */
+.cmp__table {
+  width: max-content;
+  min-width: 100%;
+  border-collapse: separate;
+  border-spacing: 10px 0;
+  table-layout: fixed;
+}
+
+.cmp__table tbody td {
+  width: clamp(170px, 14.5vw, 215px);
+}
+
+.cmp__table th,
+.cmp__table td {
+  padding: clamp(12px, 1.2vw, 18px) clamp(10px, 1vw, 16px);
+  border-inline: 1px solid #ececf0;
+  border-bottom: 1px solid #ececf0;
+  background: #fff;
+  vertical-align: middle;
+  text-align: center;
+}
+
+/* 열 첫 칸과 마지막 칸을 둥글게 — 열 하나가 카드처럼 보이게 */
+.cmp__table tbody:first-of-type tr:nth-child(2) th,
+.cmp__table tbody:first-of-type tr:nth-child(2) td {
+  border-top: 1px solid #ececf0;
+  border-radius: 14px 14px 0 0;
+}
+
+.cmp__table tbody:last-of-type tr:last-child th,
+.cmp__table tbody:last-of-type tr:last-child td {
+  border-radius: 0 0 14px 14px;
+}
+
+/* 왼쪽 항목 이름 — 가로로 넘겨도 제자리에 */
+.cmp__table tbody th[scope="row"] {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  width: clamp(120px, 11vw, 160px);
+  background: #f5f6fb;
+  color: var(--navy);
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 700;
+  word-break: keep-all;
+}
+
+/* 분류 이름 줄 */
+.cmp__groupRow th {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  padding: clamp(16px, 1.8vw, 26px) 4px clamp(8px, 0.9vw, 12px);
+  border: 0;
+  background: #fff;
+  color: var(--ink);
+  font-size: clamp(14px, 1.2vw, 19px);
+  font-weight: 700;
+  text-align: left;
+}
+
+.cmp__table tbody:first-of-type .cmp__groupRow th {
+  padding-top: 0;
+}
+
+/* 브랜드 줄 */
+.cmp__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(10px, 1.2vw, 18px);
+}
+
+.cmp__logo .hatch,
+.cmp__photo .hatch {
+  width: 100%;
+  height: 100%;
+}
+
+.cmp__chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: clamp(96px, 9vw, 130px);
+  height: clamp(28px, 2.4vw, 34px);
+  padding: 0 14px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* 높이를 정해 두고 그 안에 맞춘다 — grid 자동 행은 사진 원본 높이로 늘어나 버린다 */
+.cmp__logo {
+  display: block;
+  width: 100%;
+  height: clamp(26px, 2.4vw, 34px);
+  overflow: hidden;
+}
+
+.cmp__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.cmp__photo {
+  display: block;
+  width: 100%;
+  height: clamp(100px, 9vw, 128px);
+  overflow: hidden;
+}
+
+.cmp__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* 값 */
+.cmp__value b {
+  display: block;
+  font-size: clamp(14px, 1.2vw, 19px);
+  font-weight: 700;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.cmp__value b[data-accent] {
+  color: #e8306b;
+  font-size: clamp(15px, 1.35vw, 22px);
+}
+
+.cmp__value span {
+  display: block;
+  margin-top: 4px;
+  color: #777;
+  font-size: clamp(11px, 0.92vw, 14px);
+}
+
+.cmp__list {
+  display: grid;
+  gap: 10px;
+  text-align: left;
+}
+
+.cmp__list li {
+  position: relative;
+  padding-left: 12px;
+}
+
+.cmp__list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #999;
+}
+
+.cmp__list b {
+  display: block;
+  font-size: clamp(12px, 1vw, 15px);
+  font-weight: 700;
+}
+
+.cmp__list span {
+  display: block;
+  color: #777;
+  font-size: clamp(11px, 0.88vw, 13px);
+}
+
+/* ---------- 모바일 카드 ---------- */
+.cmp__cards,
+.cmp__dots {
+  display: none;
+}
+
+/* ============================================================
+   반응형 — 768px 이하는 분류 탭 + 카드
+   ============================================================ */
+@media (max-width: 768px) {
+  .cmp__tabs {
+    display: flex;
+  }
+
+  .cmp__scroll {
+    display: none;
+  }
+
+  .cmp__cards {
+    display: flex;
+    gap: 14px;
+    margin-inline: calc(var(--gut) * -1);
+    padding-inline: var(--gut);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .cmp__cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cmp__card {
+    flex: none;
+    width: min(260px, 72vw);
+    padding: 18px 16px 22px;
+    border: 1px solid #ececf0;
+    border-radius: 16px;
+    background: #fff;
+    scroll-snap-align: start;
+  }
+
+  .cmp__cardRow + .cmp__cardRow {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #f0f0f4;
+  }
+
+  .cmp__cardRow .cmp__value,
+  .cmp__cardRow .cmp__brand {
+    text-align: center;
+  }
+
+  .cmp__cardLabel {
+    margin-bottom: 6px;
+    color: #9b9ca6;
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .cmp__dots {
+    display: flex;
+    justify-content: center;
+    gap: 7px;
+    margin-top: 20px;
+  }
+
+  .cmp__dots span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #dcdde5;
+    transition: background-color 0.2s;
+  }
+
+  .cmp__dots span[data-on] {
+    background: var(--purple);
+  }
+}
