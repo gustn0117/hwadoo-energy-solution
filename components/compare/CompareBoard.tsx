@@ -11,6 +11,9 @@ import {
   type CompareCell,
 } from "@/lib/compare-data";
 
+/** 브랜드 줄을 뺀 비교 항목 — 모바일에서 이 이름들이 탭이 된다 (시안 1015) */
+const ITEMS = COMPARE_GROUPS.flatMap((g) => g.rows.filter((r) => !("brand" in r.cells[0])));
+
 /** 칸 하나 — 로고 줄 · 큰 글씨 + 설명 · 글머리표 목록 세 가지 */
 function Cell({ cell, brand }: { cell: CompareCell; brand: CompareBrand }) {
   if ("brand" in cell) {
@@ -56,7 +59,7 @@ function Cell({ cell, brand }: { cell: CompareCell; brand: CompareBrand }) {
  * 모바일 — 항목 분류가 탭이 되고, 사업자가 카드로 넘어간다.
  */
 export function CompareBoard() {
-  const [group, setGroup] = useState(0);
+  const [item, setItem] = useState(0);
   const [page, setPage] = useState(0);
   const scroll = useRef<HTMLDivElement>(null);
   const cards = useRef<HTMLDivElement>(null);
@@ -107,11 +110,19 @@ export function CompareBoard() {
           </p>
         </div>
 
-        {/* 모바일 — 항목 분류 탭 */}
-        <nav className="cmp__tabs" aria-label="비교 항목 분류">
-          {COMPARE_GROUPS.map((g, i) => (
-            <button key={g.label} aria-selected={i === group} onClick={() => setGroup(i)}>
-              {g.label}
+        {/* 모바일 — 비교 항목 탭 */}
+        <nav className="cmp__tabs" aria-label="비교 항목">
+          {ITEMS.map((r, i) => (
+            <button
+              key={r.key}
+              aria-selected={i === item}
+              onClick={(e) => {
+                setItem(i);
+                // 고른 탭이 화면 밖이면 보이게 민다
+                e.currentTarget.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+              }}
+            >
+              {r.key}
             </button>
           ))}
         </nav>
@@ -131,7 +142,8 @@ export function CompareBoard() {
         </div>
 
         {/* PC — 항목 이름이 왼쪽에 고정된 비교표 */}
-        <div className="cmp__scroll" ref={scroll}>
+        <div className="cmp__viewport">
+          <div className="cmp__scroll" ref={scroll}>
           <table className="cmp__table">
             <thead className="sr-only">
               <tr>
@@ -162,22 +174,29 @@ export function CompareBoard() {
                 ))}
               </tbody>
             ))}
-          </table>
+            </table>
+          </div>
         </div>
 
         {/* 모바일 — 사업자 카드가 좌우로 넘어간다.
-            분류를 모두 그려 두고 고른 것만 보여준다 (정적 파일에서도 탭이 돌아가도록) */}
+            항목을 모두 그려 두고 고른 것만 보여준다 (정적 파일에서도 탭이 돌아가도록) */}
         <div className="cmp__cards" ref={cards}>
           {COMPARE_BRANDS.map((b, i) => (
             <article className="cmp__card" key={b.name}>
-              {COMPARE_GROUPS.map((g, gi) =>
-                g.rows.map((r) => (
-                  <div className="cmp__cardRow" data-group={gi} hidden={gi !== group} key={`${g.label}-${r.key}`}>
-                    {"brand" in r.cells[i] ? null : <p className="cmp__cardLabel">{r.key}</p>}
-                    <Cell cell={r.cells[i]} brand={b} />
-                  </div>
-                )),
-              )}
+              <div className="cmp__cardHead">
+                <span className="cmp__chip" style={{ background: b.color }}>
+                  {b.name}
+                </span>
+                <span className="cmp__logo">
+                  {b.logo ? <img src={b.logo} alt={b.name} loading="lazy" /> : <Hatch label="로고 준비중" />}
+                </span>
+              </div>
+              {ITEMS.map((r, ri) => (
+                <div className="cmp__cardRow" data-item={ri} hidden={ri !== item} key={r.key}>
+                  <p className="cmp__cardLabel">{r.key}</p>
+                  <Cell cell={r.cells[i]} brand={b} />
+                </div>
+              ))}
             </article>
           ))}
         </div>

@@ -502,7 +502,7 @@
   }
 
   /* ------------------------------------------------------------------
-     14) 한 눈에 비교 — 분류 탭과 좌우 이동
+     14) 한 눈에 비교 — 항목 탭과 좌우 이동
         PC 는 표를 한 열씩 밀고, 모바일은 카드를 한 장씩 넘깁니다.
      ------------------------------------------------------------------ */
   function initCompare() {
@@ -514,13 +514,14 @@
     var dots = Array.prototype.slice.call(board.querySelectorAll(".cmp__dots span"));
     var page = 0;
 
-    // 분류 탭 — 고른 분류의 줄만 보여준다
+    // 항목 탭 — 고른 항목의 줄만 보여준다
     tabs.forEach(function (btn, i) {
       btn.addEventListener("click", function () {
         tabs.forEach(function (t, k) { t.setAttribute("aria-selected", k === i ? "true" : "false"); });
         board.querySelectorAll(".cmp__cardRow").forEach(function (row) {
-          row.hidden = row.getAttribute("data-group") !== String(i);
+          row.hidden = row.getAttribute("data-item") !== String(i);
         });
+        btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
       });
     });
 

@@ -14,6 +14,8 @@
   display: none;
   gap: 8px;
   margin-bottom: 18px;
+  margin-inline: calc(var(--gut) * -1);
+  padding-inline: var(--gut);
   overflow-x: auto;
   scrollbar-width: none;
 }
@@ -68,6 +70,23 @@
 }
 
 /* ---------- PC 비교표 ---------- */
+.cmp__viewport {
+  position: relative;
+}
+
+/* 오른쪽 끝 열이 흐려지며 더 있다는 걸 알린다 (메인 브랜드 슬라이드와 같은 방식) */
+.cmp__viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: clamp(60px, 9vw, 150px);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0), #fff 88%);
+  pointer-events: none;
+  z-index: 3;
+}
+
 .cmp__scroll {
   overflow-x: auto;
   scrollbar-width: none;
@@ -86,8 +105,9 @@
   table-layout: fixed;
 }
 
+/* 한 화면에 3.5열쯤 보이도록 — 나머지는 오른쪽으로 넘어간다 */
 .cmp__table tbody td {
-  width: clamp(170px, 14.5vw, 215px);
+  width: clamp(200px, 19vw, 290px);
 }
 
 .cmp__table th,
@@ -112,17 +132,24 @@
   border-radius: 0 0 14px 14px;
 }
 
-/* 왼쪽 항목 이름 — 가로로 넘겨도 제자리에 */
+/* 왼쪽 항목 이름 — 가로로 넘겨도 제자리에 (시안 1015) */
 .cmp__table tbody th[scope="row"] {
   position: sticky;
   left: 0;
   z-index: 2;
   width: clamp(120px, 11vw, 160px);
-  background: #f5f6fb;
+  background: #fff;
   color: var(--navy);
   font-size: clamp(12px, 1vw, 15px);
   font-weight: 700;
   word-break: keep-all;
+}
+
+/* 브랜드 칸만 연한 카드로 떼어 놓는다 */
+.cmp__table tbody:first-of-type tr:nth-child(2) th[scope="row"] {
+  border: 0;
+  border-radius: 16px;
+  background: #f7f9fb;
 }
 
 /* 분류 이름 줄 */
@@ -260,6 +287,11 @@
   display: none;
 }
 
+/* 카드 머리는 모바일에서만 */
+.cmp__cardHead {
+  display: none;
+}
+
 /* ============================================================
    반응형 — 768px 이하는 분류 탭 + 카드
    ============================================================ */
@@ -296,22 +328,33 @@
     scroll-snap-align: start;
   }
 
-  .cmp__cardRow + .cmp__cardRow {
-    margin-top: 16px;
-    padding-top: 16px;
-    border-top: 1px solid #f0f0f4;
+  /* 브랜드 머리 — 칩과 로고 */
+  .cmp__cardHead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #f0f0f4;
   }
 
-  .cmp__cardRow .cmp__value,
-  .cmp__cardRow .cmp__brand {
+  .cmp__cardHead .cmp__logo {
+    height: 30px;
+  }
+
+  .cmp__cardRow {
+    padding-top: 18px;
     text-align: center;
   }
 
   .cmp__cardLabel {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
     color: #9b9ca6;
     font-size: 13px;
-    text-align: center;
+  }
+
+  .cmp__cardRow .cmp__list {
+    text-align: left;
   }
 
   .cmp__dots {
