@@ -158,8 +158,9 @@ export function CompareBoard() {
             {COMPARE_GROUPS.map((g) => (
               <tbody key={g.label}>
                 <tr className="cmp__groupRow">
+                  {/* 칸은 표 전체 폭이라 가로로 밀면 글자가 따라 나간다 — 글자만 왼쪽에 붙여 둔다 */}
                   <th scope="rowgroup" colSpan={total + 1}>
-                    {g.label}
+                    <span>{g.label}</span>
                   </th>
                 </tr>
                 {g.rows.map((r) => (

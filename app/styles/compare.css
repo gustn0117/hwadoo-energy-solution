@@ -120,16 +120,22 @@
   text-align: center;
 }
 
-/* 열 첫 칸과 마지막 칸을 둥글게 — 열 하나가 카드처럼 보이게 */
-.cmp__table tbody:first-of-type tr:nth-child(2) th,
-.cmp__table tbody:first-of-type tr:nth-child(2) td {
+/* 분류마다 첫 줄과 끝 줄을 둥글게 — 분류 하나가 카드처럼 보이게 */
+.cmp__table tbody .cmp__groupRow + tr th,
+.cmp__table tbody .cmp__groupRow + tr td {
   border-top: 1px solid #ececf0;
   border-radius: 14px 14px 0 0;
 }
 
-.cmp__table tbody:last-of-type tr:last-child th,
-.cmp__table tbody:last-of-type tr:last-child td {
+.cmp__table tbody tr:last-child th,
+.cmp__table tbody tr:last-child td {
   border-radius: 0 0 14px 14px;
+}
+
+/* 줄이 하나뿐인 분류는 네 모서리 모두 */
+.cmp__table tbody .cmp__groupRow + tr:last-child th,
+.cmp__table tbody .cmp__groupRow + tr:last-child td {
+  border-radius: 14px;
 }
 
 /* 왼쪽 항목 이름 — 가로로 넘겨도 제자리에 (시안 1015) */
@@ -146,7 +152,7 @@
 }
 
 /* 브랜드 칸만 연한 카드로 떼어 놓는다 */
-.cmp__table tbody:first-of-type tr:nth-child(2) th[scope="row"] {
+.cmp__table tbody:first-of-type .cmp__groupRow + tr th[scope="row"] {
   border: 0;
   border-radius: 16px;
   background: #f7f9fb;
@@ -154,9 +160,6 @@
 
 /* 분류 이름 줄 */
 .cmp__groupRow th {
-  position: sticky;
-  left: 0;
-  z-index: 3;
   padding: clamp(16px, 1.8vw, 26px) 4px clamp(8px, 0.9vw, 12px);
   border: 0;
   background: #fff;
@@ -164,6 +167,15 @@
   font-size: clamp(14px, 1.2vw, 19px);
   font-weight: 700;
   text-align: left;
+}
+
+/* 칸이 표 전체 폭이라 가로로 밀면 글자가 따라 나간다 — 글자만 왼쪽에 붙여 둔다 */
+.cmp__groupRow span {
+  position: sticky;
+  left: 0;
+  display: inline-block;
+  padding-right: 12px;
+  background: #fff;
 }
 
 .cmp__table tbody:first-of-type .cmp__groupRow th {
