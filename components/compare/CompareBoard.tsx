@@ -6,13 +6,13 @@ import { Chevron } from "@/components/Icons";
 import { Hatch } from "@/components/Hatch";
 import {
   COMPARE_BRANDS,
-  COMPARE_GROUPS,
+  COMPARE_ROWS,
   type CompareBrand,
   type CompareCell,
 } from "@/lib/compare-data";
 
 /** 브랜드 줄을 뺀 비교 항목 — 모바일에서 이 이름들이 탭이 된다 (시안 1015) */
-const ITEMS = COMPARE_GROUPS.flatMap((g) => g.rows.filter((r) => !("brand" in r.cells[0])));
+const ITEMS = COMPARE_ROWS.filter((r) => !("brand" in r.cells[0]));
 
 /** 칸 하나 — 로고 줄 · 큰 글씨 + 설명 · 글머리표 목록 세 가지 */
 function Cell({ cell, brand }: { cell: CompareCell; brand: CompareBrand }) {
@@ -56,7 +56,7 @@ function Cell({ cell, brand }: { cell: CompareCell; brand: CompareBrand }) {
 /**
  * 충전사업자 비교표 (시안 1014).
  * PC — 왼쪽에 항목 이름이 고정되고 사업자 열이 좌우로 넘어간다.
- * 모바일 — 항목 분류가 탭이 되고, 사업자가 카드로 넘어간다.
+ * 모바일 — 항목 이름이 탭이 되고, 사업자가 카드로 넘어간다.
  */
 export function CompareBoard() {
   const [item, setItem] = useState(0);
@@ -155,26 +155,18 @@ export function CompareBoard() {
                 ))}
               </tr>
             </thead>
-            {COMPARE_GROUPS.map((g) => (
-              <tbody key={g.label}>
-                <tr className="cmp__groupRow">
-                  {/* 칸은 표 전체 폭이라 가로로 밀면 글자가 따라 나간다 — 글자만 왼쪽에 붙여 둔다 */}
-                  <th scope="rowgroup" colSpan={total + 1}>
-                    <span>{g.label}</span>
-                  </th>
+            <tbody>
+              {COMPARE_ROWS.map((r) => (
+                <tr key={r.key}>
+                  <th scope="row">{r.key}</th>
+                  {r.cells.map((c, i) => (
+                    <td key={COMPARE_BRANDS[i].name}>
+                      <Cell cell={c} brand={COMPARE_BRANDS[i]} />
+                    </td>
+                  ))}
                 </tr>
-                {g.rows.map((r) => (
-                  <tr key={r.key}>
-                    <th scope="row">{r.key}</th>
-                    {r.cells.map((c, i) => (
-                      <td key={COMPARE_BRANDS[i].name}>
-                        <Cell cell={c} brand={COMPARE_BRANDS[i]} />
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            ))}
+              ))}
+            </tbody>
             </table>
           </div>
         </div>
