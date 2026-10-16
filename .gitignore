@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 퍼블리싱 스크립트 캐시
+publish/__pycache__/
