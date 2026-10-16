@@ -545,14 +545,24 @@
     board.querySelectorAll(".cmp__nav button").forEach(function (btn, i) {
       var dir = i === 0 ? -1 : 1;
       btn.addEventListener("click", function () {
+        // PC 표 — 한 열씩, 끝에 닿으면 반대쪽 끝으로 돌아간다
         if (scroll) {
           var col = scroll.querySelector("tbody td");
           var table = scroll.querySelector("table");
           var gap = table ? parseFloat(getComputedStyle(table).borderSpacing) || 0 : 0;
-          scroll.scrollBy({ left: ((col ? col.offsetWidth : 210) + gap) * dir, behavior: "smooth" });
+          var step = (col ? col.offsetWidth : 210) + gap;
+          var end = scroll.scrollWidth - scroll.clientWidth;
+          var at = scroll.scrollLeft;
+          var left;
+          // 소수점 때문에 끝에 1px 못 미치는 경우가 있어 여유를 둔다
+          if (dir > 0) left = at >= end - 1 ? 0 : Math.min(at + step, end);
+          else left = at <= 1 ? end : Math.max(at - step, 0);
+          scroll.scrollTo({ left: left, behavior: "smooth" });
         }
+        // 모바일 카드 — 마지막 다음은 다시 첫 장
         if (cards) {
-          page = Math.min(cards.children.length - 1, Math.max(0, page + dir));
+          var n = cards.children.length;
+          page = (page + dir + n) % n;
           var target = cards.children[page];
           if (target) cards.scrollTo({ left: target.offsetLeft - cards.offsetLeft, behavior: "smooth" });
           mark();

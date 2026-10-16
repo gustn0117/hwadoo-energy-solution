@@ -66,21 +66,29 @@ export function CompareBoard() {
 
   const total = COMPARE_BRANDS.length;
 
-  /** PC — 한 열씩 좌우로 */
+  /** PC — 한 열씩 좌우로, 끝에 닿으면 반대쪽 끝으로 돌아간다 */
   const slide = (dir: -1 | 1) => {
     const box = scroll.current;
     if (!box) return;
     // 머리글은 화면에서 숨겨 두었으므로 실제로 보이는 칸의 폭을 쓴다
     const col = box.querySelector<HTMLElement>("tbody td");
     const gap = parseFloat(getComputedStyle(box.querySelector("table")!).borderSpacing) || 0;
-    box.scrollBy({ left: ((col?.offsetWidth ?? 210) + gap) * dir, behavior: "smooth" });
+    const step = (col?.offsetWidth ?? 210) + gap;
+    const end = box.scrollWidth - box.clientWidth;
+    const at = box.scrollLeft;
+    // 소수점 때문에 끝에 1px 못 미치는 경우가 있어 여유를 둔다
+    const left =
+      dir > 0
+        ? at >= end - 1 ? 0 : Math.min(at + step, end)
+        : at <= 1 ? end : Math.max(at - step, 0);
+    box.scrollTo({ left, behavior: "smooth" });
   };
 
-  /** 모바일 — 카드 한 장씩 */
+  /** 모바일 — 카드 한 장씩, 마지막 다음은 다시 첫 장 */
   const move = (dir: -1 | 1) => {
     const box = cards.current;
     if (!box) return;
-    const next = Math.min(total - 1, Math.max(0, page + dir));
+    const next = (page + dir + total) % total;
     setPage(next);
     const card = box.children[next] as HTMLElement | undefined;
     if (card) box.scrollTo({ left: card.offsetLeft - box.offsetLeft, behavior: "smooth" });
