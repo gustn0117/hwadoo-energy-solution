@@ -13,11 +13,7 @@ export default function WhyPage() {
   return (
     <SubPage
       eyebrow="화두에너지솔루션"
-      title={
-        <>
-          화두를 <em>선택하는 이유</em>
-        </>
-      }
+      title="화두를 선택하는 이유"
       desc="단지가 직접 비교하고 고를 수 있도록, 화두는 중간에서 기준을 만듭니다."
     >
       <PageSection eyebrow="WHY HWADOO" title="네 가지 차이">

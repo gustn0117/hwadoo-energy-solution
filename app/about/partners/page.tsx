@@ -13,11 +13,7 @@ export default function PartnersPage() {
   return (
     <SubPage
       eyebrow="화두에너지솔루션"
-      title={
-        <>
-          주요 <em>파트너</em>
-        </>
-      }
+      title="주요 파트너"
       desc="6개 제휴 충전사업자의 조건을 같은 표에 놓고 비교해 제안합니다."
     >
       <PageSection eyebrow="PARTNERS" title="제휴 충전사업자">

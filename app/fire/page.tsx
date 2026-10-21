@@ -14,11 +14,7 @@ export default function FirePage() {
   return (
     <SubPage
       eyebrow="화재안전"
-      title={
-        <>
-          충전 인프라 구축에서 <em>안전까지 함께</em>
-        </>
-      }
+      title="충전 인프라 구축에서 안전까지 함께"
       desc="충전기를 놓는 것으로 끝나지 않습니다. 화재를 늦추고 번지지 않게 하는 설비를 함께 구축합니다."
     >
       <PageSection

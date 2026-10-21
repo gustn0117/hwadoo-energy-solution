@@ -13,11 +13,7 @@ export default function InstallPage() {
   return (
     <SubPage
       eyebrow="설치·시공"
-      title={
-        <>
-          어디까지 공사하고 <em>무엇을 준비하나</em>
-        </>
-      }
+      title="어디까지 공사하고 무엇을 준비하나"
       desc="공사 범위와 준비 서류, 공사 중 주차장 운영 기준을 미리 정리해드립니다."
     >
       {/* 시공 개요 */}

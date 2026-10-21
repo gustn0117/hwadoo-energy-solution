@@ -13,11 +13,7 @@ export default function DiagnosisPage() {
   return (
     <SubPage
       eyebrow="설치진단"
-      title={
-        <>
-          우리 단지, <em>얼마나 더 설치할 수 있을까요?</em>
-        </>
-      }
+      title="우리 단지, 얼마나 더 설치할 수 있을까요?"
       desc="주소만 알려주시면 기설 충전기 현황과 추가 설치 가능 수량부터 확인해드립니다."
     >
       {/* 메인과 같은 주소 검색 — 검색하면 입력한 주소로 상담 팝업이 열린다 */}

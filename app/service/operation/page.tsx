@@ -13,11 +13,7 @@ export default function OperationPage() {
   return (
     <SubPage
       eyebrow="운영·유지관리"
-      title={
-        <>
-          개통 이후가 <em>진짜 시작입니다</em>
-        </>
-      }
+      title="개통 이후가 진짜 시작입니다"
       desc="가동률을 지키는 것은 장비가 아니라 고장 접수와 점검, 민원 대응의 속도입니다."
     >
       {/* 운영 개요 */}

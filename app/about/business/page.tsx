@@ -13,11 +13,7 @@ export default function BusinessPage() {
   return (
     <SubPage
       eyebrow="화두에너지솔루션"
-      title={
-        <>
-          진단부터 관리까지 <em>사업영역</em>
-        </>
-      }
+      title="진단부터 관리까지 사업영역"
       desc="충전기 한 대를 놓기까지 필요한 일을 나눠 맡기지 않고 한 곳에서 처리합니다."
     >
       <PageSection eyebrow="BUSINESS" title="화두가 맡는 일">

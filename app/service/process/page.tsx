@@ -13,11 +13,7 @@ export default function ProcessPage() {
   return (
     <SubPage
       eyebrow="설치절차"
-      title={
-        <>
-          상담부터 개통까지 <em>8단계</em>
-        </>
-      }
+      title="상담부터 개통까지 8단계"
       desc="지금 어느 단계에 있고 다음에 무엇을 하면 되는지 한눈에 확인하세요."
     >
       {/* 절차 개요 */}

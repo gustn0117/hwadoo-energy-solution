@@ -5,7 +5,7 @@
 /* ---------- 머리 소개 ---------- */
 .abHero {
   position: relative;
-  padding: clamp(40px, 4.6vw, 90px) 0 clamp(44px, 5vw, 96px);
+  padding: clamp(50px, 5.8vw, 112px) 0 clamp(54px, 6.2vw, 120px);
   background: url("/images/about/wave-bg.png") center / cover no-repeat, #fff;
 }
 
@@ -18,14 +18,14 @@
 
 .abHero__eyebrow {
   color: var(--purple);
-  font-size: clamp(16px, 1.4vw, 26px);
+  font-size: clamp(20px, 1.75vw, 32px);
   font-weight: 700;
 }
 
 .abHero h2 {
   margin: clamp(10px, 1vw, 18px) 0 clamp(16px, 1.7vw, 30px);
   color: var(--ink);
-  font-size: clamp(24px, 2.4vw, 46px);
+  font-size: clamp(30px, 3.0vw, 58px);
   font-weight: 800;
   line-height: 1.25;
 }
@@ -55,13 +55,13 @@
   border-radius: 10px;
   background: var(--orange);
   color: #fff;
-  font-size: clamp(13px, 1vw, 17px);
+  font-size: clamp(16px, 1.25vw, 21px);
   font-weight: 700;
 }
 
 .abHero__img {
   display: block;
-  height: clamp(180px, 20vw, 340px);
+  height: clamp(200px, 24vw, 420px);
 }
 
 .abHero__img img,
@@ -73,7 +73,7 @@
 
 /* ---------- 핵심 가치 띠 ---------- */
 .abValues {
-  padding: clamp(34px, 3.6vw, 70px) 0;
+  padding: clamp(40px, 4.4vw, 86px) 0;
   background: linear-gradient(90deg, #1536c8 0%, #3d35d6 52%, #7a3bea 100%);
   color: #fff;
 }
@@ -88,13 +88,13 @@
 .abValues__eyebrow {
   margin-bottom: clamp(10px, 1vw, 18px);
   color: rgba(255, 255, 255, 0.72);
-  font-size: clamp(12px, 0.95vw, 16px);
+  font-size: clamp(15px, 1.19vw, 20px);
   font-weight: 500;
   letter-spacing: 0.06em;
 }
 
 .abValues h2 {
-  font-size: clamp(19px, 1.8vw, 34px);
+  font-size: clamp(24px, 2.25vw, 42px);
   font-weight: 800;
   line-height: 1.35;
 }
@@ -132,7 +132,7 @@
 
 .abValues__item b {
   display: block;
-  font-size: clamp(13px, 1.1vw, 19px);
+  font-size: clamp(16px, 1.38vw, 24px);
   font-weight: 700;
 }
 
@@ -140,13 +140,13 @@
   display: block;
   margin-top: 3px;
   color: rgba(255, 255, 255, 0.68);
-  font-size: clamp(10px, 0.82vw, 13px);
+  font-size: clamp(12px, 1.02vw, 16px);
   letter-spacing: 0.05em;
 }
 
 /* ---------- 사업영역 슬라이드 ---------- */
 .abBiz {
-  --ab-card: clamp(280px, 56vw, 760px);
+  --ab-card: clamp(300px, 69vw, 1330px);
   --ab-gap: clamp(16px, 2vw, 40px);
   padding: clamp(44px, 4.8vw, 96px) 0 clamp(40px, 4.4vw, 86px);
   background: var(--bg-off);
@@ -167,7 +167,7 @@
   border: 1px solid var(--line-2);
   border-radius: 999px;
   color: var(--text);
-  font-size: clamp(11px, 0.9vw, 15px);
+  font-size: clamp(14px, 1.12vw, 19px);
   letter-spacing: 0.04em;
 }
 
@@ -195,7 +195,7 @@
   align-items: center;
   flex: none;
   width: var(--ab-card);
-  padding: clamp(16px, 1.7vw, 30px);
+  padding: clamp(18px, 2.2vw, 42px);
   border-radius: 18px;
   background: #fff;
   /* 가운데 칸만 또렷하게 (시안 1021) */
@@ -210,7 +210,7 @@
 
 .abBiz__photo {
   display: block;
-  height: clamp(150px, 15vw, 260px);
+  height: clamp(170px, 19vw, 360px);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -243,21 +243,21 @@
   border-radius: 999px;
   background: #efe9fd;
   color: var(--purple);
-  font-size: clamp(10px, 0.8vw, 13px);
+  font-size: clamp(12px, 1.0vw, 16px);
   font-weight: 700;
   letter-spacing: 0.04em;
 }
 
 .abBiz__text h3 {
   color: var(--ink);
-  font-size: clamp(16px, 1.45vw, 27px);
+  font-size: clamp(20px, 1.81vw, 34px);
   font-weight: 700;
 }
 
 .abBiz__text p {
   margin-top: clamp(8px, 0.8vw, 14px);
   color: var(--text);
-  font-size: clamp(12px, 0.98vw, 17px);
+  font-size: clamp(15px, 1.23vw, 21px);
 }
 
 .abBiz__text p span {
@@ -274,7 +274,7 @@
 
 .abBiz__count {
   color: var(--gray);
-  font-size: clamp(13px, 1.05vw, 18px);
+  font-size: clamp(16px, 1.31vw, 22px);
 }
 
 .abBiz__count b {
@@ -303,7 +303,7 @@
 .abHist__eyebrow {
   margin-bottom: clamp(10px, 1vw, 18px);
   color: var(--purple);
-  font-size: clamp(12px, 0.95vw, 16px);
+  font-size: clamp(15px, 1.19vw, 20px);
   font-weight: 700;
   letter-spacing: 0.06em;
 }
@@ -321,7 +321,8 @@
 /* 굴릴 때마다 한 연도씩 걸린다 */
 .abHist__list {
   position: relative;
-  height: clamp(340px, 34vw, 520px);
+  /* 시안처럼 세 연도쯤 보이는 높이 — 굴리면 한 연도씩 걸린다 */
+  height: clamp(420px, 45vw, 860px);
   padding-left: clamp(60px, 6vw, 110px);
   overflow-y: auto;
   scroll-snap-type: y mandatory;
@@ -358,7 +359,7 @@
   left: calc(-1 * clamp(60px, 6vw, 110px));
   width: clamp(52px, 5.2vw, 96px);
   color: var(--ink);
-  font-size: clamp(14px, 1.25vw, 22px);
+  font-size: clamp(18px, 1.56vw, 28px);
   font-weight: 700;
   text-align: right;
 }
@@ -390,7 +391,7 @@
 .abHist__body h3 {
   margin-bottom: clamp(8px, 0.8vw, 14px);
   color: var(--ink);
-  font-size: clamp(14px, 1.2vw, 21px);
+  font-size: clamp(18px, 1.5vw, 26px);
   font-weight: 700;
 }
 
@@ -403,7 +404,7 @@
   position: relative;
   padding-left: 12px;
   color: var(--text);
-  font-size: clamp(12px, 0.95vw, 16px);
+  font-size: clamp(15px, 1.19vw, 20px);
   white-space: pre-line;
 }
 
@@ -435,7 +436,7 @@
 .abWhy__eyebrow {
   margin-bottom: clamp(10px, 1vw, 18px);
   color: var(--navy);
-  font-size: clamp(13px, 1.05vw, 18px);
+  font-size: clamp(16px, 1.31vw, 22px);
   font-weight: 700;
 }
 
@@ -451,7 +452,7 @@
 
 .abWhy__img {
   display: block;
-  height: clamp(150px, 15vw, 250px);
+  height: clamp(170px, 18vw, 310px);
 }
 
 .abWhy__img img,
@@ -502,7 +503,7 @@
 .abWhy__item b {
   display: block;
   color: var(--ink);
-  font-size: clamp(12px, 1vw, 17px);
+  font-size: clamp(15px, 1.25vw, 21px);
   font-weight: 700;
   line-height: 1.4;
 }
@@ -547,7 +548,7 @@
   }
 
   .abBiz {
-    --ab-card: min(78vw, 340px);
+    --ab-card: min(84vw, 360px);
   }
 
   .abBiz__card {

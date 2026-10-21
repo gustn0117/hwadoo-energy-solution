@@ -13,11 +13,7 @@ export default function ServicePage() {
   return (
     <SubPage
       eyebrow="설치·운영"
-      title={
-        <>
-          상담부터 개통 이후까지 <em>한 곳에서</em>
-        </>
-      }
+      title="상담부터 개통 이후까지 한 곳에서"
       desc="장비 선정, 공사, 행정, 개통 이후 관리까지 담당자 한 명이 이어서 진행합니다."
     >
       {/* 설치·운영 전체 흐름 소개 */}

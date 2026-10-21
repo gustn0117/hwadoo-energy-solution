@@ -13,11 +13,7 @@ export default function ProductPage() {
   return (
     <SubPage
       eyebrow="제품안내"
-      title={
-        <>
-          아파트에 맞춘 <em>완속충전기</em>
-        </>
-      }
+      title="아파트에 맞춘 완속충전기"
       desc="장비 사양과 안전장치, 입주민이 실제로 쓰는 앱 기능까지 확인하세요."
     >
       {/* 장비 개요 */}

@@ -4,8 +4,12 @@ import { FloatingDock } from "@/components/FloatingDock";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { SupHero } from "@/components/support/SupHero";
 
-/** 서브 페이지 공통 틀 — 헤더, 페이지 제목 띠, 본문, 대표전화 배너, 푸터 */
+/**
+ * 서브 페이지 공통 틀 — 헤더, 페이지 제목 띠, 본문, 대표전화 배너, 푸터.
+ * 제목 띠는 고객지원·충전사업자 비교와 같은 것을 쓴다 (시안 1006).
+ */
 export function SubPage({
   eyebrow,
   title,
@@ -13,7 +17,7 @@ export function SubPage({
   children,
 }: {
   eyebrow: string;
-  title: React.ReactNode;
+  title: string;
   desc?: string;
   children: React.ReactNode;
 }) {
@@ -21,13 +25,7 @@ export function SubPage({
     <>
       <Header />
       <main>
-        <section className="subHero">
-          <div className="shell sec-head" data-reveal>
-            <p className="sec-eyebrow">{eyebrow}</p>
-            <h1 className="sec-title">{title}</h1>
-            {desc ? <p className="sec-desc">{desc}</p> : null}
-          </div>
-        </section>
+        <SupHero eyebrow={eyebrow} title={title} desc={desc} />
         {children}
         <ContactBanner />
       </main>

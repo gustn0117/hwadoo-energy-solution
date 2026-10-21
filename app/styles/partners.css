@@ -34,7 +34,7 @@
   padding: 0 clamp(16px, 1.8vw, 30px);
   border-radius: 999px;
   color: var(--gray);
-  font-size: clamp(14px, 1.05vw, 18px);
+  font-size: clamp(18px, 1.33vw, 23px);
   font-weight: 500;
   white-space: nowrap;
   transition: color 0.2s;
@@ -77,7 +77,7 @@
 
 .pt__headline {
   color: var(--ink);
-  font-size: clamp(17px, 1.45vw, 26px);
+  font-size: clamp(22px, 1.84vw, 33px);
   font-weight: 700;
 }
 
@@ -115,7 +115,7 @@
   border-radius: 8px;
   background: var(--pt-blue-soft);
   color: var(--pt-blue);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
   font-weight: 500;
 }
 
@@ -127,8 +127,8 @@
 }
 
 .pt__ask h3 {
-  color: var(--purple);
-  font-size: clamp(15px, 1.2vw, 20px);
+  color: var(--pt-blue);
+  font-size: clamp(19px, 1.52vw, 25px);
   font-weight: 700;
 }
 
@@ -144,13 +144,13 @@
   gap: 10px;
   align-items: start;
   color: var(--text);
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: clamp(17px, 1.27vw, 20px);
 }
 
 .pt__ask li::before {
   content: "";
   height: 1.45em;
-  background: var(--purple);
+  background: var(--pt-blue);
   mask: url("/images/partners/common/icon-check-purple.svg") center / contain no-repeat;
 }
 
@@ -162,7 +162,7 @@
   border-radius: 10px;
   background: var(--ink);
   color: #fff;
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: clamp(17px, 1.27vw, 20px);
   font-weight: 700;
 }
 
@@ -262,7 +262,7 @@
   position: relative;
   padding-left: 10px;
   color: var(--gray);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
   text-align: left;
   transition: color 0.2s;
 }
@@ -328,19 +328,19 @@
   border-radius: 50%;
   background: var(--pt-blue);
   color: #fff;
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: clamp(17px, 1.27vw, 20px);
   font-weight: 700;
 }
 
 .ptsec__sub {
   color: var(--ink);
-  font-size: clamp(18px, 1.65vw, 31px);
+  font-size: clamp(23px, 2.1vw, 39px);
   font-weight: 700;
 }
 
 .ptsec__title {
   color: var(--pt-blue);
-  font-size: clamp(21px, 2vw, 38px);
+  font-size: clamp(27px, 2.54vw, 48px);
   font-weight: 800;
 }
 
@@ -367,7 +367,7 @@
 .ptsec__note {
   margin-top: clamp(16px, 1.6vw, 26px);
   color: var(--gray);
-  font-size: clamp(12px, 0.92vw, 15px);
+  font-size: clamp(15px, 1.17vw, 19px);
   text-align: center;
   white-space: pre-line;
 }
@@ -388,7 +388,7 @@
 
 .ptPhoto__img {
   display: block;
-  height: clamp(200px, 20vw, 340px);
+  height: clamp(230px, 29vw, 560px);
 }
 
 .ptPhoto__img img {
@@ -404,7 +404,7 @@
 
 .ptPhoto__cards {
   display: grid;
-  gap: clamp(10px, 1vw, 16px);
+  gap: clamp(10px, 1.4vw, 26px);
 }
 
 .ptPhoto__card {
@@ -412,7 +412,7 @@
   grid-template-columns: clamp(40px, 3.6vw, 56px) minmax(0, 1fr);
   gap: clamp(12px, 1.2vw, 20px);
   align-items: center;
-  padding: clamp(16px, 1.6vw, 26px);
+  padding: clamp(18px, 2.1vw, 40px);
   border: 1px solid #d9e3ff;
   border-radius: 12px;
   background: #fbfcff;
@@ -429,7 +429,7 @@
 .ptPhoto__card b {
   display: block;
   color: var(--ink);
-  font-size: clamp(14px, 1.1vw, 18px);
+  font-size: clamp(18px, 1.4vw, 23px);
   font-weight: 700;
 }
 
@@ -437,7 +437,7 @@
   display: block;
   margin-top: 4px;
   color: var(--orange);
-  font-size: clamp(13px, 1.02vw, 17px);
+  font-size: clamp(17px, 1.3vw, 22px);
   font-weight: 500;
 }
 
@@ -453,9 +453,9 @@
 
 .ptSpec th,
 .ptSpec td {
-  padding: clamp(12px, 1.15vw, 18px) clamp(14px, 1.5vw, 26px);
+  padding: clamp(14px, 1.45vw, 23px) clamp(14px, 1.5vw, 26px);
   border-bottom: 1px solid var(--pt-line);
-  font-size: clamp(13px, 1vw, 16px);
+  font-size: clamp(17px, 1.27vw, 20px);
   text-align: left;
 }
 
@@ -479,15 +479,15 @@
 /* ---------- 제목 + 체크 목록 카드 ---------- */
 .ptBullets {
   display: grid;
-  gap: clamp(14px, 1.4vw, 24px);
+  gap: clamp(14px, 1.7vw, 30px);
 }
 
 .ptBullets__card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(70px, 7vw, 110px);
+  grid-template-columns: minmax(0, 1fr) clamp(80px, 8vw, 125px);
   gap: clamp(16px, 1.8vw, 30px);
   align-items: center;
-  padding: clamp(20px, 2.2vw, 40px);
+  padding: clamp(22px, 2.6vw, 50px);
   border: 1px solid #d9e3ff;
   border-radius: 14px;
   background: #fff;
@@ -517,7 +517,7 @@
 
 .ptBullets__card h4 {
   color: var(--ink);
-  font-size: clamp(15px, 1.25vw, 21px);
+  font-size: clamp(19px, 1.59vw, 27px);
   font-weight: 700;
 }
 
@@ -541,7 +541,7 @@
   gap: 8px;
   align-items: start;
   color: var(--text);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
   white-space: pre-line;
 }
 
@@ -635,7 +635,7 @@
 .ptSteps__item b {
   display: block;
   color: var(--pt-blue);
-  font-size: clamp(13px, 1.02vw, 17px);
+  font-size: clamp(17px, 1.3vw, 22px);
   font-weight: 700;
 }
 
@@ -646,7 +646,7 @@
 .ptSteps__item p {
   margin-top: 6px;
   color: var(--gray);
-  font-size: clamp(11px, 0.88vw, 14px);
+  font-size: clamp(14px, 1.12vw, 18px);
   white-space: pre-line;
 }
 
@@ -670,7 +670,7 @@
 
 .ptZig__img {
   display: block;
-  height: clamp(220px, 20vw, 330px);
+  height: clamp(240px, 23vw, 440px);
   padding: 0 11%;
   border-radius: 14px;
   background: var(--pt-blue-soft);
@@ -698,17 +698,34 @@
 }
 
 .ptZig__no {
+  position: relative;
   display: inline-grid;
   place-items: center;
-  min-width: 46px;
-  height: 28px;
+  min-width: 58px;
+  height: 34px;
   margin-bottom: clamp(10px, 1vw, 18px);
-  padding: 0 12px;
+  padding: 0 14px;
   border-radius: 999px;
   background: var(--pt-blue);
   color: #fff;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 700;
+}
+
+/* 번호에서 이미지 쪽으로 잇는 선 (시안 1021) */
+.ptZig__no::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  width: clamp(16px, 3.4vw, 66px);
+  border-top: 1px solid var(--pt-blue);
+}
+
+.ptZig__item:nth-child(even) .ptZig__no::before {
+  right: auto;
+  left: 100%;
+  border-color: var(--orange);
 }
 
 .ptZig__item:nth-child(even) .ptZig__no {
@@ -717,7 +734,7 @@
 
 .ptZig__text h4 {
   color: var(--ink);
-  font-size: clamp(16px, 1.4vw, 24px);
+  font-size: clamp(20px, 1.78vw, 30px);
   font-weight: 700;
 }
 
@@ -733,7 +750,7 @@
   gap: 8px;
   align-items: center;
   color: var(--text);
-  font-size: clamp(13px, 1.02vw, 17px);
+  font-size: clamp(17px, 1.3vw, 22px);
 }
 
 .ptZig__item:nth-child(even) .ptZig__points li {
@@ -765,7 +782,7 @@
   border-radius: 999px;
   background: var(--pt-blue);
   color: #fff;
-  font-size: clamp(13px, 1.02vw, 17px);
+  font-size: clamp(17px, 1.3vw, 22px);
   font-weight: 700;
 }
 
@@ -791,7 +808,7 @@
 .ptRate__asOf {
   margin-bottom: 8px;
   color: var(--gray);
-  font-size: clamp(11px, 0.85vw, 13px);
+  font-size: clamp(14px, 1.08vw, 17px);
   text-align: right;
 }
 
@@ -809,7 +826,7 @@
   padding: clamp(12px, 1.15vw, 18px);
   background: #3f5bbd;
   color: #fff;
-  font-size: clamp(13px, 1vw, 17px);
+  font-size: clamp(17px, 1.27vw, 22px);
   font-weight: 700;
 }
 
@@ -822,7 +839,7 @@
   padding: clamp(14px, 1.4vw, 24px) clamp(10px, 1vw, 16px);
   border-bottom: 1px solid var(--pt-line);
   border-right: 1px solid var(--pt-line);
-  font-size: clamp(13px, 1.05vw, 18px);
+  font-size: clamp(17px, 1.33vw, 23px);
 }
 
 .ptRate__table tbody tr:last-child th,
@@ -847,7 +864,7 @@
 
 .ptRate__price {
   color: var(--ink);
-  font-size: clamp(17px, 1.6vw, 28px);
+  font-size: clamp(22px, 2.03vw, 36px);
   font-weight: 800;
 }
 
@@ -867,7 +884,7 @@
   align-items: start;
   margin-top: 10px;
   color: var(--gray);
-  font-size: clamp(11px, 0.88vw, 14px);
+  font-size: clamp(14px, 1.12vw, 18px);
 }
 
 .ptRate__note::before {
@@ -885,7 +902,7 @@
   width: fit-content;
   margin: 0 auto clamp(20px, 2vw, 36px);
   color: var(--text);
-  font-size: clamp(13px, 1.02vw, 17px);
+  font-size: clamp(17px, 1.3vw, 22px);
   font-weight: 500;
 }
 
@@ -911,7 +928,7 @@
 .ptBenefit__card b {
   display: block;
   color: var(--ink);
-  font-size: clamp(14px, 1.1vw, 18px);
+  font-size: clamp(18px, 1.4vw, 23px);
   font-weight: 700;
 }
 
@@ -919,13 +936,13 @@
   display: block;
   margin: 8px 0 4px;
   color: var(--gray);
-  font-size: clamp(11px, 0.88vw, 14px);
+  font-size: clamp(14px, 1.12vw, 18px);
   font-style: normal;
 }
 
 .ptBenefit__card p {
   color: var(--text);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
 }
 
 .ptBenefit__card .pt-hi {
@@ -941,7 +958,7 @@
   border-radius: 999px;
   background: #fff;
   color: var(--text);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
 }
 
 .ptBenefit__notes {
@@ -960,7 +977,7 @@
   gap: 7px;
   align-items: center;
   color: var(--pt-blue);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
   font-weight: 700;
   white-space: nowrap;
 }
@@ -980,7 +997,7 @@
   position: relative;
   padding-left: 11px;
   color: var(--text);
-  font-size: clamp(11px, 0.9vw, 14px);
+  font-size: clamp(14px, 1.14vw, 18px);
 }
 
 .ptBenefit__notes li::before {
@@ -1022,7 +1039,7 @@
 .ptInfo__row b {
   display: block;
   color: var(--ink);
-  font-size: clamp(14px, 1.15vw, 19px);
+  font-size: clamp(18px, 1.46vw, 24px);
   font-weight: 700;
 }
 
@@ -1030,7 +1047,7 @@
   display: block;
   margin-top: 3px;
   color: var(--gray);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
 }
 
 /* ---------- 이름표 + 설명 카드 ---------- */
@@ -1058,13 +1075,13 @@
   border-radius: 8px;
   background: var(--pt-blue-soft);
   color: var(--pt-blue);
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
   font-weight: 700;
 }
 
 .ptTags__card p {
   color: var(--text);
-  font-size: clamp(12px, 0.98vw, 16px);
+  font-size: clamp(15px, 1.24vw, 20px);
 }
 
 .ptTags__card img,
@@ -1122,7 +1139,7 @@
   gap: 8px;
   align-items: center;
   color: var(--pt-blue);
-  font-size: clamp(12px, 0.98vw, 16px);
+  font-size: clamp(15px, 1.24vw, 20px);
   font-weight: 700;
 }
 
@@ -1134,7 +1151,7 @@
 
 .ptProof__val {
   color: var(--text);
-  font-size: clamp(12px, 0.98vw, 16px);
+  font-size: clamp(15px, 1.24vw, 20px);
 }
 
 /* ---------- 자료 준비중 ---------- */
@@ -1151,12 +1168,12 @@
 
 .pt__empty b {
   color: var(--text);
-  font-size: clamp(15px, 1.2vw, 20px);
+  font-size: clamp(19px, 1.52vw, 25px);
   font-weight: 700;
 }
 
 .pt__empty p {
-  font-size: clamp(12px, 0.95vw, 15px);
+  font-size: clamp(15px, 1.21vw, 19px);
 }
 
 /* ============================================================
