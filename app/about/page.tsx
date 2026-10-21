@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "@/app/styles/about.css";
 import { AboutBusiness } from "@/components/about/AboutBusiness";
 import { AboutHistory } from "@/components/about/AboutHistory";
-import { Brands } from "@/components/Brands";
+import { AboutBrands } from "@/components/about/AboutBrands";
 import { Hatch } from "@/components/Hatch";
 import { ArrowRight } from "@/components/Icons";
 import { SubPage } from "@/components/SubPage";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <SubPage
-      eyebrow="HAWDOO ENERGY"
+      eyebrow="HWADOO ENERGY"
       title="회사소개"
       desc="화두에서 인기있는, 나에게 맞는 충전사업자를 비교하세요"
     >
@@ -116,8 +116,8 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 06. 충전사업자 비교 — 메인과 같은 섹션 */}
-      <Brands />
+      {/* 06. 6개 충전사업자 한 번에 비교 */}
+      <AboutBrands />
     </SubPage>
   );
 }

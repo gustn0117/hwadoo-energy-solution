@@ -122,3 +122,19 @@ export const ABOUT_WHY = {
     { title: ["안전까지", "고려한 솔루션"], icon: `${A}/why-05.png` },
   ],
 };
+
+/** 마지막 섹션 — 6개 충전사업자 한 번에 비교 (시안 1021) */
+export const ABOUT_BRANDS = {
+  badge: "오직 화두에너지솔루션에서만",
+  title: ["6개 충전사업자를", "화두에서 한 번에 비교하세요!"],
+  /* 제목 양옆에 떠 있는 앱 아이콘 — 왼쪽 셋 · 오른쪽 셋 */
+  icons: [1, 2, 3, 4, 5, 6].map((i) => `${A}/app-${i}.png`),
+  cards: [
+    { name: "플러그링크", desc: "전기차 충전경험을 기술로", logo: `${A}/logo-pluglink.png`, href: "/compare/partners" },
+    { name: "에버온", desc: "스마트한 기술력", logo: `${A}/logo-everon.png`, href: "/compare/partners" },
+    { name: "SK일렉링크", desc: "급속충전기 시장점유율 1위", logo: `${A}/logo-sk.png`, href: "/compare/partners" },
+    { name: "현대엔지니어링", desc: "전기차 충전경험을 기술로", logo: `${A}/logo-hyundai.png`, href: "/compare/partners" },
+    { name: "그리드위즈", desc: "요금, 탄소배출 까지", logo: `${A}/logo-gridwiz.png`, href: "/compare/partners" },
+    { name: "나이스차저", desc: "스트레스 없는 충전생활", logo: `${A}/logo-nice.png`, href: "/compare/partners" },
+  ],
+};

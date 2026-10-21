@@ -11,9 +11,10 @@ export const metadata: Metadata = {
 export default function ComparePartnersPage() {
   return (
     <SubPage
-      eyebrow="HAWDOO ENERGY"
+      eyebrow="HWADOO ENERGY"
       title="제휴 충전사업자"
       desc="화두에서 인기있는, 나에게 맞는 충전사업자를 비교하세요"
+      contact={false}
     >
       <PartnerBoard />
     </SubPage>

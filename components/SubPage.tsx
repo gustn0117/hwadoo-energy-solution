@@ -14,11 +14,14 @@ export function SubPage({
   eyebrow,
   title,
   desc,
+  /** 맨 아래 대표전화 배너 — 시안에 없는 페이지는 끈다 */
+  contact = true,
   children,
 }: {
   eyebrow: string;
   title: string;
   desc?: string;
+  contact?: boolean;
   children: React.ReactNode;
 }) {
   return (
@@ -27,7 +30,7 @@ export function SubPage({
       <main>
         <SupHero eyebrow={eyebrow} title={title} desc={desc} />
         {children}
-        <ContactBanner />
+        {contact ? <ContactBanner /> : null}
       </main>
       <Footer />
       <FloatingDock />
