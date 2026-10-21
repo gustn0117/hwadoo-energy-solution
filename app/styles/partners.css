@@ -1,6 +1,11 @@
 /* ============================================================
    제휴 충전사업자 — 사업자별 상세 (시안 1021)
    ============================================================ */
+/* 머리글 영역 폭 — 시안(피그마) 기준 1404px (좌우 여백 포함) */
+.pt > .shell {
+  max-width: calc(1404px + var(--gut) * 2);
+}
+
 .pt {
   --pt-blue: #1a62ff;
   --pt-blue-soft: #eef3ff;
@@ -30,7 +35,7 @@
 
 .pt__brandsScroll button {
   flex: none;
-  height: clamp(44px, 3.4vw, 52px);
+  height: clamp(44px, 3.4vw, 65px);
   padding: 0 clamp(16px, 1.8vw, 30px);
   border-radius: 999px;
   color: var(--gray);
@@ -69,7 +74,7 @@
 /* ---------- 사업자 머리글 ---------- */
 .pt__head {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(260px, 22vw, 300px);
+  grid-template-columns: minmax(0, 1fr) clamp(260px, 22vw, 411px);
   gap: clamp(24px, 3vw, 56px);
   align-items: start;
   padding: clamp(32px, 3.6vw, 62px) 0 0;
@@ -83,7 +88,8 @@
 
 .pt__logo {
   display: block;
-  height: clamp(34px, 3vw, 54px);
+  width: fit-content;
+  height: clamp(34px, 2.7vw, 49px);
   margin: clamp(12px, 1.2vw, 20px) 0 clamp(14px, 1.4vw, 22px);
 }
 
@@ -121,7 +127,7 @@
 
 /* 오른쪽 문의 카드 */
 .pt__ask {
-  padding: clamp(20px, 1.9vw, 30px);
+  padding: clamp(20px, 2.3vw, 35px);
   border-radius: 14px;
   background: var(--bg-soft);
 }
@@ -134,8 +140,8 @@
 
 .pt__ask ul {
   display: grid;
-  gap: clamp(8px, 0.8vw, 13px);
-  margin: clamp(14px, 1.4vw, 22px) 0 clamp(18px, 1.8vw, 28px);
+  gap: clamp(8px, 1vw, 18px);
+  margin: clamp(14px, 1.8vw, 32px) 0 clamp(18px, 2.2vw, 40px);
 }
 
 .pt__ask li {
@@ -158,7 +164,7 @@
   display: grid;
   place-items: center;
   width: 100%;
-  height: clamp(44px, 3.4vw, 54px);
+  height: clamp(44px, 3.4vw, 60px);
   border-radius: 10px;
   background: var(--ink);
   color: #fff;
@@ -188,7 +194,7 @@
 .pt__slide {
   flex: none;
   width: 100%;
-  height: clamp(150px, 14vw, 240px);
+  height: clamp(150px, 12vw, 208px);
   scroll-snap-align: start;
 }
 
@@ -242,8 +248,9 @@
 .pt__body {
   --pt-menu: clamp(110px, 10vw, 150px);
   display: grid;
-  grid-template-columns: var(--pt-menu) minmax(0, 1fr) var(--pt-menu);
+  grid-template-columns: var(--pt-menu) minmax(0, 1080px) var(--pt-menu);
   gap: clamp(18px, 2.6vw, 50px);
+  justify-content: center;
   /* shell 바깥까지 넓혀 쓴다 (.shell 의 바로 아래 칸이라 50% 가 shell 폭이다) */
   margin-inline: calc(50% - 50vw);
   padding: clamp(36px, 4vw, 72px) max(var(--gut), calc(50vw - 750px)) clamp(50px, 5vw, 96px);
@@ -254,7 +261,7 @@
   position: sticky;
   top: calc(var(--header-h) + 20px);
   display: grid;
-  gap: clamp(10px, 1.1vw, 18px);
+  gap: clamp(10px, 1.55vw, 29px);
   align-content: start;
 }
 
@@ -322,8 +329,8 @@
 .ptsec__no {
   display: inline-grid;
   place-items: center;
-  width: clamp(34px, 2.8vw, 44px);
-  height: clamp(34px, 2.8vw, 44px);
+  width: clamp(34px, 3.4vw, 64px);
+  height: clamp(34px, 3.3vw, 62px);
   margin-bottom: clamp(12px, 1.2vw, 20px);
   border-radius: 50%;
   background: var(--pt-blue);
@@ -381,9 +388,10 @@
 /* ---------- 제품 사진 + 설명 카드 ---------- */
 .ptPhoto {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(20px, 2.6vw, 50px);
+  grid-template-columns: minmax(0, 460px) minmax(0, 470px);
+  gap: clamp(20px, 3.6vw, 70px);
   align-items: center;
+  justify-content: center;
 }
 
 .ptPhoto__img {
@@ -409,9 +417,10 @@
 
 .ptPhoto__card {
   display: grid;
-  grid-template-columns: clamp(40px, 3.6vw, 56px) minmax(0, 1fr);
-  gap: clamp(12px, 1.2vw, 20px);
+  grid-template-columns: clamp(40px, 4.4vw, 84px) minmax(0, 1fr);
+  gap: clamp(12px, 1.4vw, 26px);
   align-items: center;
+  min-height: clamp(96px, 9.4vw, 180px);
   padding: clamp(18px, 2.1vw, 40px);
   border: 1px solid #d9e3ff;
   border-radius: 12px;
@@ -453,7 +462,7 @@
 
 .ptSpec th,
 .ptSpec td {
-  padding: clamp(14px, 1.45vw, 23px) clamp(14px, 1.5vw, 26px);
+  padding: clamp(14px, 1.58vw, 25px) clamp(14px, 1.5vw, 26px);
   border-bottom: 1px solid var(--pt-line);
   font-size: clamp(17px, 1.27vw, 20px);
   text-align: left;
@@ -484,10 +493,11 @@
 
 .ptBullets__card {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(80px, 8vw, 125px);
-  gap: clamp(16px, 1.8vw, 30px);
+  grid-template-columns: minmax(0, 1fr) clamp(80px, 8.4vw, 160px);
+  gap: clamp(16px, 2.2vw, 42px);
   align-items: center;
-  padding: clamp(22px, 2.6vw, 50px);
+  min-height: clamp(170px, 17vw, 328px);
+  padding: clamp(22px, 3.2vw, 62px);
   border: 1px solid #d9e3ff;
   border-radius: 14px;
   background: #fff;
@@ -579,7 +589,10 @@
 }
 
 .ptSteps__item {
-  padding: clamp(14px, 1.5vw, 24px) clamp(10px, 1vw, 16px);
+  /* 번호 뱃지가 카드 위로 올라앉는다 (시안) — 그만큼 자리를 띄운다 */
+  position: relative;
+  margin-top: clamp(30px, 2.8vw, 53px);
+  padding: clamp(12px, 1.1vw, 18px) clamp(10px, 1vw, 16px);
   border-radius: 12px;
   background: var(--pt-blue-soft);
   text-align: center;
@@ -590,17 +603,35 @@
 }
 
 .ptSteps__no {
-  display: inline-grid;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  display: grid;
   place-items: center;
-  min-width: 42px;
-  height: 24px;
-  margin-bottom: clamp(10px, 1vw, 16px);
-  padding: 0 10px;
-  border-radius: 999px;
+  width: clamp(56px, 4.4vw, 84px);
+  height: clamp(26px, 1.9vw, 35px);
+  margin-bottom: clamp(12px, 0.95vw, 18px);
+  transform: translateX(-50%);
+  border-radius: 8px;
   background: var(--pt-blue);
   color: #fff;
-  font-size: 12px;
+  font-size: clamp(12px, 1.25vw, 24px);
   font-weight: 700;
+}
+
+/* 뱃지에서 카드를 가리키는 꼬리 */
+.ptSteps__no::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border: clamp(6px, 0.5vw, 9px) solid transparent;
+  border-top-color: var(--pt-blue);
+  transform: translateX(-50%);
+}
+
+.ptSteps[data-tone="purple"] .ptSteps__no::after {
+  border-top-color: var(--ink);
 }
 
 .ptSteps[data-tone="purple"] .ptSteps__no {
@@ -609,8 +640,8 @@
 
 .ptSteps__img {
   display: block;
-  height: clamp(86px, 8vw, 130px);
-  margin-bottom: clamp(10px, 1vw, 16px);
+  height: clamp(86px, 8.4vw, 160px);
+  margin-bottom: clamp(8px, 0.7vw, 12px);
   border-radius: 8px;
   overflow: hidden;
 }
