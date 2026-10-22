@@ -1,11 +1,6 @@
 /* ============================================================
    제휴 충전사업자 — 사업자별 상세 (시안 1021)
    ============================================================ */
-/* 머리글 영역 폭 — 시안(피그마) 기준 1404px (좌우 여백 포함) */
-.pt > .shell {
-  max-width: calc(1404px + var(--gut) * 2);
-}
-
 .pt {
   --pt-blue: #1a62ff;
   --pt-blue-soft: #eef3ff;
@@ -247,19 +242,35 @@
    오른쪽에 메뉴와 같은 폭의 빈 칸을 하나 더 둬서 가운데를 맞춘다. */
 .pt__body {
   --pt-menu: clamp(110px, 10vw, 150px);
+  position: relative;
   display: grid;
-  grid-template-columns: var(--pt-menu) minmax(0, 1080px) var(--pt-menu);
+  grid-template-columns: var(--pt-menu) minmax(0, 1fr);
   gap: clamp(18px, 2.6vw, 50px);
-  justify-content: center;
-  /* shell 바깥까지 넓혀 쓴다 (.shell 의 바로 아래 칸이라 50% 가 shell 폭이다) */
-  margin-inline: calc(50% - 50vw);
-  padding: clamp(36px, 4vw, 72px) max(var(--gut), calc(50vw - 750px)) clamp(50px, 5vw, 96px);
+  padding: clamp(36px, 4vw, 72px) 0 clamp(50px, 5vw, 96px);
+}
+
+/* 자리가 넉넉하면 메뉴를 본문 영역 밖(왼쪽 여백)으로 뺀다 (시안 1021).
+   100vw 를 쓰면 세로 스크롤바 폭만큼 가로가 넘치므로 쓰지 않는다. */
+@media (min-width: 1700px) {
+  .pt__body {
+    display: block;
+  }
+
+  .pt__panel {
+    width: min(100%, 1080px);
+    margin-inline: auto;
+  }
+
+  .pt__menu {
+    position: absolute;
+    top: clamp(36px, 4vw, 72px);
+    right: 100%;
+    width: var(--pt-menu);
+  }
 }
 
 /* 메뉴 — 누르면 화면이 바뀐다 (스크롤 이동 아님) */
 .pt__menu {
-  position: sticky;
-  top: calc(var(--header-h) + 20px);
   display: grid;
   gap: clamp(10px, 1.55vw, 29px);
   align-content: start;
