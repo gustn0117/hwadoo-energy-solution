@@ -135,6 +135,12 @@ img {
   display: block;
 }
 
+/* hidden 은 브라우저 기본값이라 display 를 준 요소에서는 무시된다.
+   숨김 처리를 쓰는 곳이 있어 확실히 눌러 둔다. */
+[hidden] {
+  display: none !important;
+}
+
 /* 키보드로 이동할 때만 보이는 표시 — 주황 테두리는 쓰지 않는다 (시안 1007 피드백) */
 :focus-visible {
   outline: 2px solid var(--purple);
