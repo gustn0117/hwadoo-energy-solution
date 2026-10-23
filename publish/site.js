@@ -10,6 +10,7 @@
  *   7) TOP 버튼             8) 충전사업자 순위 운영대수/충전요금 전환
  *   9) 순위 전체보기 팝업     10) 순위 표 열기/접기 (모바일)
  *   11) 설치 상담 단계 사이 화면 이동   12) 한 눈에 비교 분류 탭 · 좌우 이동
+ *   13) 제휴 충전사업자 사업자·상세 탭      14) 회사소개 사업영역 무한 슬라이드
  */
 (function () {
   "use strict";
@@ -571,6 +572,127 @@
     });
   }
 
+  /* ------------------------------------------------------------------
+     15) 제휴 충전사업자 — 사업자 탭과 왼쪽 상세 메뉴
+        둘 다 누르면 화면이 바뀝니다 (스크롤 이동이 아닙니다).
+     ------------------------------------------------------------------ */
+  function initPartners() {
+    var board = document.querySelector(".pt");
+    if (!board) return;
+    var brands = Array.prototype.slice.call(board.querySelectorAll(".pt__brandsScroll button"));
+    var menu = Array.prototype.slice.call(board.querySelectorAll(".pt__menu button:not([disabled])"));
+    var brand = Math.max(0, brands.findIndex ? brands.findIndex(function (b) { return b.getAttribute("aria-selected") === "true"; }) : 0);
+    var tab = 0;
+
+    function show() {
+      brands.forEach(function (b, i) { b.setAttribute("aria-selected", i === brand ? "true" : "false"); });
+      menu.forEach(function (b, i) { b.setAttribute("aria-selected", i === tab ? "true" : "false"); });
+      board.querySelectorAll(".pt__head, .pt__slides").forEach(function (el) {
+        el.hidden = el.getAttribute("data-brand") !== String(brand);
+      });
+      board.querySelectorAll(".pt__tabPanel").forEach(function (el) {
+        el.hidden = !(el.getAttribute("data-brand") === String(brand) && el.getAttribute("data-tab") === String(tab));
+      });
+    }
+
+    brands.forEach(function (btn, i) {
+      btn.addEventListener("click", function () {
+        brand = i;
+        tab = 0; // 사업자를 바꾸면 첫 탭부터
+        show();
+        btn.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+      });
+    });
+    menu.forEach(function (btn, i) {
+      btn.addEventListener("click", function () { tab = i; show(); });
+    });
+
+    // 탭 띠를 한 칸 오른쪽으로
+    var next = board.querySelector(".pt__brandsNext");
+    var scroll = board.querySelector(".pt__brandsScroll");
+    if (next && scroll) {
+      next.addEventListener("click", function () {
+        var b = scroll.querySelector("button");
+        scroll.scrollBy({ left: (b ? b.offsetWidth : 120) + 12, behavior: "smooth" });
+      });
+    }
+
+    // 머리글 아래 슬라이드의 점 맞추기
+    board.querySelectorAll(".pt__slidesTrack").forEach(function (track) {
+      var box = track.parentElement;
+      var dots = Array.prototype.slice.call(box.querySelectorAll(".pt__slideDots span"));
+      var count = box.querySelector(".pt__slideCount");
+      track.addEventListener("scroll", function () {
+        var one = track.children[0];
+        if (!one) return;
+        var at = Math.round(track.scrollLeft / one.offsetWidth);
+        dots.forEach(function (d, i) {
+          if (i === at) d.setAttribute("data-on", "");
+          else d.removeAttribute("data-on");
+        });
+        if (count) count.textContent = at + 1 + " / " + dots.length;
+      }, { passive: true });
+    });
+
+    show();
+  }
+
+  /* ------------------------------------------------------------------
+     16) 회사소개 사업영역 — 가운데만 또렷한 무한 슬라이드
+        앞뒤 복제본을 거쳐 끝에서 처음으로 끊김 없이 이어집니다.
+     ------------------------------------------------------------------ */
+  function initAboutBiz() {
+    var sec = document.querySelector(".abBiz");
+    if (!sec) return;
+    var track = sec.querySelector(".abBiz__track");
+    var cards = track ? Array.prototype.slice.call(track.children) : [];
+    var nav = sec.querySelectorAll(".abBiz__nav button");
+    var count = sec.querySelector(".abBiz__count b");
+    if (!track || cards.length < 3) return;
+
+    var n = cards.length / 3; // 원본 · 앞 복제 · 뒤 복제
+    var index = Number(getComputedStyle(track).getPropertyValue("--i")) || n;
+    var busy = false;
+
+    function paint(animate) {
+      track.setAttribute("data-animate", animate ? "true" : "false");
+      track.style.setProperty("--i", index);
+      cards.forEach(function (c, i) {
+        if (i === index) c.setAttribute("data-on", "");
+        else c.removeAttribute("data-on");
+      });
+      if (count) count.textContent = String((((index - n) % n) + n) % n + 1).padStart(2, "0");
+    }
+
+    // 복제 구간에 닿으면 전환 없이 같은 카드의 원본 자리로 옮긴다
+    function settle() {
+      busy = false;
+      if (index < n || index >= n * 2) {
+        index = ((((index - n) % n) + n) % n) + n;
+        paint(false);
+        // 한 프레임 뒤에 전환 효과를 되살린다
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () { track.setAttribute("data-animate", "true"); });
+        });
+      }
+    }
+
+    track.addEventListener("transitionend", settle);
+
+    nav.forEach(function (btn, i) {
+      var dir = i === 0 ? -1 : 1;
+      btn.addEventListener("click", function () {
+        if (busy) return;
+        busy = true;
+        index += dir;
+        paint(true);
+        window.setTimeout(function () { if (busy) settle(); }, 900); // transitionend 누락 대비
+      });
+    });
+
+    paint(false);
+  }
+
   function init() {
     initReveal();
     initHeader();
@@ -585,6 +707,8 @@
     initLegal();
     initConsultWizard();
     initCompare();
+    initPartners();
+    initAboutBiz();
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);

@@ -312,9 +312,7 @@ export function PartnerBoard() {
   const brandsRef = useRef<HTMLDivElement>(null);
   const slidesRef = useRef<HTMLDivElement>(null);
 
-  const p: Partner = PARTNERS[brand];
-  const tabs = p.tabs;
-  const sections = tabs[tab]?.sections ?? [];
+  const tabs = PARTNERS[brand].tabs;
 
   // 사업자를 바꾸면 첫 탭부터 다시 본다
   useEffect(() => {
@@ -369,62 +367,66 @@ export function PartnerBoard() {
       </div>
 
       <div className="shell">
-        {/* 사업자 머리글 */}
-        <div className="pt__head" data-reveal>
-          <div>
-            <p className="pt__headline">{p.headline}</p>
-            <span className="pt__logo">
-              <Hatch label={`${p.name} 로고`} src={p.logo} />
-            </span>
-            <p className="pt__desc">{p.desc}</p>
-            {p.tags.length ? (
-              <ul className="pt__tags">
-                {p.tags.map((t) => (
-                  <li key={t}>#{t}</li>
-                ))}
-              </ul>
-            ) : null}
-          </div>
+        {/* 사업자 머리글 — 모두 그려 두고 고른 것만 보여준다 (정적 파일에서도 전환되도록) */}
+        {PARTNERS.map((b, bi) => (
+          <div className="pt__head" data-brand={bi} hidden={bi !== brand} data-reveal key={b.slug}>
+            <div>
+              <p className="pt__headline">{b.headline}</p>
+              <span className="pt__logo">
+                <Hatch label={`${b.name} 로고`} src={b.logo} />
+              </span>
+              <p className="pt__desc">{b.desc}</p>
+              {b.tags.length ? (
+                <ul className="pt__tags">
+                  {b.tags.map((t) => (
+                    <li key={t}>#{t}</li>
+                  ))}
+                </ul>
+              ) : null}
+            </div>
 
-          <aside className="pt__ask">
-            <h3>설치 및 운영 문의</h3>
-            {p.points.length ? (
-              <ul>
-                {p.points.map((t) => (
-                  <li key={t}>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : null}
-            <a className="pt__askBtn" href="/#consult">
-              전문가 1:1 문의하기
-            </a>
-          </aside>
-        </div>
+            <aside className="pt__ask">
+              <h3>설치 및 운영 문의</h3>
+              {b.points.length ? (
+                <ul>
+                  {b.points.map((t) => (
+                    <li key={t}>
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+              <a className="pt__askBtn" href="/#consult">
+                전문가 1:1 문의하기
+              </a>
+            </aside>
+          </div>
+        ))}
 
         {/* 머리글 아래 가로 슬라이드 */}
-        {p.slides.length ? (
-          <div className="pt__slides">
-            <div className="pt__slidesTrack" ref={slidesRef}>
-              {p.slides.map((s) => (
-                <div className="pt__slide" key={s.label}>
-                  <Hatch label={s.label} src={s.image} />
-                </div>
-              ))}
-            </div>
-            <div className="pt__slideNav" aria-hidden="true">
-              <span className="pt__slideCount">
-                {slide + 1} / {p.slides.length}
-              </span>
-              <span className="pt__slideDots">
-                {p.slides.map((s, i) => (
-                  <span key={s.label} data-on={i === slide || undefined} />
+        {PARTNERS.map((b, bi) =>
+          b.slides.length ? (
+            <div className="pt__slides" data-brand={bi} hidden={bi !== brand} key={b.slug}>
+              <div className="pt__slidesTrack" ref={bi === brand ? slidesRef : undefined}>
+                {b.slides.map((s) => (
+                  <div className="pt__slide" key={s.label}>
+                    <Hatch label={s.label} src={s.image} />
+                  </div>
                 ))}
-              </span>
+              </div>
+              <div className="pt__slideNav" aria-hidden="true">
+                <span className="pt__slideCount">
+                  {(bi === brand ? slide : 0) + 1} / {b.slides.length}
+                </span>
+                <span className="pt__slideDots">
+                  {b.slides.map((s, i) => (
+                    <span key={s.label} data-on={(bi === brand ? slide : 0) === i || undefined} />
+                  ))}
+                </span>
+              </div>
             </div>
-          </div>
-        ) : null}
+          ) : null,
+        )}
 
         {/* 메뉴 + 내용 */}
         <div className="pt__body">
@@ -441,13 +443,25 @@ export function PartnerBoard() {
           </nav>
 
           <div className="pt__panel">
-            {sections.length ? (
-              sections.map((s, i) => <SectionBlock s={s} tone={i % 2 === 1} key={s.title + i} />)
-            ) : (
-              <div className="pt__empty">
-                <b>{p.name} 자료 준비중</b>
-                <p>자료를 받는 대로 플러그링크와 같은 구성으로 채워집니다.</p>
-              </div>
+            {PARTNERS.map((b, bi) =>
+              b.tabs.map((t, ti) => (
+                <div
+                  className="pt__tabPanel"
+                  data-brand={bi}
+                  data-tab={ti}
+                  hidden={!(bi === brand && ti === tab)}
+                  key={b.slug + t.key}
+                >
+                  {t.sections.length ? (
+                    t.sections.map((s, i) => <SectionBlock s={s} tone={i % 2 === 1} key={s.title + i} />)
+                  ) : (
+                    <div className="pt__empty">
+                      <b>{b.name} 자료 준비중</b>
+                      <p>자료를 받는 대로 플러그링크와 같은 구성으로 채워집니다.</p>
+                    </div>
+                  )}
+                </div>
+              )),
             )}
           </div>
         </div>

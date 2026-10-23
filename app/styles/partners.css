@@ -313,6 +313,11 @@
 
 /* ---------- 구역 공통 ---------- */
 .pt__panel {
+  min-width: 0;
+}
+
+/* 탭 하나분 — 고른 것만 보인다 (나머지는 hidden) */
+.pt__tabPanel {
   display: grid;
   gap: clamp(50px, 5.5vw, 110px);
   min-width: 0;
